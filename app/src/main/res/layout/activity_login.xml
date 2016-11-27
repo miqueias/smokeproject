@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/red"
+    android:baselineAligned="false">
+
+    <TextView
+        android:text="Gestão de Inspeção"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginTop="50dp"
+        android:id="@+id/textView" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:id="@+id/linearLayout">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:id="@+id/imageView"
+            android:paddingRight="10dp" />
+
+        <TextView
+            android:text="SisInpe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:id="@+id/textView2" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/div_longo"
+        android:layout_marginTop="8dp"
+        android:id="@+id/imageView2"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:text="Odebretch Ambiente Unidade:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:id="@+id/textView5" />
+
+    <TextView
+        android:text="Pernambuco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:id="@+id/textView6" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Login"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:backgroundTint="@color/white"
+        android:drawableStart="@android:drawable/sym_action_chat"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Senha"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:backgroundTint="@color/white"
+        android:drawableStart="@android:drawable/sym_action_email" />
+
+    <Button
+        android:text="ENTRAR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:background="@color/transparent"
+        android:id="@+id/btnEntrar" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_marginTop="30dp"
+        android:id="@+id/imageView3" />
+</LinearLayout>
