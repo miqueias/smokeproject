@@ -3,18 +3,6 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@mipmap/ic_launcher"
-            android:title="VISTORIA/APOIO" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@mipmap/ic_launcher"
-            android:title="VISTORIAS REALIZADAS" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@mipmap/ic_launcher"
-            android:title="VALIDAR PLACA" />
-        <item
             android:id="@+id/nav_sair"
             android:icon="@mipmap/ic_launcher"
             android:menuCategory="secondary"

@@ -9,9 +9,16 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Button btnVistoriaRealizada;
+    private Button btnPlaca;
+    private Button btnNovaVistoria;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +32,41 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+//        drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        btnNovaVistoria = (Button) findViewById(R.id.btnNovaVistoria);
+        btnNovaVistoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
+
+        btnVistoriaRealizada = (Button) findViewById(R.id.btnVistoriaRealizada);
+        btnVistoriaRealizada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
+
+        btnPlaca = (Button) findViewById(R.id.btnPlaca);
+        btnPlaca.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getBaseContext(), ValidarPlacaActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -48,14 +85,14 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-            Intent it = new Intent(getBaseContext(), ValidarPlacaActivity.class);
-            startActivity(it);
-        }
+//        if (id == R.id.nav_camera) {
+//            // Handle the camera action
+//        } else if (id == R.id.nav_gallery) {
+//
+//        } else if (id == R.id.nav_slideshow) {
+//            Intent it = new Intent(getBaseContext(), ValidarPlacaActivity.class);
+//            startActivity(it);
+//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

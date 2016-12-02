@@ -95,7 +95,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:textSize="20sp"
-        android:id="@+id/button2" />
+        android:id="@+id/btnNovaVistoria" />
 
     <Button
         android:text="VISTORIAS REALIZADAS"
@@ -106,7 +106,7 @@
         android:background="@color/white"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
-        android:id="@+id/button3" />
+        android:id="@+id/btnVistoriaRealizada" />
 
     <Button
         android:text="VALIDAR PLACA"
@@ -117,5 +117,5 @@
         android:background="@color/white"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
-        android:id="@+id/button4" />
+        android:id="@+id/btnPlaca" />
 </LinearLayout>
