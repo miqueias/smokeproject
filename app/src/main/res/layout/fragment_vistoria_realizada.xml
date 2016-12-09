@@ -4,6 +4,55 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ESCOLHA UMA AÇÃO"
+            android:id="@+id/textView"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="22sp"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <Button
+        android:text="NOVA VISTORIA"
+        android:drawableStart="@android:drawable/ic_menu_edit"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:paddingRight="150dp"
+        android:paddingLeft="30dp"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="25dp"
+        android:textStyle="bold"
+        android:id="@+id/btnNovaVistoria" />
+
+    <Button
+        android:text="APOIO"
+        android:drawableStart="@android:drawable/ic_menu_send"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/white"
+        android:paddingRight="200dp"
+        android:paddingLeft="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textStyle="bold"
+        android:id="@+id/btnApoio" />
 
 
 </LinearLayout>

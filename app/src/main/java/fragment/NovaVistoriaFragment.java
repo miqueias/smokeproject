@@ -3,15 +3,23 @@ package fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
+import adapter.NovaVistoriaAdapter;
 import br.com.monster.smokeproject.R;
+import model.Lista;
+import util.DividerItemDecoration;
 
 
 public class NovaVistoriaFragment extends Fragment {
 
+    private RecyclerView rvNovaVistoria;
+    private List<Lista> lista;
     private LinearLayoutManager llm;
 
 
@@ -35,6 +43,15 @@ public class NovaVistoriaFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        rvNovaVistoria=(RecyclerView) getView().findViewById(R.id.rvNovaVistoria);
+        llm = new LinearLayoutManager(getActivity());
+        rvNovaVistoria.setLayoutManager(llm);
+        rvNovaVistoria.setHasFixedSize(true);
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
+        rvNovaVistoria.addItemDecoration(itemDecoration);
+        NovaVistoriaAdapter adapter = new NovaVistoriaAdapter(lista);
+        rvNovaVistoria.setAdapter(adapter);
 
     }
 }

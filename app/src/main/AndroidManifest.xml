@@ -25,9 +25,12 @@
             android:name=".ValidarPlacaActivity"
             android:label="@string/title_activity_validar"
             android:theme="@style/AppTheme" />
-        <activity android:name=".VistoriaActivity"
+        <activity
+            android:name=".VistoriaActivity"
             android:label="@string/title_activity_validar"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".NovaVistoriaActivity" />
+        <activity android:name=".ApoioActivity"></activity>
     </application>
 
 </manifest>

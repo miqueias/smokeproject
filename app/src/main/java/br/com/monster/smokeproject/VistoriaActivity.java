@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import fragment.NovaVistoriaFragment;
 import fragment.VistoriaRealizadaFragment;
@@ -17,6 +18,9 @@ public class VistoriaActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private int[] tabIcons = {
+            android.R.drawable.ic_dialog_info,
+            android.R.drawable.ic_dialog_info};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,12 @@ public class VistoriaActivity extends AppCompatActivity {
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#FFFFFF"));
         tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         tabLayout.setupWithViewPager(viewPager);
+        setupTabIcons();
+    }
+
+    private void setupTabIcons() {
+        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -54,5 +64,19 @@ public class VistoriaActivity extends AppCompatActivity {
         adapter.addFragment(novaVistoriaFragment, "NOVA VISTORIA");
         adapter.addFragment(vistoriaRealizadaFragment, "VISTORIA/APOIO");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+//                Intent it = new Intent(getBaseContext(), MainActivity.class);
+//                startActivity(it);
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
