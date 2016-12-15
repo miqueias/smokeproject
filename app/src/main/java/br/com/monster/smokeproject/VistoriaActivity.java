@@ -1,5 +1,6 @@
 package br.com.monster.smokeproject;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -70,8 +71,8 @@ public class VistoriaActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-//                Intent it = new Intent(getBaseContext(), MainActivity.class);
-//                startActivity(it);
+                Intent it = new Intent(getBaseContext(), HomeActivity.class);
+                startActivity(it);
                 finish();
                 return true;
 

@@ -20,26 +20,289 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+
+
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp">
+        android:layout_height="match_parent">
 
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="CADASTRAR VISTORIA"
-            android:id="@+id/textView"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="22sp"
-            android:layout_gravity="center"
-            android:gravity="center" />
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CADASTRAR VISTORIA"
+                    android:id="@+id/textView"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="22sp"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:text="12/10"
+                    android:layout_marginRight="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView8" />
+
+                <TextView
+                    android:text="às"
+                    android:layout_marginRight="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView7" />
+
+                <TextView
+                    android:text="10:23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView9" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="25dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="25dp">
+
+                    <TextView
+                        android:text="Supervisor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="20sp"
+                        android:layout_marginBottom="2dp"
+                        android:id="@+id/textView12" />
+
+                    <TextView
+                        android:text="José Augusto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView11" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="25dp">
+
+                    <TextView
+                        android:text="Estação"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="20sp"
+                        android:layout_marginBottom="2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView14" />
+
+                    <TextView
+                        android:text="Oesta B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView13" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Regional"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="20sp"
+                        android:layout_marginBottom="2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView16" />
+
+                    <TextView
+                        android:text="Sul"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView15" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="Nº relogio da Celpe"
+                    android:ems="10"
+                    android:id="@+id/editText4"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/black"
+                    android:textColorHighlight="@color/black" />
+
+                <TextView
+                    android:text="CHECKLIST"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView21" />
+
+                <CheckBox
+                    android:text="Gradeamento Limpo"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBox2" />
+
+                <CheckBox
+                    android:text="Caixa de areia limpa"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBox3" />
+
+                <CheckBox
+                    android:text="Sem materias sobrenadantes"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBox" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="GALERIA DE IMAGENS"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView22" />
+
+                <Button
+                    android:text="ADICIONAR IMAGENS"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/button2" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:text="LISTAGEM DE PROBLEMAS"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView23" />
+
+                <CheckBox
+                    android:text="Conjunto de bomba 1"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBox5" />
+
+                <CheckBox
+                    android:text="Conjunto de bomba 2"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBox7" />
+
+                <CheckBox
+                    android:text="Conjunto de bomba 3"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBox6" />
+
+                <CheckBox
+                    android:text="Conjunto de bomba 4"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBox8" />
+
+                <CheckBox
+                    android:text="Outros"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBox4" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="Descrição do problema"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/black"
+                    android:layout_marginBottom="70dp"
+                    android:textColorHighlight="@color/black"
+                    android:ems="10"
+                    android:id="@+id/editText5" />
+
+            </LinearLayout>
+
+            <Button
+                android:text="Salvar"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button4" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

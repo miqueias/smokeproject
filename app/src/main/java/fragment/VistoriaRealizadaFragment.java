@@ -50,7 +50,7 @@ public class VistoriaRealizadaFragment extends Fragment {
             public void onClick(View v) {
                 Intent it = new Intent(getActivity(), NovaVistoriaActivity.class);
                 startActivity(it);
-//                finish();
+                getActivity().finish();
             }
         });
 
@@ -60,7 +60,7 @@ public class VistoriaRealizadaFragment extends Fragment {
             public void onClick(View v) {
                 Intent it = new Intent(getActivity(), ApoioActivity.class);
                 startActivity(it);
-//                finish();
+                getActivity().finish();
             }
         });
 
