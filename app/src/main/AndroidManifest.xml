@@ -30,7 +30,8 @@
             android:label="@string/title_activity_validar"
             android:theme="@style/AppTheme" />
         <activity android:name=".NovaVistoriaActivity" />
-        <activity android:name=".ApoioActivity"></activity>
+        <activity android:name=".ApoioActivity" />
+        <activity android:name=".VistoriaRealizadaActivity"></activity>
     </application>
 
 </manifest>

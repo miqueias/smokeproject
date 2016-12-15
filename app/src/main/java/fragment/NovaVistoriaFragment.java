@@ -1,5 +1,6 @@
 package fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,13 +8,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
 import adapter.NovaVistoriaAdapter;
 import br.com.monster.smokeproject.R;
+import br.com.monster.smokeproject.VistoriaActivity;
+import br.com.monster.smokeproject.VistoriaRealizadaActivity;
 import model.Lista;
 import util.DividerItemDecoration;
+import util.RecyclerItemClickListener;
 
 
 public class NovaVistoriaFragment extends Fragment {
@@ -52,6 +57,20 @@ public class NovaVistoriaFragment extends Fragment {
         rvNovaVistoria.addItemDecoration(itemDecoration);
         NovaVistoriaAdapter adapter = new NovaVistoriaAdapter(lista);
         rvNovaVistoria.setAdapter(adapter);
+        rvNovaVistoria.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), rvNovaVistoria ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+//                        Toast.makeText(getActivity(), "Posição " + position,
+//                                Toast.LENGTH_LONG).show();
+                        Intent it = new Intent(getContext(), VistoriaRealizadaActivity.class);
+                        startActivity(it);
+                        getActivity().finish();
+                    }
+
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
 
     }
 }
