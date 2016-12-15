@@ -155,12 +155,14 @@
         android:layout_marginRight="20dp"
         android:layout_weight="1">
 
-        <Spinner
+        <android.support.v7.widget.AppCompatSpinner
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:id="@+id/spinner"
             android:entries="@array/array_name"
             android:layout_marginBottom="10dp"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            app:backgroundTint="@color/black"
             android:backgroundTint="@color/black"/>
 
         <EditText

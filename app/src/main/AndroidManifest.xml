@@ -29,10 +29,11 @@
             android:name=".VistoriaActivity"
             android:label="@string/title_activity_validar"
             android:theme="@style/AppTheme" />
-        <activity android:name=".NovaVistoriaActivity"
+        <activity
+            android:name=".NovaVistoriaActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ApoioActivity" />
-        <activity android:name=".VistoriaRealizadaActivity"></activity>
+        <activity android:name=".VistoriaRealizadaActivity" />
     </application>
 
 </manifest>

@@ -52,9 +52,9 @@ public class HomeActivity extends AppCompatActivity
         btnVistoriaRealizada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+                Intent it = new Intent(getBaseContext(), VistoriaRealizadaActivity.class);
                 startActivity(it);
-                finish();
+//                finish();
             }
         });
 

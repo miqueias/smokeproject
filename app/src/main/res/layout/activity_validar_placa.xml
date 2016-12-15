@@ -40,7 +40,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="40dp"
-
+            android:textCursorDrawable="@drawable/color_cursor"
             android:id="@+id/etPlaca" />
 
         <Button

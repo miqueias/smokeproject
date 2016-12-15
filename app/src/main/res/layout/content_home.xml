@@ -87,7 +87,7 @@
         android:text="Escala atual: 8/5" />
 
     <Button
-        android:text="NOVA VISTORIA"
+        android:text="VISTORIA/APOIO"
         android:layout_marginTop="30dp"
         android:background="@color/white"
         android:textColor="@color/colorPrimaryDark"
