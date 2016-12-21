@@ -24,24 +24,25 @@
         <TextView
             android:text="Olá "
             android:layout_width="wrap_content"
-            android:textSize="21sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"
             android:layout_height="wrap_content"
             android:id="@+id/textView10" />
 
         <TextView
-            android:text="Neto"
+            android:text="Antonio Neto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"
             android:id="@+id/tvNomeBV"
             android:layout_weight="1"
-            android:textSize="21sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/Data"
+            android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/grey"
@@ -51,14 +52,13 @@
     </LinearLayout>
 
 
-
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/grey"
         android:textStyle="bold"
+        android:textSize="14sp"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="10dp"
@@ -66,6 +66,7 @@
 
     <TextView
         android:id="@+id/textView2"
+        android:textSize="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/grey"
@@ -77,6 +78,7 @@
 
     <TextView
         android:id="@+id/textView3"
+        android:textSize="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/grey"
@@ -89,12 +91,14 @@
     <Button
         android:text="VISTORIA/APOIO"
         android:layout_marginTop="30dp"
-        android:background="@color/white"
-        android:textColor="@color/colorPrimaryDark"
-        android:drawableStart="@mipmap/ic_launcher"
+        android:background="@color/vermelho"
+        android:padding="16dp"
+        android:drawablePadding="-49dp"
+        android:textColor="@color/white"
+        android:drawableStart="@drawable/ic_vistoria_apoio"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:textSize="20sp"
+        android:textSize="17sp"
         android:id="@+id/btnNovaVistoria" />
 
     <Button
@@ -102,10 +106,11 @@
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:drawableStart="@mipmap/ic_launcher"
-        android:background="@color/white"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
+        android:padding="16dp"
+        android:drawableStart="@drawable/ic_vistoria_realizada"
+        android:background="@color/vermelho"
+        android:textColor="@color/white"
+        android:textSize="17sp"
         android:id="@+id/btnVistoriaRealizada" />
 
     <Button
@@ -113,9 +118,11 @@
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:drawableStart="@mipmap/ic_launcher"
-        android:background="@color/white"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
+        android:padding="16dp"
+        android:drawablePadding="-49dp"
+        android:drawableStart="@drawable/ic_validar_placa"
+        android:background="@color/vermelho"
+        android:textColor="@color/white"
+        android:textSize="17sp"
         android:id="@+id/btnPlaca" />
 </LinearLayout>

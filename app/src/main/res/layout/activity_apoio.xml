@@ -51,11 +51,20 @@
         android:layout_marginRight="30dp"
         android:layout_marginBottom="10dp">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_time"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:id="@+id/imageView4" />
+
         <TextView
             android:text="12/10"
             android:layout_marginRight="6dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="10sp"
             android:id="@+id/textView8" />
 
         <TextView
@@ -63,12 +72,14 @@
             android:layout_marginRight="6dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="10sp"
             android:id="@+id/textView7" />
 
         <TextView
             android:text="10:23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="10sp"
             android:id="@+id/textView9" />
     </LinearLayout>
 
@@ -161,14 +172,12 @@
             android:id="@+id/spinner"
             android:entries="@array/array_name"
             android:layout_marginBottom="10dp"
-            style="@style/Widget.AppCompat.Spinner.Underlined"
-            app:backgroundTint="@color/black"
-            android:backgroundTint="@color/black"/>
+            style="@style/SpinnerTheme" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:hint="Numero da O.S"
             android:ems="10"
             android:id="@+id/editText4"

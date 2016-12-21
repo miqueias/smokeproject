@@ -26,10 +26,10 @@
 
     <Button
         android:text="NOVA VISTORIA"
-        android:drawableStart="@android:drawable/ic_menu_edit"
+        android:drawableStart="@drawable/ic_novavistoria"
         android:layout_width="match_parent"
-        android:background="@color/colorPrimaryDark"
-        android:paddingRight="150dp"
+        android:background="@drawable/bg_vermelho"
+        android:paddingRight="90dp"
         android:paddingLeft="30dp"
         android:textColor="@color/white"
         android:layout_height="wrap_content"
@@ -38,15 +38,17 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="25dp"
         android:textStyle="bold"
+        android:textSize="15sp"
         android:id="@+id/btnNovaVistoria" />
 
     <Button
         android:text="APOIO"
-        android:drawableStart="@android:drawable/ic_menu_send"
-        android:background="@color/colorPrimaryDark"
+        android:drawableStart="@drawable/ic_apoio"
+        android:background="@drawable/bg_vermelho"
         android:textColor="@color/white"
-        android:paddingRight="200dp"
+        android:paddingRight="150dp"
         android:paddingLeft="30dp"
+        android:textSize="15sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"

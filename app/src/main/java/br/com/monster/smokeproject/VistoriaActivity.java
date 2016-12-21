@@ -21,7 +21,7 @@ public class VistoriaActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private int[] tabIcons = {
             android.R.drawable.ic_dialog_info,
-            android.R.drawable.ic_dialog_info};
+            android.R.drawable.ic_dialog_alert};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -18,6 +20,8 @@ public class HomeActivity extends AppCompatActivity
     private Button btnVistoriaRealizada;
     private Button btnPlaca;
     private Button btnNovaVistoria;
+    private Button btnSair;
+
 
 
     @Override
@@ -36,7 +40,58 @@ public class HomeActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerview = navigationView.getHeaderView(0);
+        TextView profilename = (TextView) headerview.findViewById(R.id.tvNomeBV);
+        profilename.setText("Antonio Neto");
         navigationView.setNavigationItemSelectedListener(this);
+
+        btnNovaVistoria = (Button) headerview.findViewById(R.id.btnNovaVistoria);
+        btnNovaVistoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(HomeActivity.this, "clicked", Toast.LENGTH_SHORT).show();
+               // drawer.closeDrawer(GravityCompat.START);
+                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
+
+        btnVistoriaRealizada = (Button) headerview.findViewById(R.id.btnNovaVistoria);
+        btnNovaVistoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(HomeActivity.this, "clicked", Toast.LENGTH_SHORT).show();
+                //drawer.closeDrawer(GravityCompat.START);
+                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
+
+        btnPlaca = (Button) headerview.findViewById(R.id.btnNovaVistoria);
+        btnNovaVistoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(HomeActivity.this, "clicked", Toast.LENGTH_SHORT).show();
+               // drawer.closeDrawer(GravityCompat.START);
+                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
+
+        btnSair = (Button) headerview.findViewById(R.id.btnSair);
+        btnSair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(HomeActivity.this, "clicked", Toast.LENGTH_SHORT).show();
+                // drawer.closeDrawer(GravityCompat.START);
+                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
 
         btnNovaVistoria = (Button) findViewById(R.id.btnNovaVistoria);
         btnNovaVistoria.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +102,8 @@ public class HomeActivity extends AppCompatActivity
                 finish();
             }
         });
+
+
 
         btnVistoriaRealizada = (Button) findViewById(R.id.btnVistoriaRealizada);
         btnVistoriaRealizada.setOnClickListener(new View.OnClickListener() {

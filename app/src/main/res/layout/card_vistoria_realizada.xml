@@ -27,14 +27,23 @@
             android:background="@color/grey_claro"
             android:layout_marginTop="10dp">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_time"
+                android:layout_gravity="center"
+                android:paddingRight="10dp"
+                android:id="@+id/imageView5"
+                android:layout_weight="1" />
+
             <TextView
-                android:text="12/10"
+                android:text="12/10 "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView19" />
 
             <TextView
-                android:text="às"
+                android:text="às "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView18" />
