@@ -32,15 +32,18 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="11dp"
+        android:layout_marginTop="17dp"
         android:layout_centerHorizontal="true">
 
         <TextView
             android:text="Olá "
             android:layout_width="wrap_content"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/vermelho"
             android:layout_height="wrap_content"
-            android:id="@+id/textView10" />
+            android:id="@+id/tvOla" />
 
         <TextView
             android:text="Antonio Neto"
@@ -48,35 +51,46 @@
             android:layout_height="wrap_content"
             android:textColor="@color/vermelhodois"
             android:id="@+id/tvNomeBV"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
 
     </LinearLayout>
 
 
     <TextView
-        android:id="@+id/Data"
+        android:id="@+id/tvData"
+        android:layout_marginLeft="19dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/grey"
+        android:textSize="12sp"
         android:text="Ter.18/10/16" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tvDescRota"
+        android:layout_marginLeft="19dp"
+        android:textSize="12sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/grey"
         android:text="Descrição da rota: Leste/oeste" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvTipoRota"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="5dp"
+        android:textSize="12sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/grey"
         android:text="Tipo rota: Manhã" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvEscala"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="5dp"
+        android:textSize="12sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/grey"

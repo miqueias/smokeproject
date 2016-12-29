@@ -1,6 +1,7 @@
 package br.com.monster.smokeproject;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +23,7 @@ public class HomeActivity extends AppCompatActivity
     private Button btnNovaVistoria;
     private Button btnSair;
 
+    private TextView tvOla, tvNomeBV, tvData, tvEscala, tvTipoRota, tvDescRota;
 
 
     @Override
@@ -32,6 +34,12 @@ public class HomeActivity extends AppCompatActivity
         toolbar.setTitle("Início");
         toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         setSupportActionBar(toolbar);
+
+        //Fontes.ttf
+        Typeface RalewayBold = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Bold.ttf");
+        Typeface RalewayMedium = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Medium.ttf");
+        Typeface RalewayRegular = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Regular.ttf");
+        Typeface Odebrecht = Typeface.createFromAsset(getResources().getAssets(), "odebrecht-slab-webfont.ttf");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -45,7 +53,27 @@ public class HomeActivity extends AppCompatActivity
         profilename.setText("Antonio Neto");
         navigationView.setNavigationItemSelectedListener(this);
 
+        tvOla = (TextView) headerview.findViewById(R.id.tvOla);
+        tvOla = (TextView) findViewById(R.id.tvOla);
+        tvOla.setTypeface(RalewayMedium);
+
+        tvNomeBV = (TextView) headerview.findViewById(R.id.tvNomeBV);
+        tvNomeBV = (TextView) findViewById(R.id.tvNomeBV);
+        tvNomeBV.setTypeface(RalewayMedium);
+
+        tvData = (TextView) headerview.findViewById(R.id.tvData);
+        tvData = (TextView) findViewById(R.id.tvData);
+        tvData.setTypeface(RalewayMedium);
+        tvEscala = (TextView) findViewById(R.id.tvEscala);
+        tvEscala.setTypeface(RalewayMedium);
+        tvTipoRota = (TextView) findViewById(R.id.tvTipoRota);
+        tvTipoRota.setTypeface(RalewayMedium);
+        tvDescRota = (TextView) findViewById(R.id.tvDescRota);
+        tvDescRota.setTypeface(RalewayMedium);
+
+
         btnNovaVistoria = (Button) headerview.findViewById(R.id.btnNovaVistoria);
+        btnNovaVistoria.setTypeface(RalewayMedium);
         btnNovaVistoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,8 +85,9 @@ public class HomeActivity extends AppCompatActivity
             }
         });
 
-        btnVistoriaRealizada = (Button) headerview.findViewById(R.id.btnNovaVistoria);
-        btnNovaVistoria.setOnClickListener(new View.OnClickListener() {
+        btnVistoriaRealizada = (Button) headerview.findViewById(R.id.btnVistoriaRealizada);
+        btnVistoriaRealizada.setTypeface(RalewayMedium);
+        btnVistoriaRealizada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(HomeActivity.this, "clicked", Toast.LENGTH_SHORT).show();
@@ -69,8 +98,9 @@ public class HomeActivity extends AppCompatActivity
             }
         });
 
-        btnPlaca = (Button) headerview.findViewById(R.id.btnNovaVistoria);
-        btnNovaVistoria.setOnClickListener(new View.OnClickListener() {
+        btnPlaca = (Button) headerview.findViewById(R.id.btnPlaca);
+        btnPlaca.setTypeface(RalewayMedium);
+        btnPlaca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(HomeActivity.this, "clicked", Toast.LENGTH_SHORT).show();
@@ -82,6 +112,7 @@ public class HomeActivity extends AppCompatActivity
         });
 
         btnSair = (Button) headerview.findViewById(R.id.btnSair);
+        btnSair.setTypeface(RalewayMedium);
         btnSair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +125,7 @@ public class HomeActivity extends AppCompatActivity
         });
 
         btnNovaVistoria = (Button) findViewById(R.id.btnNovaVistoria);
+        btnNovaVistoria.setTypeface(RalewayMedium);
         btnNovaVistoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +138,7 @@ public class HomeActivity extends AppCompatActivity
 
 
         btnVistoriaRealizada = (Button) findViewById(R.id.btnVistoriaRealizada);
+        btnVistoriaRealizada.setTypeface(RalewayMedium);
         btnVistoriaRealizada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +149,7 @@ public class HomeActivity extends AppCompatActivity
         });
 
         btnPlaca = (Button) findViewById(R.id.btnPlaca);
+        btnPlaca.setTypeface(RalewayMedium);
         btnPlaca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

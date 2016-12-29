@@ -17,8 +17,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
         android:layout_centerHorizontal="true">
 
         <TextView
@@ -26,22 +26,22 @@
             android:layout_width="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="#e6e4002b"
             android:layout_height="wrap_content"
-            android:id="@+id/textView10" />
+            android:id="@+id/tvOla" />
 
         <TextView
             android:text="Antonio Neto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="#e6e4002b"
             android:id="@+id/tvNomeBV"
             android:layout_weight="1"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/Data"
+            android:id="@+id/tvData"
             android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,39 +53,31 @@
 
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tvDescRota"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/grey"
-        android:textStyle="bold"
         android:textSize="14sp"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="13dp"
         android:text="Descrição da rota: Leste/oeste" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvTipoRota"
         android:textSize="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/grey"
-        android:textStyle="bold"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="5dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="8dp"
         android:text="Tipo rota: Manhã" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvEscala"
         android:textSize="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/grey"
-        android:textStyle="bold"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="5dp"
         android:text="Escala atual: 8/5" />
 
     <Button

@@ -16,4 +16,9 @@
         <item name="android:background">@drawable/bg_spinner</item>
     </style>
 
+    <style name="MyCheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">#a6192e</item>
+        <item name="colorControlActivated">#a6192e</item>
+    </style>
+
 </resources>

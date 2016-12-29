@@ -17,7 +17,7 @@
         android:textStyle="bold"
         android:textSize="16sp"
         android:layout_marginTop="50dp"
-        android:id="@+id/textView" />
+        android:id="@+id/tvGestao" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -56,7 +56,7 @@
         android:layout_marginTop="10dp"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:id="@+id/textView5" />
+        android:id="@+id/tvOdebretch" />
 
     <TextView
         android:text="Pernambuco"
@@ -66,7 +66,7 @@
         android:layout_gravity="center"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:id="@+id/textView6" />
+        android:id="@+id/tvEstado" />
 
     <EditText
         android:layout_width="190dp"
@@ -80,7 +80,7 @@
         android:textColor="@color/white"
         android:layout_gravity="center"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/etLogin"
         android:backgroundTint="@color/white"
         android:drawableStart="@drawable/ic_login"/>
 
@@ -96,7 +96,7 @@
         android:layout_marginTop="15dp"
         android:layout_gravity="center"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/etSenha"
         android:backgroundTint="@color/white"
         android:drawableStart="@drawable/ic_senha" />
 

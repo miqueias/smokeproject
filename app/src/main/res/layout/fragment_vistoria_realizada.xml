@@ -15,10 +15,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ESCOLHA UMA AÇÃO"
-            android:id="@+id/textView"
-            android:textStyle="bold"
+            android:id="@+id/tvEscolhaAcao"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="22sp"
+            android:textSize="15sp"
             android:layout_gravity="center"
             android:gravity="center" />
 

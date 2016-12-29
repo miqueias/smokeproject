@@ -18,5 +18,8 @@
     //App
     <color name="vermelho">#e4002b</color>
     <color name="vermelhodois">#e6e4002b</color>
+    <color name="cinza">#6a6c6f</color>
+
+
     <!--<color name="colorAccent">#FFFAFA</color>-->
 </resources>
