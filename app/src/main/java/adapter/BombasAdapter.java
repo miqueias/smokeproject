@@ -38,7 +38,7 @@ public class BombasAdapter extends RecyclerView.Adapter<BombasAdapter.PersonView
 
     @Override
     public PersonViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_nova_vistoria, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_bomba, viewGroup, false);
         PersonViewHolder pvh = new PersonViewHolder(v);
         return pvh;
     }

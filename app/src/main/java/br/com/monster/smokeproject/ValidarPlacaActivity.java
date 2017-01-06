@@ -43,7 +43,7 @@ public class ValidarPlacaActivity extends AppCompatActivity {
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(etPlaca.getWindowToken(), 0);
                 minhaPlaca = etPlaca.getText().toString();
-                snackbar = Snackbar.make(linearLayout, "Placa validada - " + minhaPlaca, Snackbar.LENGTH_INDEFINITE);
+                snackbar = Snackbar.make(linearLayout, "Código - 0000000", Snackbar.LENGTH_INDEFINITE);
                 View snackbarView = snackbar.getView();
                 snackbarView.setBackgroundResource(R.color.black);
                 snackbar.show();

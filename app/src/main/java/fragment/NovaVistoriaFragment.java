@@ -61,9 +61,8 @@ public class NovaVistoriaFragment extends Fragment {
                     @Override public void onItemClick(View view, int position) {
 //                        Toast.makeText(getActivity(), "Posição " + position,
 //                                Toast.LENGTH_LONG).show();
-//                        Intent it = new Intent(getContext(), VistoriaRealizadaActivity.class);
-//                        startActivity(it);
-//                        getActivity().finish();
+                        VistoriaActivity.viewPager.setCurrentItem(1);
+
                     }
 
                     @Override public void onLongItemClick(View view, int position) {

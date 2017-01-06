@@ -18,7 +18,7 @@ public class VistoriaActivity extends AppCompatActivity {
     private String posicao = "";
 
     private TabLayout tabLayout;
-    private ViewPager viewPager;
+    public static ViewPager viewPager;
     private int[] tabIcons = {
             android.R.drawable.ic_dialog_info,
             android.R.drawable.ic_dialog_alert};

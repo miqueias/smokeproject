@@ -38,7 +38,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="25dp"
-                android:layout_marginBottom="39dp">
+                android:layout_marginBottom="25dp">
 
 
                 <TextView
@@ -55,7 +55,6 @@
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cvAlerta"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginLeft="25dp"
@@ -66,7 +65,6 @@
                 app:cardUseCompatPadding="false"
                 android:layout_below="@+id/tb_main"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp">
 
                 <LinearLayout
@@ -101,7 +99,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="15sp"
+                                android:textSize="11sp"
+                                android:layout_marginBottom="8dp"
                                 android:textStyle="bold"
                                 android:text="PROBLEMA PERSISTENTE" />
 
@@ -111,7 +110,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="1 problema destacado"
                                 android:textColor="@color/grey"
-                                android:textSize="11sp" />
+                                android:textSize="9sp" />
                         </LinearLayout>
                     </LinearLayout>
 
