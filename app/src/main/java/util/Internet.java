@@ -16,6 +16,10 @@ public class Internet {
         this.context = context;
     }
 
+    public Internet() {
+
+    }
+
     public boolean verificarConexao()
     {
         ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);

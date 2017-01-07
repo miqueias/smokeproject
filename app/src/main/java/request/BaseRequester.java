@@ -1,4 +1,4 @@
-package Request;
+package request;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -21,7 +21,7 @@ import javax.net.ssl.HttpsURLConnection;
  * Created by Miqueias on 1/7/17.
  */
 
-public class BaseRequest extends AsyncTask<BaseRequest, Object, String> {
+public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
 
     private String url;
     private JSONObject jsonObject;
@@ -31,7 +31,7 @@ public class BaseRequest extends AsyncTask<BaseRequest, Object, String> {
     private String gsonString;
     private String authorization;
 
-    BaseRequest() {
+    public BaseRequester() {
 
     }
 
@@ -92,7 +92,7 @@ public class BaseRequest extends AsyncTask<BaseRequest, Object, String> {
     }
 
     @Override
-    protected String doInBackground(BaseRequest... params) {
+    protected String doInBackground(BaseRequester... params) {
         try {
             return sendGson(this.url, this.method, this.gsonString, this.authorization);//sendPostRequest(this.url, this.method, this.jsonObject);
         } catch (JSONException e) {

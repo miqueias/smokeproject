@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Util {
 
-    Util() {
+    public Util() {
 
     }
 
