@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tvOdebretch, tvGestao, tvEstado;
     Util util;
     Internet internet;
+    String jsonReturn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                                 baseRequester.setMethod(Method.POST);
                                 baseRequester.setJsonObject(jsonPut);
 
-                                String jsonReturn = baseRequester.execute(baseRequester).get();
+                                jsonReturn = baseRequester.execute(baseRequester).get();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
