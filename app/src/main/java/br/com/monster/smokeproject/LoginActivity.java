@@ -75,20 +75,19 @@ public class LoginActivity extends AppCompatActivity {
                             final JSONObject jsonPut = new JSONObject();
 
                             try {
-                                jsonPut.put("senha", senha);
                                 jsonPut.put("login", login);
+                                jsonPut.put("senha", senha);
 
                                 BaseRequester baseRequester = new BaseRequester();
                                 baseRequester.setUrl(Requester.API_URL + "/auth");
                                 baseRequester.setMethod(Method.POST);
                                 baseRequester.setGsonString(jsonPut.toString());
 
-<<<<<<< HEAD
                                 String jsonReturn = baseRequester.execute(baseRequester).get();
                                 Log.i("API", jsonReturn);
-=======
+
                                 jsonReturn = baseRequester.execute(baseRequester).get();
->>>>>>> 327cb3dc30bb20577aade6c99ebc57c4f57895f2
+
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
