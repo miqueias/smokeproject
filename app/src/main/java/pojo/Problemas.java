@@ -1,15 +1,16 @@
-package java;
+package pojo;
 
 /**
  * Created by Miqueias on 1/7/17.
  */
 
-public class Motivo {
+public class Problemas {
 
     private int id;
     private String descricao;
+    private int status;
 
-    Motivo() {
+    Problemas() {
 
     }
 
@@ -27,5 +28,13 @@ public class Motivo {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

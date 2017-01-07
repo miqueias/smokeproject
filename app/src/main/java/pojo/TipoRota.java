@@ -1,16 +1,15 @@
-package java;
+package pojo;
 
 /**
  * Created by Miqueias on 1/7/17.
  */
 
-public class Problemas {
+public class TipoRota {
 
     private int id;
     private String descricao;
-    private int status;
 
-    Problemas() {
+    TipoRota() {
 
     }
 
@@ -28,13 +27,5 @@ public class Problemas {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 }

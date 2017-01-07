@@ -7,6 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import fragment.NovaVistoriaFragment;
@@ -65,6 +67,13 @@ public class VistoriaActivity extends AppCompatActivity {
         adapter.addFragment(novaVistoriaFragment, "NOVA VISTORIA");
         adapter.addFragment(vistoriaRealizadaFragment, "VISTORIA/APOIO");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home, menu);
+        return true;
     }
 
     @Override

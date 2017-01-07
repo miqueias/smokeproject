@@ -1,15 +1,15 @@
-package java;
+package pojo;
 
 /**
  * Created by Miqueias on 1/7/17.
  */
 
-public class TipoRota {
+public class Cargo {
 
     private int id;
     private String descricao;
 
-    TipoRota() {
+    Cargo() {
 
     }
 

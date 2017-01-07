@@ -1,21 +1,27 @@
-package java;
+package pojo;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Miqueias on 1/7/17.
  */
 
-public class EstacoesElevatorias {
+public class Vistorias {
 
     private int id;
     private String descricao;
+    private Date created;
+    private String endereco;
+    private String numero;
+    private String bairro;
+    private int status;
+    private int cidadeId;
     private int regionalId;
     private Regional regional;
     private ArrayList<ConjuntoMotorBomba> conjuntoMotorBombaArrayList;
 
-
-    EstacoesElevatorias() {
+    Vistorias() {
 
     }
 
@@ -33,6 +39,54 @@ public class EstacoesElevatorias {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getCidadeId() {
+        return cidadeId;
+    }
+
+    public void setCidadeId(int cidadeId) {
+        this.cidadeId = cidadeId;
     }
 
     public int getRegionalId() {

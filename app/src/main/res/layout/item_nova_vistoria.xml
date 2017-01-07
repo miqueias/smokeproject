@@ -35,14 +35,14 @@
                     android:textSize="16sp"
                     android:layout_weight="1" />
 
-                <ImageView
+                <CheckBox
                     android:layout_width="wrap_content"
                     android:visibility="visible"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/checked_symbol"
-                    android:id="@+id/imageView2"
+                    android:id="@+id/cbCheck"
                     android:layout_gravity="center"
-                    android:layout_marginRight="8dp" />
+                    android:layout_marginRight="8dp"
+                    android:theme="@style/MyCheckBox"/>
 
             </LinearLayout>
         </LinearLayout>

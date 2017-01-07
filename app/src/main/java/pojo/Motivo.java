@@ -1,15 +1,15 @@
-package java;
+package pojo;
 
 /**
  * Created by Miqueias on 1/7/17.
  */
 
-public class Cargo {
+public class Motivo {
 
     private int id;
     private String descricao;
 
-    Cargo() {
+    Motivo() {
 
     }
 

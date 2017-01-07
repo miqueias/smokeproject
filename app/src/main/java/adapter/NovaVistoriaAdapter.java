@@ -6,6 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -25,12 +28,17 @@ public class NovaVistoriaAdapter extends RecyclerView.Adapter<NovaVistoriaAdapte
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
 
 
+
+
         PersonViewHolder(View itemView) {
             super(itemView);
             itemView.setClickable(true);
 
+
         }
     }
+
+
 
     public NovaVistoriaAdapter(List<Lista> lista) {
         this.lista = lista;
@@ -44,8 +52,15 @@ public class NovaVistoriaAdapter extends RecyclerView.Adapter<NovaVistoriaAdapte
     }
 
     @Override
-    public void onBindViewHolder(PersonViewHolder personViewHolder, int position) {
+    public void onBindViewHolder(final PersonViewHolder personViewHolder, int position) {
 //        personViewHolder.tvNomeEstacao.setText(endereco.get(position).getComplemento());
+//        personViewHolder.imgCheck.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                personViewHolder.imgCheck.setVisibility(View.INVISIBLE);
+//            }
+//        });
 
     }
 

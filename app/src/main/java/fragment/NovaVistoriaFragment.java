@@ -1,6 +1,7 @@
 package fragment;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -26,6 +28,7 @@ public class NovaVistoriaFragment extends Fragment {
     private RecyclerView rvNovaVistoria;
     private List<Lista> lista;
     private LinearLayoutManager llm;
+    private TextView tvEstacaoElevatoria;
 
 
     public NovaVistoriaFragment() {
@@ -48,6 +51,12 @@ public class NovaVistoriaFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //Fontes.ttf
+        Typeface RalewayBold = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Bold.ttf");
+
+        tvEstacaoElevatoria = (TextView) getView().findViewById(R.id.tvEstacaoElevatoria);
+        tvEstacaoElevatoria.setTypeface(RalewayBold);
+
         rvNovaVistoria=(RecyclerView) getView().findViewById(R.id.rvNovaVistoria);
         llm = new LinearLayoutManager(getActivity());
         rvNovaVistoria.setLayoutManager(llm);
@@ -66,7 +75,9 @@ public class NovaVistoriaFragment extends Fragment {
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
-                        // do whatever
+//                        Toast.makeText(getActivity(), "Posição " + position,
+//                                Toast.LENGTH_LONG).show();
+
                     }
                 })
         );
