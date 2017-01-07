@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -116,9 +117,10 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
         try {
             if (method == Method.POST) {
 
-                HttpsURLConnection conn = null;
+
+                HttpURLConnection conn = null;
                 byte[] bytes = null;
-                conn = (HttpsURLConnection) url.openConnection();
+                conn = (HttpURLConnection) url.openConnection();
 
                 String body = "";
                 if (gsonString != null) {
