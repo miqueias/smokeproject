@@ -88,6 +88,10 @@ public class LoginActivity extends AppCompatActivity {
 
                                 jsonReturn = baseRequester.execute(baseRequester).get();
 
+                                JSONObject jsonObject = new JSONObject(jsonReturn);
+
+                                //if (jsonObject.get("error").toString() == "true") {
+
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -100,17 +104,11 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }
                     }).start();
-
-
-
                 }
 
-
-
-
-                Intent it = new Intent(getBaseContext(), HomeActivity.class);
-                startActivity(it);
-                finish();
+                //Intent it = new Intent(getBaseContext(), HomeActivity.class);
+                //startActivity(it);
+                //finish();
             }
         });
     }

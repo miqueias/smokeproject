@@ -137,7 +137,7 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
             conn.setDoOutput(true);
 
             OutputStream out = conn.getOutputStream();
-            out.write(bytes);
+                            out.write(bytes);
             out.close();
 
             int status = conn.getResponseCode();
@@ -192,12 +192,6 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
 
                 bytes = body.getBytes();
                 conn.setRequestProperty("Content-Type", "application/json");
-
-                bytes = body.getBytes();
-                conn.setRequestProperty("Content-Type", "application/json");
-                if (authorization != null && authorization.trim() != "") {
-                    conn.setRequestProperty("Authorization", "JWT " + authorization);
-                }
 
                 conn.setReadTimeout(10000);
                 conn.setConnectTimeout(15000);
