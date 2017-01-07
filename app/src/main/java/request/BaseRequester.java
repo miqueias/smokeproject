@@ -95,13 +95,76 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
     @Override
     protected String doInBackground(BaseRequester... params) {
         try {
-            return sendGson(this.url, this.method, this.gsonString, this.authorization);//sendPostRequest(this.url, this.method, this.jsonObject);
+            return sendGson(this.url, this.method, this.gsonString, this.authorization);
+            //return sendPostRequest(this.url, this.method, this.jsonObject);
         } catch (JSONException e) {
             return null;
         } catch (IOException e) {
             return null;
         }
     }
+
+    private static String sendPostRequest(String apiUrl, Method method, JSONObject jsonObjSend) throws JSONException, IOException {
+
+        URL url;
+        String returnStr = "";
+
+        try {
+            url = new URL(apiUrl);
+        }
+        catch (MalformedURLException e) {
+            throw new IllegalArgumentException("invalid url: " + apiUrl);
+        }
+
+        if (method == Method.POST) {
+
+            HttpURLConnection conn = null;
+            byte[] bytes = null;
+            conn = (HttpURLConnection) url.openConnection();
+
+            String body = "";
+            if (jsonObjSend != null) {
+                body = jsonObjSend.toString();
+            }
+
+            bytes = body.getBytes();
+            conn.setRequestProperty("Content-Type", "application/json");
+
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod(String.valueOf(method));
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            OutputStream out = conn.getOutputStream();
+            out.write(bytes);
+            out.close();
+
+            int status = conn.getResponseCode();
+
+            InputStream is;
+            String convertStreamToString = "";
+
+            if (status == 400) {
+                //return MessageText.ERROR_SERVER.toString();
+                convertStreamToString = convertStreamToString(conn.getErrorStream(), "UTF-8");
+            }
+            else
+            {
+                if (conn != null)
+                {
+                    convertStreamToString = convertStreamToString(conn.getInputStream(), /*HTTP.UTF_8*/"UTF-8");
+                    conn.disconnect();
+                }
+            }
+
+            returnStr = convertStreamToString;
+            return convertStreamToString;
+
+        }
+        return returnStr;
+    }
+
 
     private static String sendGson(String apiUrl, Method method, String gsonString, String authorization) throws JSONException, IOException {
 
@@ -126,6 +189,9 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
                 if (gsonString != null) {
                     body = gsonString;
                 }
+
+                bytes = body.getBytes();
+                conn.setRequestProperty("Content-Type", "application/json");
 
                 bytes = body.getBytes();
                 conn.setRequestProperty("Content-Type", "application/json");
@@ -164,7 +230,6 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
         } catch (Exception e) {
             return e.getMessage();
         }
-
         return returnStr;
     }
 

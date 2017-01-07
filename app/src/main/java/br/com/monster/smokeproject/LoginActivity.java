@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -80,9 +81,14 @@ public class LoginActivity extends AppCompatActivity {
                                 BaseRequester baseRequester = new BaseRequester();
                                 baseRequester.setUrl(Requester.API_URL + "/auth");
                                 baseRequester.setMethod(Method.POST);
-                                baseRequester.setJsonObject(jsonPut);
+                                baseRequester.setGsonString(jsonPut.toString());
 
+<<<<<<< HEAD
+                                String jsonReturn = baseRequester.execute(baseRequester).get();
+                                Log.i("API", jsonReturn);
+=======
                                 jsonReturn = baseRequester.execute(baseRequester).get();
+>>>>>>> 327cb3dc30bb20577aade6c99ebc57c4f57895f2
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

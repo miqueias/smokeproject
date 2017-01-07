@@ -15,6 +15,7 @@ public class Operador {
     private int cargoId;
     private int escalaId;
     private int rotaId;
+    private String validaPlaca;
 
     Operador() {
 
@@ -90,5 +91,13 @@ public class Operador {
 
     public void setRotaId(int rotaId) {
         this.rotaId = rotaId;
+    }
+
+    public String getValidaPlaca() {
+        return validaPlaca;
+    }
+
+    public void setValidaPlaca(String validaPlaca) {
+        this.validaPlaca = validaPlaca;
     }
 }
