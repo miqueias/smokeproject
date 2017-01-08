@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -40,12 +41,16 @@ public class EstacaoAdapter extends RecyclerView.Adapter<EstacaoAdapter.PersonVi
 
         Typeface RalewayMedium = Typeface.createFromAsset(itemView.getResources().getAssets(), "Raleway-Medium.ttf");
         TextView tvSupervisor;
+        CheckBox cbCheck;
+
 
         PersonViewHolder(View itemView) {
             super(itemView);
             itemView.setClickable(true);
             tvSupervisor = (TextView) itemView.findViewById(R.id.tvNomeEstacao);
             tvSupervisor.setTypeface(RalewayMedium);
+            cbCheck = (CheckBox) itemView.findViewById(R.id.cbCheck);
+
         }
     }
 
@@ -59,15 +64,14 @@ public class EstacaoAdapter extends RecyclerView.Adapter<EstacaoAdapter.PersonVi
     @Override
     public void onBindViewHolder(final PersonViewHolder personViewHolder, int position) {
         personViewHolder.tvSupervisor.setText(lista.get(position).getDescricao());
-//        personViewHolder.tvNomeEstacao.setText(endereco.get(position).getComplemento());
-//        personViewHolder.imgCheck.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                personViewHolder.imgCheck.setVisibility(View.INVISIBLE);
-//            }
-//        });
 
+        personViewHolder.cbCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
     }
 
 
