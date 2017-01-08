@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     final String senha = Util.md5(etSenha.getText().toString().trim());
 
+                    Util.AtivaDialogHandler(2, "", "Efetuando Login...");
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -88,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                                 auth = Auth.getInstance();
 
                                 if (auth.getStatusAPI().equals("ERRO")) {
+                                    Util.AtivaDialogHandler(5, "", "");
                                     Util.AtivaDialogHandler(1, "SisInspe", auth.getMensagemErroApi());
                                 } else {
                                     Intent it = new Intent(getBaseContext(), HomeActivity.class);
