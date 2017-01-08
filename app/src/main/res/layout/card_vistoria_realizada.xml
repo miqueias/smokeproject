@@ -81,20 +81,20 @@
                 android:layout_marginRight="25dp">
 
                 <TextView
-                    android:text="Supervisor"
+                    android:text="Estação"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp"
                     android:layout_marginBottom="2dp"
-                        android:id="@+id/tvSupervisor" />
+                        android:id="@+id/tvEstacao" />
 
                 <TextView
-                    android:text="José Augusto"
+                    android:text="Oesta B"
                     android:textSize="11sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvNomeSupervisor" />
+                    android:id="@+id/tvNomeEstacao" />
             </LinearLayout>
 
             <LinearLayout
@@ -104,20 +104,20 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="Estação"
+                    android:text="Regional"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp"
                     android:layout_marginBottom="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvEstacao" />
+                    android:id="@+id/tvRegional" />
 
                 <TextView
-                    android:text="Oesta B"
+                    android:text="Sul"
                     android:textSize="11sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvNomeEstacao" />
+                    android:id="@+id/tvNomeRegional" />
             </LinearLayout>
 
             <LinearLayout
