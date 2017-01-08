@@ -59,18 +59,15 @@ public class UserRequester {
 
         JSONObject jsonObjectAuth = new JSONObject(jsonReturn);
 
+        auth.setStatusAPI(jsonObjectAuth.get("status").toString());
+        auth.setMensagemErroApi(jsonObjectAuth.get("mensagem").toString());
+
         if (jsonObjectAuth.get("status").toString().equals("ERRO")) {
             //informar ao usuario
-            auth.setStatusAPI(jsonObjectAuth.get("status").toString().toUpperCase());
             String mensagemErro = jsonObjectAuth.get("mensagem").toString();
-            auth.setMensagemErroApi(mensagemErro);
             Log.d("API", mensagemErro);
         } else {
             //auth
-
-            auth.setStatus(jsonObjectAuth.get("status").toString());
-            auth.setMensagem(jsonObjectAuth.get("mensagem").toString());
-
             JSONObject jsonObjectDados = jsonObjectAuth.getJSONObject("dados");
 
             auth.setToken(jsonObjectDados.get("token").toString());
