@@ -12,12 +12,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import adapter.EstacaoAdapter;
 import adapter.NovaVistoriaAdapter;
 import adapter.VistoriaAdapter;
 import model.Lista;
 import pojo.Auth;
+import pojo.EstacoesElevatorias;
 import util.DividerItemDecoration;
 import util.RecyclerItemClickListener;
 
@@ -25,7 +28,7 @@ public class EstacoesElevatoriasActivity extends AppCompatActivity {
 
     private RecyclerView rvNovaVistoria;
     private LinearLayoutManager llm;
-    private List<Lista> lista;
+    private ArrayList<EstacoesElevatorias> lista;
     private TextView tvEstacaoElevatoria;
     private Auth auth = Auth.getInstance();
 
@@ -55,7 +58,7 @@ public class EstacoesElevatoriasActivity extends AppCompatActivity {
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         rvNovaVistoria.addItemDecoration(itemDecoration);
-        NovaVistoriaAdapter adapter = new NovaVistoriaAdapter(lista);
+        EstacaoAdapter adapter = new EstacaoAdapter(auth.getRota().getEstacoesElevatoriasArrayList());
         rvNovaVistoria.setAdapter(adapter);
 
 //        rvNovaVistoria.addOnItemTouchListener(
