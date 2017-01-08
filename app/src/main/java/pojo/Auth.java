@@ -21,7 +21,8 @@ public final class Auth {
     private ArrayList<Problemas> problemasArrayList;
     private ArrayList<ProblemasCheckList> problemasCheckListArrayList;
     private ArrayList<Vistoria> vistoriasArrayList;
-
+    private String statusAPI;
+    private String mensagemErroApi;
 
     public Auth() {
 
@@ -129,5 +130,21 @@ public final class Auth {
 
     public void setVistoriasArrayList(ArrayList<Vistoria> vistoriasArrayList) {
         this.vistoriasArrayList = vistoriasArrayList;
+    }
+
+    public String getStatusAPI() {
+        return statusAPI;
+    }
+
+    public void setStatusAPI(String statusAPI) {
+        this.statusAPI = statusAPI;
+    }
+
+    public String getMensagemErroApi() {
+        return mensagemErroApi;
+    }
+
+    public void setMensagemErroApi(String mensagemErroApi) {
+        this.mensagemErroApi = mensagemErroApi;
     }
 }

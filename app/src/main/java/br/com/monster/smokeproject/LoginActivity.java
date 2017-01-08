@@ -1,7 +1,12 @@
 package br.com.monster.smokeproject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +41,7 @@ import request.Method;
 import request.Requester;
 import request.UserRequester;
 import util.Internet;
+import util.Util;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -49,6 +55,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Util.setCtxAtual(this);
 
         //Fontes.ttf
         Typeface RalewayBold = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Bold.ttf");
@@ -76,9 +84,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (!internet.verificarConexao()) {
-                    //mensagem que precisa conectar a internet
+                    new AlertDialog.Builder(LoginActivity.this)
+                            .setCancelable(false)
+                            .setMessage("Por favor, verifique sua conexao com a internet.")
 
+                            // Positive button
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
                 } else {
+
+                    final String senha = Util.md5(etSenha.getText().toString().trim());
 
                     new Thread(new Runnable() {
                         @Override
@@ -86,11 +104,19 @@ public class LoginActivity extends AppCompatActivity {
 
                             UserRequester userRequester = new UserRequester();
                             try {
-                                userRequester.loadAuth("tiago", "4297f44b13955235245b2497399d7a93", "");
-                                Intent it = new Intent(getBaseContext(), HomeActivity.class);
-                                startActivity(it);
-                                finish();
+                                //userRequester.loadAuth("tiago", "4297f44b13955235245b2497399d7a93", "");
+                                userRequester.loadAuth(etLogin.getText().toString().toLowerCase().trim(),
+                                        senha, "");
 
+                                auth = Auth.getInstance();
+
+                                if (auth.getStatusAPI().equals("ERRO")) {
+                                    Util.AtivaDialogHandler(1, "SisInspe", auth.getMensagemErroApi());
+                                } else {
+                                    Intent it = new Intent(getBaseContext(), HomeActivity.class);
+                                    startActivity(it);
+                                    finish();
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             } catch (InterruptedException e) {

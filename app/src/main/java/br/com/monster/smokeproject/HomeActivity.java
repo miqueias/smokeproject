@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+
 import pojo.Auth;
 
 public class HomeActivity extends AppCompatActivity
@@ -64,16 +66,27 @@ public class HomeActivity extends AppCompatActivity
         tvNomeBV = (TextView) headerview.findViewById(R.id.tvNomeBV);
         tvNomeBV = (TextView) findViewById(R.id.tvNomeBV);
         tvNomeBV.setTypeface(RalewayMedium);
+        tvNomeBV.setText(auth.getOperador().getNome()); // API
 
         tvData = (TextView) headerview.findViewById(R.id.tvData);
         tvData = (TextView) findViewById(R.id.tvData);
         tvData.setTypeface(RalewayMedium);
+        //data atual begin
+        long date = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String dateString = sdf.format(date);
+        //data atual end
+        tvData.setText(dateString);
+
         tvEscala = (TextView) findViewById(R.id.tvEscala);
         tvEscala.setTypeface(RalewayMedium);
+        tvEscala.setText("Escala: " + auth.getEscala().getDescricao());//API
         tvTipoRota = (TextView) findViewById(R.id.tvTipoRota);
         tvTipoRota.setTypeface(RalewayMedium);
+        tvTipoRota.setText("Tipo de Rota: " + auth.getRota().getTipoRota().getDescricao()); //API
         tvDescRota = (TextView) findViewById(R.id.tvDescRota);
         tvDescRota.setTypeface(RalewayMedium);
+        tvDescRota.setText("Rota: " + auth.getRota().getDescricao()); //API
 
 
         btnNovaVistoria = (Button) headerview.findViewById(R.id.btnNovaVistoria);
