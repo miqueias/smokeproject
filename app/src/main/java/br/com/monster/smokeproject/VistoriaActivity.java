@@ -15,9 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import fragment.NovaVistoriaFragment;
-import fragment.VistoriaRealizadaFragment;
-import util.ViewPagerAdapter;
 
 public class VistoriaActivity extends AppCompatActivity {
 

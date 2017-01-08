@@ -58,22 +58,22 @@ public class EstacoesElevatoriasActivity extends AppCompatActivity {
         NovaVistoriaAdapter adapter = new NovaVistoriaAdapter(lista);
         rvNovaVistoria.setAdapter(adapter);
 
-        rvNovaVistoria.addOnItemTouchListener(
-                new RecyclerItemClickListener(this, rvNovaVistoria ,new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
-                        Toast.makeText(EstacoesElevatoriasActivity.this, "Posição " + position,
-                                Toast.LENGTH_LONG).show();
-                        Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
-                        startActivity(it);
-                        finish();
-
-                    }
-
-                    @Override public void onLongItemClick(View view, int position) {
-                        // do whatever
-                    }
-                })
-        );
+//        rvNovaVistoria.addOnItemTouchListener(
+//                new RecyclerItemClickListener(this, rvNovaVistoria ,new RecyclerItemClickListener.OnItemClickListener() {
+//                    @Override public void onItemClick(View view, int position) {
+//                        Toast.makeText(EstacoesElevatoriasActivity.this, "Posição " + position,
+//                                Toast.LENGTH_LONG).show();
+//                        Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+//                        startActivity(it);
+//                        finish();
+//
+//                    }
+//
+//                    @Override public void onLongItemClick(View view, int position) {
+//                        // do whatever
+//                    }
+//                })
+//        );
     }
 
 
