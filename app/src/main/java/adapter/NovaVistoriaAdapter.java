@@ -29,7 +29,6 @@ public class NovaVistoriaAdapter extends RecyclerView.Adapter<NovaVistoriaAdapte
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
 
 
-        CheckBox cbCheck;
 
         PersonViewHolder(View itemView) {
             super(itemView);
@@ -37,7 +36,6 @@ public class NovaVistoriaAdapter extends RecyclerView.Adapter<NovaVistoriaAdapte
 
 
 
-            cbCheck = (CheckBox) itemView.findViewById(R.id.cbCheck);
 
 
         }
@@ -58,13 +56,7 @@ public class NovaVistoriaAdapter extends RecyclerView.Adapter<NovaVistoriaAdapte
 
     @Override
     public void onBindViewHolder(final PersonViewHolder personViewHolder, int position) {
-         personViewHolder.cbCheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-            }
-        });
 
     }
 
