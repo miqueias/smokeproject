@@ -20,7 +20,7 @@ public final class Auth {
     private Rota rota;
     private ArrayList<Problemas> problemasArrayList;
     private ArrayList<ProblemasCheckList> problemasCheckListArrayList;
-    private ArrayList<Vistorias> vistoriasArrayList;
+    private ArrayList<Vistoria> vistoriasArrayList;
 
 
     public Auth() {
@@ -123,11 +123,11 @@ public final class Auth {
         this.problemasCheckListArrayList = problemasCheckListArrayList;
     }
 
-    public ArrayList<Vistorias> getVistoriasArrayList() {
+    public ArrayList<Vistoria> getVistoriasArrayList() {
         return vistoriasArrayList;
     }
 
-    public void setVistoriasArrayList(ArrayList<Vistorias> vistoriasArrayList) {
+    public void setVistoriasArrayList(ArrayList<Vistoria> vistoriasArrayList) {
         this.vistoriasArrayList = vistoriasArrayList;
     }
 }

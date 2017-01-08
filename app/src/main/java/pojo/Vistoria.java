@@ -1,5 +1,8 @@
 package pojo;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Created by Miqueias on 1/8/17.
  */
@@ -11,10 +14,20 @@ public class Vistoria {
     private String leituraCompesa;
     private int cmbsEncontradas;
     private String descricaoProblemas;
-    private String created;
     private int estacaoElevatoriaId;
     private int operadorId;
     private EstacoesElevatorias estacoesElevatorias;
+    private int Status;
+    private ArrayList<ConjuntoMotorBomba> conjuntoMotorBombaArrayList;
+    private String descricao;
+    private String created;
+    private String endereco;
+    private String numero;
+    private String bairro;
+    private int status;
+    private int cidadeId;
+    private int regionalId;
+    private Regional regional;
 
     public Vistoria() {
 
@@ -60,14 +73,6 @@ public class Vistoria {
         this.descricaoProblemas = descricaoProblemas;
     }
 
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
     public int getEstacaoElevatoriaId() {
         return estacaoElevatoriaId;
     }
@@ -90,5 +95,85 @@ public class Vistoria {
 
     public void setEstacoesElevatorias(EstacoesElevatorias estacoesElevatorias) {
         this.estacoesElevatorias = estacoesElevatorias;
+    }
+
+    public int getStatus() {
+        return Status;
+    }
+
+    public void setStatus(int status) {
+        Status = status;
+    }
+
+    public ArrayList<ConjuntoMotorBomba> getConjuntoMotorBombaArrayList() {
+        return conjuntoMotorBombaArrayList;
+    }
+
+    public void setConjuntoMotorBombaArrayList(ArrayList<ConjuntoMotorBomba> conjuntoMotorBombaArrayList) {
+        this.conjuntoMotorBombaArrayList = conjuntoMotorBombaArrayList;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public int getCidadeId() {
+        return cidadeId;
+    }
+
+    public void setCidadeId(int cidadeId) {
+        this.cidadeId = cidadeId;
+    }
+
+    public int getRegionalId() {
+        return regionalId;
+    }
+
+    public void setRegionalId(int regionalId) {
+        this.regionalId = regionalId;
+    }
+
+    public Regional getRegional() {
+        return regional;
+    }
+
+    public void setRegional(Regional regional) {
+        this.regional = regional;
     }
 }

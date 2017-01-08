@@ -11,8 +11,15 @@ public class EstacoesElevatorias {
     private int id;
     private String descricao;
     private int regionalId;
-    private Regional regional;
     private ArrayList<ConjuntoMotorBomba> conjuntoMotorBombaArrayList;
+    private String created;
+    private String numero;
+    private String bairro;
+    private int status;
+    private int cidadeId;
+    private Regional regional;
+    private String endereco;
+    private int ufId;
 
 
     public EstacoesElevatorias() {
@@ -57,5 +64,61 @@ public class EstacoesElevatorias {
 
     public void setConjuntoMotorBombaArrayList(ArrayList<ConjuntoMotorBomba> conjuntoMotorBombaArrayList) {
         this.conjuntoMotorBombaArrayList = conjuntoMotorBombaArrayList;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getCidadeId() {
+        return cidadeId;
+    }
+
+    public void setCidadeId(int cidadeId) {
+        this.cidadeId = cidadeId;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public int getUfId() {
+        return ufId;
+    }
+
+    public void setUfId(int ufId) {
+        this.ufId = ufId;
     }
 }

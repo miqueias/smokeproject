@@ -30,6 +30,7 @@ import pojo.ProblemasCheckList;
 import pojo.Regional;
 import pojo.Rota;
 import pojo.TipoRota;
+import pojo.Vistoria;
 import request.BaseRequester;
 import request.Method;
 import request.Requester;
@@ -250,6 +251,75 @@ public class LoginActivity extends AppCompatActivity {
                                             problemasCheckListArrayList.add(problemasCheckList);
                                         }
                                         auth.setProblemasCheckListArrayList(problemasCheckListArrayList);
+
+                                        //vistoria
+                                        JSONArray jsonArrayVistoria = jsonObjectDados.getJSONArray("vistorias");
+                                        ArrayList<Vistoria> vistoriaArrayList = new ArrayList<Vistoria>();
+
+                                        for (int n = 0; n < jsonArrayVistoria.length(); n++) {
+
+                                            JSONObject jsonObjectVistoria = jsonArrayVistoria.getJSONObject(n);
+                                            Vistoria vistoria = new Vistoria();
+                                            vistoria.setId(Integer.parseInt(jsonObjectVistoria.get("id").toString()));
+                                            vistoria.setLeituraCelpe(jsonObjectVistoria.get("leitura_celpe").toString());
+                                            vistoria.setLeituraCompesa(jsonObjectVistoria.get("leitura_compesa").toString());
+                                            vistoria.setCmbsEncontradas(Integer.parseInt(jsonObjectVistoria.get("cmbs_encontradas").toString()));
+                                            vistoria.setDescricaoProblemas(jsonObjectVistoria.get("descricao_dos_probelmas").toString());
+                                            vistoria.setCreated(jsonObjectVistoria.get("created").toString());
+                                            vistoria.setEstacaoElevatoriaId(Integer.parseInt(jsonObjectVistoria.get("estacao_elevatoria_id").toString()));
+                                            vistoria.setOperadorId(Integer.parseInt(jsonObjectVistoria.get("operador_id").toString()));
+                                            vistoria.setStatus(Integer.parseInt(jsonObjectVistoria.get("status").toString()));
+                                            vistoriaArrayList.add(vistoria);
+
+                                            JSONObject jsonObjectEstacaoVistoria = jsonObjectVistoria.getJSONObject("estacao_elevatoria");
+                                            EstacoesElevatorias estacoesElevatoriasVistoria = new EstacoesElevatorias();
+                                            estacoesElevatoriasVistoria.setId(Integer.parseInt(jsonObjectEstacaoVistoria.get("id").toString()));
+                                            estacoesElevatoriasVistoria.setDescricao(jsonObjectEstacaoVistoria.get("descricao").toString());
+                                            estacoesElevatoriasVistoria.setRegionalId(Integer.parseInt(jsonObjectEstacaoVistoria.get("regional_id").toString()));
+                                            estacoesElevatoriasVistoria.setCreated(jsonObjectEstacaoVistoria.get("created").toString());
+                                            estacoesElevatoriasVistoria.setEndereco(jsonObjectEstacaoVistoria.get("endereco").toString());
+                                            estacoesElevatoriasVistoria.setNumero(jsonObjectEstacaoVistoria.get("numero").toString());
+                                            estacoesElevatoriasVistoria.setCidadeId(Integer.parseInt(jsonObjectEstacaoVistoria.get("cidade_id").toString()));
+                                            estacoesElevatoriasVistoria.setUfId(Integer.parseInt(jsonObjectEstacaoVistoria.get("uf_id").toString()));
+                                            estacoesElevatoriasVistoria.setStatus(Integer.parseInt(jsonObjectEstacaoVistoria.get("status").toString()));
+
+                                            JSONObject jsonObjectRegionalVistoria = jsonObjectEstacaoVistoria.getJSONObject("regional");
+                                            Regional regionalVistoria = new Regional();
+                                            regionalVistoria.setId(Integer.parseInt(jsonObjectRegionalVistoria.get("id").toString()));
+                                            regionalVistoria.setNome(jsonObjectRegionalVistoria.getString("nome"));
+                                            regionalVistoria.setCreated(jsonObjectRegionalVistoria.getString("created"));
+                                            estacoesElevatoriasVistoria.setRegional(regionalVistoria);
+
+                                            JSONArray jsonArrayCmblVistoria = jsonObjectEstacaoVistoria.getJSONArray("cmb");
+                                            ArrayList<ConjuntoMotorBomba> conjuntoMotorBombaVistoriaArrayList = new ArrayList<ConjuntoMotorBomba>();
+
+                                            for (int x = 0; x < jsonArrayCmblVistoria.length(); x++) {
+
+                                                JSONObject jsonObjectCmbVistoria = jsonArrayCmblVistoria.getJSONObject(x);
+                                                ConjuntoMotorBomba conjuntoMotorBombaVistoria = new ConjuntoMotorBomba();
+                                                conjuntoMotorBombaVistoria.setId(Integer.parseInt(jsonObjectCmbVistoria.get("id").toString()));
+                                                conjuntoMotorBombaVistoria.setNumero(jsonObjectCmbVistoria.get("numero").toString());
+                                                conjuntoMotorBombaVistoria.setEstacaoElevatoriaId(Integer.parseInt(jsonObjectCmbVistoria.get("estacao_elevatoria_id").toString()));
+                                                conjuntoMotorBombaVistoriaArrayList.add(conjuntoMotorBombaVistoria);
+
+                                                JSONArray jsonArrayProblemasVistoria = jsonObjectCmbVistoria.getJSONArray("problemas");
+                                                ArrayList<Problemas> problemasVistoriaArrayList = new ArrayList<Problemas>();
+
+                                                for (int y = 0; y < jsonArrayProblemasVistoria.length(); y++) {
+
+                                                    JSONObject jsonObjectProblemasVistoria = jsonArrayProblemasVistoria.getJSONObject(y);
+                                                    Problemas problemasVistoria = new Problemas();
+                                                    problemasVistoria.setId(Integer.parseInt(jsonObjectProblemasVistoria.get("id").toString()));
+                                                    problemasVistoria.setDescricao(jsonObjectProblemasVistoria.get("descricao").toString());
+                                                    problemasVistoria.setStatus(Integer.parseInt(jsonObjectProblemasVistoria.get("status").toString()));
+                                                    problemasVistoriaArrayList.add(problemasVistoria);
+                                                }
+                                                conjuntoMotorBombaVistoria.setProblemasArrayList(problemasVistoriaArrayList);
+                                            }
+                                            estacoesElevatoriasVistoria.setConjuntoMotorBombaArrayList(conjuntoMotorBombaVistoriaArrayList);
+                                        }
+
+                                        auth.setVistoriasArrayList(vistoriaArrayList);
 
                                         Intent it = new Intent(getBaseContext(), HomeActivity.class);
                                         startActivity(it);
