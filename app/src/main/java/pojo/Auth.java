@@ -23,7 +23,7 @@ public final class Auth {
     private ArrayList<Vistorias> vistoriasArrayList;
 
 
-    private Auth() {
+    public Auth() {
 
     }
 

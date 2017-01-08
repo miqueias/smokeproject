@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import pojo.Auth;
+
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -24,6 +26,7 @@ public class HomeActivity extends AppCompatActivity
     private Button btnSair;
 
     private TextView tvOla, tvNomeBV, tvData, tvEscala, tvTipoRota, tvDescRota;
+    private Auth auth;
 
 
     @Override
@@ -34,6 +37,7 @@ public class HomeActivity extends AppCompatActivity
         toolbar.setTitle("Início");
         toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         setSupportActionBar(toolbar);
+        auth = Auth.getInstance();
 
         //Fontes.ttf
         Typeface RalewayBold = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Bold.ttf");
@@ -50,7 +54,7 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerview = navigationView.getHeaderView(0);
         TextView profilename = (TextView) headerview.findViewById(R.id.tvNomeBV);
-        profilename.setText("Antonio Neto");
+        profilename.setText(Auth.getInstance().getOperador().getNome());
         navigationView.setNavigationItemSelectedListener(this);
 
         tvOla = (TextView) headerview.findViewById(R.id.tvOla);

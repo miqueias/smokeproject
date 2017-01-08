@@ -34,15 +34,14 @@ import request.BaseRequester;
 import request.Method;
 import request.Requester;
 import util.Internet;
-import util.Util;
 
 public class LoginActivity extends AppCompatActivity {
 
     private Button btnEntrar;
     private EditText etLogin, etSenha;
     private TextView tvOdebretch, tvGestao, tvEstado;
-    Internet internet;
-    Auth auth;
+    private Internet internet;
+    private Auth auth; //SingleUser
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
