@@ -10,17 +10,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import pojo.Auth;
+
 public class ApoioActivity extends AppCompatActivity {
 
     private TextView tvRegistrarApoio, tvData, tvAs, tvHora, tvSupervisor, tvNomeSupervisor,
             tvEstacao, tvNomeEstacao, tvRegional, tvNomeRegional;
     private EditText etNumeroOS, etDescProblema;
     private Button btnSalvar;
+    private Auth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apoio);
+
+        auth = Auth.getInstance();
 
         //Fontes.ttf
         Typeface RalewayBold = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Bold.ttf");
@@ -34,8 +39,6 @@ public class ApoioActivity extends AppCompatActivity {
         toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
 
         tvRegistrarApoio = (TextView) findViewById(R.id.tvRegistrarApoio);
         tvRegistrarApoio.setTypeface(RalewayBold);
@@ -51,10 +54,12 @@ public class ApoioActivity extends AppCompatActivity {
         tvSupervisor.setTypeface(RalewayMedium);
         tvNomeSupervisor = (TextView) findViewById(R.id.tvNomeSupervisor);
         tvNomeSupervisor.setTypeface(RalewayMedium);
+        tvNomeSupervisor.setText(auth.getLider().getNome());
         tvEstacao = (TextView) findViewById(R.id.tvEstacao);
         tvEstacao.setTypeface(RalewayMedium);
         tvNomeEstacao = (TextView) findViewById(R.id.tvNomeEstacao);
         tvNomeEstacao.setTypeface(RalewayMedium);
+        //tvNomeEstacao.setText(auth.gete);
         tvRegional = (TextView) findViewById(R.id.tvRegional);
         tvRegional.setTypeface(RalewayMedium);
         tvNomeRegional = (TextView) findViewById(R.id.tvNomeRegional);
