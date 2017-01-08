@@ -48,7 +48,7 @@ public class VistoriaRealizadaActivity extends AppCompatActivity {
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         rvVistoria.addItemDecoration(itemDecoration);
-        VistoriaAdapter adapter = new VistoriaAdapter(auth.getVistoriasArrayList());
+        VistoriaAdapter adapter = new VistoriaAdapter(getApplicationContext(), auth.getVistoriasArrayList());
         rvVistoria.setAdapter(adapter);
 
         rvVistoria.addOnItemTouchListener(

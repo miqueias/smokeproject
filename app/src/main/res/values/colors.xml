@@ -19,7 +19,9 @@
     <color name="vermelho">#e4002b</color>
     <color name="vermelhodois">#e6e4002b</color>
     <color name="cinza">#6a6c6f</color>
+    <color name="cinza_card">#acacac</color>
     <color name="vermelho_card">#B22222</color>
+
 
     <!--<color name="colorAccent">#FFFAFA</color>-->
 </resources>

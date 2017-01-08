@@ -87,14 +87,14 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp"
                     android:layout_marginBottom="2dp"
-                        android:id="@+id/tvEstacao" />
+                        android:id="@+id/tvSupervisor" />
 
                 <TextView
-                    android:text="Oesta B"
+                    android:text="José Augusto"
                     android:textSize="11sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvNomeEstacao" />
+                    android:id="@+id/tvNomeSupervisor" />
             </LinearLayout>
 
             <LinearLayout
@@ -104,20 +104,20 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="Regional"
+                    android:text="Estação"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="15sp"
                     android:layout_marginBottom="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvRegional" />
+                    android:id="@+id/tvEstacao" />
 
                 <TextView
-                    android:text="Sul"
+                    android:text="Oesta B"
                     android:textSize="11sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvNomeRegional" />
+                    android:id="@+id/tvNomeEstacao" />
             </LinearLayout>
 
             <LinearLayout

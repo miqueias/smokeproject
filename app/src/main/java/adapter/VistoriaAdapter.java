@@ -13,11 +13,11 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.text.ParseException;
-
+import java.util.List;
 
 import br.com.monster.smokeproject.LoginActivity;
 import br.com.monster.smokeproject.R;
@@ -35,7 +35,15 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
 
     private ArrayList<Vistoria> lista;
     public Context context;
-    private Auth auth = Auth.getInstance();
+
+    public VistoriaAdapter() {
+
+    }
+
+    public VistoriaAdapter(Context context, ArrayList<Vistoria> lista) {
+        this.context = context;
+        this.lista = lista;
+    }
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
 
@@ -64,8 +72,10 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
             tvSupervisor.setTypeface(RalewayMedium);
             tvNomeSupervisor = (TextView) itemView.findViewById(R.id.tvNomeSupervisor);
             tvNomeSupervisor.setTypeface(RalewayMedium);
+            tvNomeSupervisor.setText("Estação");
             tvEstacao = (TextView) itemView.findViewById(R.id.tvEstacao);
             tvEstacao.setTypeface(RalewayMedium);
+            tvEstacao.setText("Regional");
             tvNomeEstacao = (TextView) itemView.findViewById(R.id.tvNomeEstacao);
             tvNomeEstacao.setTypeface(RalewayMedium);
             tvMaisDetalhes = (TextView) itemView.findViewById(R.id.tvMaisDetalhes);
@@ -94,11 +104,16 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
 
 
         try {
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             Date date = format.parse(lista.get(position).getEstacoesElevatorias().getCreated());
-            String newDate = format.format(date);
 
+            format = new SimpleDateFormat("dd/MM/yyyy");
+            String newDate = format.format(date);
             personViewHolder.tvData.setText(newDate);
+
+            format = new SimpleDateFormat("hh:mm:ss");
+            newDate = format.format(date);
+            personViewHolder.tvHora.setText(newDate);
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -119,7 +134,6 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
 
     @Override
     public int getItemCount() {
-        //return 10;
         return lista.size();
     }
 }

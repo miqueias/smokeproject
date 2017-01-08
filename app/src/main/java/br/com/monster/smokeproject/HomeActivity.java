@@ -175,6 +175,10 @@ public class HomeActivity extends AppCompatActivity
                 finish();
             }
         });
+
+        if (auth.getOperador().getValidaPlaca().equals("false")) {
+            btnPlaca.setVisibility(View.GONE);
+        }
     }
 
     @Override
