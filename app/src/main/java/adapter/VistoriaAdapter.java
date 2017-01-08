@@ -2,6 +2,7 @@ package adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,10 +19,13 @@ import java.util.Date;
 import java.text.ParseException;
 
 
+import br.com.monster.smokeproject.LoginActivity;
 import br.com.monster.smokeproject.R;
 import model.Lista;
 import pojo.Auth;
 import pojo.Vistoria;
+
+import static android.R.attr.format;
 
 /**
  * Created by Marlon on 09/12/2016.
@@ -88,10 +92,10 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
         personViewHolder.tvNomeSupervisor.setText(lista.get(position).getEstacoesElevatorias().getDescricao());
         personViewHolder.tvNomeEstacao.setText(lista.get(position).getEstacoesElevatorias().getRegional().getNome());
 
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+
         try {
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
             Date date = format.parse(lista.get(position).getEstacoesElevatorias().getCreated());
-            format = new SimpleDateFormat("MMM dd,yyyy hh:mm a");
             String newDate = format.format(date);
 
             personViewHolder.tvData.setText(newDate);
@@ -102,10 +106,10 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
 
         if (lista.get(position).getEstacoesElevatorias().getStatus() == 1) { //vermelho
             personViewHolder.alertProblema.setText("PROBLEMA\nATIVO");
-            personViewHolder.alertProblema.getResources().getColor(R.color.vermelho_card);
+            personViewHolder.alertProblema.setBackgroundColor(ContextCompat.getColor(context, R.color.vermelho_card));
         } else if (lista.get(position).getEstacoesElevatorias().getStatus() == 2) { //cinza
             personViewHolder.alertProblema.setText("PROBLEMA\nREPORTADO");
-            personViewHolder.alertProblema.getResources().getColor(R.color.cinza_card);
+            personViewHolder.alertProblema.setBackgroundColor(ContextCompat.getColor(context, R.color.cinza_card));
         } else if (lista.get(position).getEstacoesElevatorias().getStatus() == 3) { //normal
             personViewHolder.alertProblema.setVisibility(View.GONE);
         } else {
