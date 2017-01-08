@@ -10,7 +10,7 @@ public class Regional {
 
     private int id;
     private String nome;
-    private Date created;
+    private String created;
 
     public Regional() {
 
@@ -32,11 +32,11 @@ public class Regional {
         this.nome = nome;
     }
 
-    public Date getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 }
