@@ -103,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                                 JSONObject jsonObjectAuth = new JSONObject(jsonReturn);
 
                                 if (jsonObjectAuth.get("status").toString().equals("ERRO")) {
+                                    //informar ao usuario
                                     String mensagemErro = jsonObjectAuth.get("status").toString();
                                     Log.d("API", mensagemErro);
                                 } else {
@@ -237,7 +238,7 @@ public class LoginActivity extends AppCompatActivity {
                                         }
                                         auth.setProblemasArrayList(problemasArrayList);
 
-                                        //problemas
+                                        //problemas chek list
                                         JSONArray jsonArrayProblemasCheckList = jsonObjectDados.getJSONArray("problemachecklists");
                                         ArrayList<ProblemasCheckList> problemasCheckListArrayList = new ArrayList<ProblemasCheckList>();
 
