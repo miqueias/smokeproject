@@ -12,8 +12,11 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
+import java.text.ParseException;
+
 
 import br.com.monster.smokeproject.R;
 import model.Lista;
@@ -82,14 +85,32 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int position) {
-        personViewHolder.tvNomeSupervisor.setText(auth.getLider().getNome());
-        personViewHolder.tvNomeEstacao.setText(lista.get(position).getEstacoesElevatorias().getDescricao());
+        personViewHolder.tvNomeSupervisor.setText(lista.get(position).getEstacoesElevatorias().getDescricao());
+        personViewHolder.tvNomeEstacao.setText(lista.get(position).getEstacoesElevatorias().getRegional().getNome());
 
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        try {
+            Date date = format.parse(lista.get(position).getEstacoesElevatorias().getCreated());
+            format = new SimpleDateFormat("MMM dd,yyyy hh:mm a");
+            String newDate = format.format(date);
 
+            personViewHolder.tvData.setText(newDate);
 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-        //personViewHolder.tvNomeEstacao.setText(endereco.get(position).getComplemento());
-
+        if (lista.get(position).getEstacoesElevatorias().getStatus() == 1) { //vermelho
+            personViewHolder.alertProblema.setText("PROBLEMA\nATIVO");
+            personViewHolder.alertProblema.getResources().getColor(R.color.vermelho_card);
+        } else if (lista.get(position).getEstacoesElevatorias().getStatus() == 2) { //cinza
+            personViewHolder.alertProblema.setText("PROBLEMA\nREPORTADO");
+            personViewHolder.alertProblema.getResources().getColor(R.color.cinza_card);
+        } else if (lista.get(position).getEstacoesElevatorias().getStatus() == 3) { //normal
+            personViewHolder.alertProblema.setVisibility(View.GONE);
+        } else {
+            personViewHolder.alertProblema.setVisibility(View.GONE);
+        }
     }
 
     @Override
