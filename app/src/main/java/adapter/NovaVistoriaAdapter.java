@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -30,12 +29,10 @@ public class NovaVistoriaAdapter extends RecyclerView.Adapter<NovaVistoriaAdapte
 
 
 
+
         PersonViewHolder(View itemView) {
             super(itemView);
             itemView.setClickable(true);
-
-
-
 
 
         }
@@ -56,7 +53,14 @@ public class NovaVistoriaAdapter extends RecyclerView.Adapter<NovaVistoriaAdapte
 
     @Override
     public void onBindViewHolder(final PersonViewHolder personViewHolder, int position) {
-
+//        personViewHolder.tvNomeEstacao.setText(endereco.get(position).getComplemento());
+//        personViewHolder.imgCheck.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                personViewHolder.imgCheck.setVisibility(View.INVISIBLE);
+//            }
+//        });
 
     }
 
