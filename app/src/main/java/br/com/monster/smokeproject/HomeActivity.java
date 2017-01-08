@@ -96,7 +96,7 @@ public class HomeActivity extends AppCompatActivity
             public void onClick(View v) {
                 //Toast.makeText(HomeActivity.this, "clicked", Toast.LENGTH_SHORT).show();
                // drawer.closeDrawer(GravityCompat.START);
-                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+                Intent it = new Intent(getBaseContext(), EstacoesElevatoriasActivity.class);
                 startActivity(it);
                 finish();
             }
@@ -109,7 +109,7 @@ public class HomeActivity extends AppCompatActivity
             public void onClick(View v) {
                 //Toast.makeText(HomeActivity.this, "clicked", Toast.LENGTH_SHORT).show();
                 //drawer.closeDrawer(GravityCompat.START);
-                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+                Intent it = new Intent(getBaseContext(), VistoriaRealizadaActivity.class);
                 startActivity(it);
                 finish();
             }
@@ -122,7 +122,7 @@ public class HomeActivity extends AppCompatActivity
             public void onClick(View v) {
                 //Toast.makeText(HomeActivity.this, "clicked", Toast.LENGTH_SHORT).show();
                // drawer.closeDrawer(GravityCompat.START);
-                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+                Intent it = new Intent(getBaseContext(), ValidarPlacaActivity.class);
                 startActivity(it);
                 finish();
             }
@@ -135,9 +135,9 @@ public class HomeActivity extends AppCompatActivity
             public void onClick(View v) {
                 //Toast.makeText(HomeActivity.this, "clicked", Toast.LENGTH_SHORT).show();
                 // drawer.closeDrawer(GravityCompat.START);
-                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
-                startActivity(it);
-                finish();
+//                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+//                startActivity(it);
+//                finish();
             }
         });
 
@@ -146,7 +146,7 @@ public class HomeActivity extends AppCompatActivity
         btnNovaVistoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+                Intent it = new Intent(getBaseContext(), EstacoesElevatoriasActivity.class);
                 startActivity(it);
                 finish();
             }

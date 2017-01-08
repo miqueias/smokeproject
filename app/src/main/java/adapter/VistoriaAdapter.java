@@ -124,7 +124,7 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
             personViewHolder.alertProblema.setBackgroundColor(ContextCompat.getColor(context, R.color.vermelho_card));
         } else if (lista.get(position).getEstacoesElevatorias().getStatus() == 2) { //cinza
             personViewHolder.alertProblema.setText("PROBLEMA\nREPORTADO");
-            personViewHolder.alertProblema.setBackgroundColor(ContextCompat.getColor(context, R.color.cinza_card));
+            personViewHolder.alertProblema.setBackgroundColor(ContextCompat.getColor(context, R.color.vermelho_card));
         } else if (lista.get(position).getEstacoesElevatorias().getStatus() == 3) { //normal
             personViewHolder.alertProblema.setVisibility(View.GONE);
         } else {

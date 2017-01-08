@@ -70,7 +70,7 @@ public class NovaVistoriaFragment extends Fragment {
                     @Override public void onItemClick(View view, int position) {
 //                        Toast.makeText(getActivity(), "Posição " + position,
 //                                Toast.LENGTH_LONG).show();
-                        VistoriaActivity.viewPager.setCurrentItem(1);
+//                        VistoriaActivity.viewPager.setCurrentItem(1);
 
                     }
 

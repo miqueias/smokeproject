@@ -1,0 +1,93 @@
+package br.com.monster.smokeproject;
+
+import android.content.Intent;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
+
+import adapter.NovaVistoriaAdapter;
+import adapter.VistoriaAdapter;
+import model.Lista;
+import pojo.Auth;
+import util.DividerItemDecoration;
+import util.RecyclerItemClickListener;
+
+public class EstacoesElevatoriasActivity extends AppCompatActivity {
+
+    private RecyclerView rvNovaVistoria;
+    private LinearLayoutManager llm;
+    private List<Lista> lista;
+    private TextView tvEstacaoElevatoria;
+    private Auth auth = Auth.getInstance();
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_nova_vistoria);
+
+        // Handle Toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Vistoria");
+        toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Fontes.ttf
+        Typeface RalewayBold = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Bold.ttf");
+
+        tvEstacaoElevatoria = (TextView) findViewById(R.id.tvEstacaoElevatoria);
+        tvEstacaoElevatoria.setTypeface(RalewayBold);
+
+        rvNovaVistoria = (RecyclerView) findViewById(R.id.rvNovaVistoria);
+        llm = new LinearLayoutManager(this);
+        rvNovaVistoria.setLayoutManager(llm);
+        rvNovaVistoria.setHasFixedSize(true);
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
+        rvNovaVistoria.addItemDecoration(itemDecoration);
+        NovaVistoriaAdapter adapter = new NovaVistoriaAdapter(lista);
+        rvNovaVistoria.setAdapter(adapter);
+
+        rvNovaVistoria.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, rvNovaVistoria ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        Toast.makeText(EstacoesElevatoriasActivity.this, "Posição " + position,
+                                Toast.LENGTH_LONG).show();
+                        Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+                        startActivity(it);
+                        finish();
+
+                    }
+
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent it = new Intent(getBaseContext(), HomeActivity.class);
+                startActivity(it);
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+}

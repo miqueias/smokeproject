@@ -2,6 +2,7 @@ package br.com.monster.smokeproject;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import fragment.NovaVistoriaFragment;
 import fragment.VistoriaRealizadaFragment;
@@ -19,16 +23,15 @@ public class VistoriaActivity extends AppCompatActivity {
 
     private String posicao = "";
 
-    private TabLayout tabLayout;
-    public static ViewPager viewPager;
-    private int[] tabIcons = {
-            android.R.drawable.ic_dialog_info,
-            android.R.drawable.ic_dialog_alert};
+    private Button btnNovaVistoria;
+    private Button btnApoio;
+    private TextView tvEscolhaAcao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vistoria);
+        setContentView(R.layout.fragment_vistoria_realizada);
         // Handle Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Vistoria");
@@ -36,37 +39,38 @@ public class VistoriaActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        setupViewPager(viewPager);
+        //Fontes.ttf
+        Typeface RalewayBold = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Bold.ttf");
+        Typeface RalewayMedium = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Medium.ttf");
+        Typeface RalewayRegular = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Regular.ttf");
+        Typeface Odebrecht = Typeface.createFromAsset(getResources().getAssets(), "odebrecht-slab-webfont.ttf");
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#FFFFFF"));
-        tabLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-        tabLayout.setupWithViewPager(viewPager);
-        setupTabIcons();
-    }
+        tvEscolhaAcao = (TextView) findViewById(R.id.tvEscolhaAcao);
+        tvEscolhaAcao.setTypeface(RalewayBold);
 
-    private void setupTabIcons() {
-        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
-        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
-    }
+        btnNovaVistoria=(Button) findViewById(R.id.btnNovaVistoria);
+        btnNovaVistoria.setTypeface(RalewayBold);
+        btnNovaVistoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getBaseContext(), NovaVistoriaActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
 
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        btnApoio=(Button) findViewById(R.id.btnApoio);
+        btnApoio.setTypeface(RalewayBold);
+        btnApoio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getBaseContext(), ApoioActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
 
-        Bundle bundle = new Bundle();
-        bundle.putString("posicao", posicao);
 
-        NovaVistoriaFragment novaVistoriaFragment = new NovaVistoriaFragment();
-        novaVistoriaFragment.setArguments(bundle);
-
-        VistoriaRealizadaFragment vistoriaRealizadaFragment = new VistoriaRealizadaFragment();
-        vistoriaRealizadaFragment.setArguments(bundle);
-
-
-        adapter.addFragment(novaVistoriaFragment, "NOVA VISTORIA");
-        adapter.addFragment(vistoriaRealizadaFragment, "VISTORIA/APOIO");
-        viewPager.setAdapter(adapter);
     }
 
     @Override
