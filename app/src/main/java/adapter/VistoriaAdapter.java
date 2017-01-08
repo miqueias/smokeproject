@@ -38,7 +38,7 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
         Typeface RalewayRegular = Typeface.createFromAsset(itemView.getResources().getAssets(), "Raleway-Regular.ttf");
         Typeface Odebrecht = Typeface.createFromAsset(itemView.getResources().getAssets(), "odebrecht-slab-webfont.ttf");
 
-        TextView tvData, tvAs, tvHora, tvRegional, tvNomeRegional, tvEstacao, tvNomeEstacao, tvMaisDetalhes;
+        TextView tvData, tvAs, tvHora, tvSupervisor, tvNomeSupervisor, tvEstacao, tvNomeEstacao, tvMaisDetalhes;
         Button alertProblema;
 
 
@@ -53,10 +53,10 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
             tvHora = (TextView) itemView.findViewById(R.id.tvHora);
             tvHora.setTypeface(RalewayMedium);
 
-            tvRegional = (TextView) itemView.findViewById(R.id.tvRegional);
-            tvRegional.setTypeface(RalewayMedium);
-            tvNomeRegional = (TextView) itemView.findViewById(R.id.tvNomeRegional);
-            tvNomeRegional.setTypeface(RalewayMedium);
+            tvSupervisor = (TextView) itemView.findViewById(R.id.tvSupervisor);
+            tvSupervisor.setTypeface(RalewayMedium);
+            tvNomeSupervisor = (TextView) itemView.findViewById(R.id.tvNomeSupervisor);
+            tvNomeSupervisor.setTypeface(RalewayMedium);
             tvEstacao = (TextView) itemView.findViewById(R.id.tvEstacao);
             tvEstacao.setTypeface(RalewayMedium);
             tvNomeEstacao = (TextView) itemView.findViewById(R.id.tvNomeEstacao);
@@ -82,7 +82,7 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int position) {
-        personViewHolder.tvNomeRegional.setText(auth.getLider().getNome());
+        personViewHolder.tvNomeSupervisor.setText(auth.getLider().getNome());
         personViewHolder.tvNomeEstacao.setText(lista.get(position).getEstacoesElevatorias().getDescricao());
 
 
