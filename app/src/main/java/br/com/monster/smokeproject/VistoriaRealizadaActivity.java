@@ -17,6 +17,7 @@ import java.util.List;
 import adapter.NovaVistoriaAdapter;
 import adapter.VistoriaAdapter;
 import model.Lista;
+import pojo.Auth;
 import util.DividerItemDecoration;
 import util.RecyclerItemClickListener;
 
@@ -25,6 +26,7 @@ public class VistoriaRealizadaActivity extends AppCompatActivity {
     private RecyclerView rvVistoria;
     private LinearLayoutManager llm;
     private List<Lista> lista;
+    private Auth auth = Auth.getInstance();
 
 
     @Override
@@ -46,7 +48,7 @@ public class VistoriaRealizadaActivity extends AppCompatActivity {
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         rvVistoria.addItemDecoration(itemDecoration);
-        VistoriaAdapter adapter = new VistoriaAdapter(lista);
+        VistoriaAdapter adapter = new VistoriaAdapter(auth.getVistoriasArrayList());
         rvVistoria.setAdapter(adapter);
 
         rvVistoria.addOnItemTouchListener(

@@ -12,10 +12,13 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.monster.smokeproject.R;
 import model.Lista;
+import pojo.Auth;
+import pojo.Vistoria;
 
 /**
  * Created by Marlon on 09/12/2016.
@@ -23,9 +26,9 @@ import model.Lista;
 
 public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.PersonViewHolder> {
 
-    private List<Lista> lista;
+    private ArrayList<Vistoria> lista;
     public Context context;
-
+    private Auth auth = Auth.getInstance();
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
 
@@ -66,7 +69,7 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
         }
     }
 
-    public VistoriaAdapter(List<Lista> lista) {
+    public VistoriaAdapter(ArrayList<Vistoria> lista) {
         this.lista = lista;
     }
 
@@ -79,13 +82,19 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int position) {
-//        personViewHolder.tvNomeEstacao.setText(endereco.get(position).getComplemento());
+        personViewHolder.tvNomeSupervisor.setText(auth.getLider().getNome());
+        personViewHolder.tvNomeEstacao.setText(lista.get(position).getEstacoesElevatorias().getDescricao());
+
+
+
+
+        //personViewHolder.tvNomeEstacao.setText(endereco.get(position).getComplemento());
 
     }
 
     @Override
     public int getItemCount() {
-        return 10;
-//        return lista.size();
+        //return 10;
+        return lista.size();
     }
 }
