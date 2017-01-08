@@ -264,12 +264,11 @@ public class LoginActivity extends AppCompatActivity {
                                             vistoria.setLeituraCelpe(jsonObjectVistoria.get("leitura_celpe").toString());
                                             vistoria.setLeituraCompesa(jsonObjectVistoria.get("leitura_compesa").toString());
                                             vistoria.setCmbsEncontradas(Integer.parseInt(jsonObjectVistoria.get("cmbs_encontradas").toString()));
-                                            vistoria.setDescricaoProblemas(jsonObjectVistoria.get("descricao_dos_probelmas").toString());
+                                            vistoria.setDescricaoProblemas(jsonObjectVistoria.get("descricao_dos_problemas").toString());
                                             vistoria.setCreated(jsonObjectVistoria.get("created").toString());
                                             vistoria.setEstacaoElevatoriaId(Integer.parseInt(jsonObjectVistoria.get("estacao_elevatoria_id").toString()));
                                             vistoria.setOperadorId(Integer.parseInt(jsonObjectVistoria.get("operador_id").toString()));
                                             vistoria.setStatus(Integer.parseInt(jsonObjectVistoria.get("status").toString()));
-                                            vistoriaArrayList.add(vistoria);
 
                                             JSONObject jsonObjectEstacaoVistoria = jsonObjectVistoria.getJSONObject("estacao_elevatoria");
                                             EstacoesElevatorias estacoesElevatoriasVistoria = new EstacoesElevatorias();
@@ -317,6 +316,8 @@ public class LoginActivity extends AppCompatActivity {
                                                 conjuntoMotorBombaVistoria.setProblemasArrayList(problemasVistoriaArrayList);
                                             }
                                             estacoesElevatoriasVistoria.setConjuntoMotorBombaArrayList(conjuntoMotorBombaVistoriaArrayList);
+                                            vistoria.setEstacoesElevatorias(estacoesElevatoriasVistoria);
+                                            vistoriaArrayList.add(vistoria);
                                         }
 
                                         auth.setVistoriasArrayList(vistoriaArrayList);
