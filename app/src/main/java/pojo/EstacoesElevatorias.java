@@ -15,7 +15,7 @@ public class EstacoesElevatorias {
     private ArrayList<ConjuntoMotorBomba> conjuntoMotorBombaArrayList;
 
 
-    EstacoesElevatorias() {
+    public EstacoesElevatorias() {
 
     }
 

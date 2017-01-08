@@ -10,11 +10,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import pojo.Auth;
+import pojo.Cargo;
+import pojo.ConjuntoMotorBomba;
+import pojo.Escala;
+import pojo.EstacoesElevatorias;
+import pojo.Lider;
+import pojo.Motivo;
+import pojo.Operador;
+import pojo.Problemas;
+import pojo.ProblemasCheckList;
+import pojo.Regional;
+import pojo.Rota;
+import pojo.TipoRota;
 import request.BaseRequester;
 import request.Method;
 import request.Requester;
@@ -26,9 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnEntrar;
     private EditText etLogin, etSenha;
     private TextView tvOdebretch, tvGestao, tvEstado;
-    Util util;
     Internet internet;
-    String jsonReturn;
+    Auth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,18 +95,167 @@ public class LoginActivity extends AppCompatActivity {
                                 BaseRequester baseRequester = new BaseRequester();
                                 baseRequester.setUrl(Requester.API_URL + "/auth");
                                 baseRequester.setMethod(Method.POST);
-                                baseRequester.setGsonString(jsonPut.toString());
+                                baseRequester.setJsonString(jsonPut.toString());
 
                                 String jsonReturn = baseRequester.execute(baseRequester).get();
-                                Log.i("API", jsonReturn);
+                                Log.d("API", jsonReturn);
 
-                                jsonReturn = baseRequester.execute(baseRequester).get();
+                                JSONObject jsonObjectAuth = new JSONObject(jsonReturn);
 
-                                JSONObject jsonObject = new JSONObject(jsonReturn);
+                                if (jsonObjectAuth.get("status").toString().equals("ERRO")) {
+                                    String mensagemErro = jsonObjectAuth.get("status").toString();
+                                    Log.d("API", mensagemErro);
+                                } else {
+                                    //auth
+                                    auth = Auth.getInstance();
+                                    auth.setStatus(jsonObjectAuth.get("status").toString());
+                                    auth.setMensagem(jsonObjectAuth.get("mensagem").toString());
 
-                                //if (jsonObject.get("error").toString() == "true") {
+                                    JSONObject jsonObjectDados = jsonObjectAuth.getJSONObject("dados");
+
+                                    auth.setToken(jsonObjectDados.get("token").toString());
+
+                                    //operador
+                                    JSONObject jsonObjectOperador = jsonObjectDados.getJSONObject("operador");
+                                    Operador operador = new Operador();
+                                    operador.setId(Integer.parseInt(jsonObjectOperador.get("id").toString()));
+                                    operador.setNome(jsonObjectOperador.get("nome").toString());
+                                    operador.setLogin(jsonObjectOperador.get("login").toString());
+                                    operador.setCpf(jsonObjectOperador.get("cpf").toString());
+                                    operador.setUsuarioId(Integer.parseInt(jsonObjectOperador.get("usuario_id").toString()));
+                                    operador.setCargoId(Integer.parseInt(jsonObjectOperador.get("cargo_id").toString()));
+                                    operador.setEscalaId(Integer.parseInt(jsonObjectOperador.get("escala_id").toString()));
+                                    operador.setRotaId(Integer.parseInt(jsonObjectOperador.get("rota_id").toString()));
+                                    operador.setValidaPlaca(jsonObjectOperador.get("valida_placa").toString());
+                                    auth.setOperador(operador);
+
+                                    //lider
+                                    JSONObject jsonObjectLider = jsonObjectDados.getJSONObject("lider");
+                                    Lider lider = new Lider();
+                                    lider.setId(Integer.parseInt(jsonObjectLider.get("id").toString()));
+                                    lider.setNome(jsonObjectLider.get("nome").toString());
+                                    lider.setEmail(jsonObjectLider.get("email").toString());
+                                    lider.setTelefone(jsonObjectLider.get("telefone").toString());
+                                    auth.setLider(lider);
+
+                                    //motivos
+                                    JSONArray jsonArrayMotivos = jsonObjectDados.getJSONArray("motivos");
+                                    ArrayList<Motivo> arrayListMotivos = new ArrayList<Motivo>();
+
+                                    for (int i = 0; i < jsonArrayMotivos.length(); i++) {
+
+                                        JSONObject jsonObjectMotivo = jsonArrayMotivos.getJSONObject(i);
+
+                                        Motivo motivo = new Motivo();
+                                        motivo.setId(Integer.parseInt(jsonObjectMotivo.get("id").toString()));
+                                        motivo.setDescricao(jsonObjectMotivo.get("descricao").toString());
+
+                                        arrayListMotivos.add(motivo);
+                                    }
+                                    auth.setMotivoArrayList(arrayListMotivos);
+
+                                    //cargo
+                                    JSONObject jsonObjectCargo = jsonObjectDados.getJSONObject("cargo");
+                                    Cargo cargo = new Cargo();
+                                    cargo.setId(Integer.parseInt(jsonObjectCargo.get("id").toString()));
+                                    cargo.setDescricao(jsonObjectCargo.get("descricao").toString());
+                                    auth.setCargo(cargo);
+
+                                    //escala
+                                    JSONObject jsonObjectEscala = jsonObjectDados.getJSONObject("escala");
+                                    Escala escala = new Escala();
+                                    escala.setId(Integer.parseInt(jsonObjectEscala.get("id").toString()));
+                                    escala.setDescricao(jsonObjectEscala.get("descricao").toString());
+                                    auth.setEscala(escala);
+
+                                    //rota
+                                    JSONObject jsonObjectRota = jsonObjectDados.getJSONObject("rota");
+                                    Rota rota = new Rota();
+                                    rota.setId(Integer.parseInt(jsonObjectRota.get("id").toString()));
+                                    rota.setDescricao(jsonObjectRota.get("descricao").toString());
+
+                                    //tipo rota
+                                    JSONObject jsonObjectTipoRota = jsonObjectRota.getJSONObject("tiporota");
+                                    TipoRota tipoRota = new TipoRota();
+                                    tipoRota.setId(Integer.parseInt(jsonObjectTipoRota.get("id").toString()));
+                                    tipoRota.setDescricao(jsonObjectTipoRota.get("descricao").toString());
+                                    rota.setTipoRota(tipoRota);
 
 
+                                    //estações elevatorias
+                                    JSONArray jsonArrayEstacoesElevatorias = jsonObjectRota.getJSONArray("estacoes_elevatorias");
+                                    ArrayList<EstacoesElevatorias> estacoesElevatoriasArrayList = new ArrayList<EstacoesElevatorias>();
+
+                                    for (int j = 0; j < jsonArrayEstacoesElevatorias.length(); j++) {
+
+                                        JSONObject jsonObjectEstacoesElevatorias = jsonArrayEstacoesElevatorias.getJSONObject(j);
+
+                                        EstacoesElevatorias estacoesElevatorias = new EstacoesElevatorias();
+                                        estacoesElevatorias.setId(Integer.parseInt(jsonObjectEstacoesElevatorias.get("id").toString()));
+                                        estacoesElevatorias.setDescricao(jsonObjectEstacoesElevatorias.get("descricao").toString());
+                                        estacoesElevatorias.setRegionalId(Integer.parseInt(jsonObjectEstacoesElevatorias.get("regional_id").toString()));
+
+                                        //regional
+                                        JSONObject jsonObjectRegional = jsonObjectEstacoesElevatorias.getJSONObject("regional");
+                                        Regional regional = new Regional();
+                                        regional.setId(Integer.parseInt(jsonObjectRegional.get("id").toString()));
+                                        regional.setNome(jsonObjectRegional.get("nome").toString());
+                                        estacoesElevatorias.setRegional(regional);
+
+                                        //conjunto motor bomba
+                                        JSONArray jsonArrayConjuntoMotorBomba = jsonObjectEstacoesElevatorias.getJSONArray("cmb");
+                                        ArrayList<ConjuntoMotorBomba> conjuntoMotorBombaArrayList = new ArrayList<ConjuntoMotorBomba>();
+
+                                        for (int k = 0; k < jsonArrayConjuntoMotorBomba.length(); k++) {
+
+                                            JSONObject jsonObjectConjuntoMotorBomba = jsonArrayConjuntoMotorBomba.getJSONObject(k);
+
+                                            ConjuntoMotorBomba conjuntoMotorBomba = new ConjuntoMotorBomba();
+                                            conjuntoMotorBomba.setId(Integer.parseInt(jsonObjectConjuntoMotorBomba.get("id").toString()));
+                                            conjuntoMotorBomba.setNumero(jsonObjectConjuntoMotorBomba.get("numero").toString());
+                                            conjuntoMotorBomba.setEstacaoElevatoriaId(Integer.parseInt(jsonObjectConjuntoMotorBomba.get("estacao_elevatoria_id").toString()));
+                                            conjuntoMotorBombaArrayList.add(conjuntoMotorBomba);
+
+                                        }
+                                        estacoesElevatorias.setConjuntoMotorBombaArrayList(conjuntoMotorBombaArrayList);
+                                        estacoesElevatoriasArrayList.add(estacoesElevatorias);
+                                        rota.setEstacoesElevatoriasArrayList(estacoesElevatoriasArrayList);
+                                        auth.setRota(rota);
+
+                                        //problemas
+                                        JSONArray jsonArrayProblemas = jsonObjectDados.getJSONArray("problemas");
+                                        ArrayList<Problemas> problemasArrayList = new ArrayList<Problemas>();
+
+                                        for (int m = 0; m < jsonArrayProblemas.length(); m++) {
+
+                                            JSONObject jsonObjectProblemas = jsonArrayProblemas.getJSONObject(m);
+                                            Problemas problemas = new Problemas();
+                                            problemas.setId(Integer.parseInt(jsonObjectProblemas.get("id").toString()));
+                                            problemas.setDescricao(jsonObjectProblemas.get("descricao").toString());
+                                            problemas.setStatus(Integer.parseInt(jsonObjectProblemas.get("status").toString()));
+                                            problemasArrayList.add(problemas);
+                                        }
+                                        auth.setProblemasArrayList(problemasArrayList);
+
+                                        //problemas
+                                        JSONArray jsonArrayProblemasCheckList = jsonObjectDados.getJSONArray("problemachecklists");
+                                        ArrayList<ProblemasCheckList> problemasCheckListArrayList = new ArrayList<ProblemasCheckList>();
+
+                                        for (int m = 0; m < jsonArrayProblemasCheckList.length(); m++) {
+
+                                            JSONObject jsonObjectProblemasCkeckList = jsonArrayProblemasCheckList.getJSONObject(m);
+                                            ProblemasCheckList problemasCheckList = new ProblemasCheckList();
+                                            problemasCheckList.setId(Integer.parseInt(jsonObjectProblemasCkeckList.get("id").toString()));
+                                            problemasCheckList.setDescricao(jsonObjectProblemasCkeckList.get("descricao").toString());
+                                            problemasCheckListArrayList.add(problemasCheckList);
+                                        }
+                                        auth.setProblemasCheckListArrayList(problemasCheckListArrayList);
+
+                                        Intent it = new Intent(getBaseContext(), HomeActivity.class);
+                                        startActivity(it);
+                                        finish();
+                                    }
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             } catch (InterruptedException e) {
@@ -105,10 +268,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }).start();
                 }
-
-                //Intent it = new Intent(getBaseContext(), HomeActivity.class);
-                //startActivity(it);
-                //finish();
             }
         });
     }

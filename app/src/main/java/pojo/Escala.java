@@ -9,7 +9,7 @@ public class Escala {
     private int id;
     private String descricao;
 
-    Escala() {
+    public Escala() {
 
     }
 

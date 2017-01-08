@@ -13,7 +13,7 @@ public class ConjuntoMotorBomba{
     private int estacaoElevatoriaId;
     private ArrayList<Problemas> problemasArrayList;
 
-    ConjuntoMotorBomba() {
+    public ConjuntoMotorBomba() {
 
     }
 

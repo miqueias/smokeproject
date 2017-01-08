@@ -10,7 +10,7 @@ public class Problemas {
     private String descricao;
     private int status;
 
-    Problemas() {
+    public Problemas() {
 
     }
 

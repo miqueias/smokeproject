@@ -9,7 +9,7 @@ public class TipoRota {
     private int id;
     private String descricao;
 
-    TipoRota() {
+    public TipoRota() {
 
     }
 

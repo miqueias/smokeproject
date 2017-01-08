@@ -13,7 +13,7 @@ public class Rota {
     private TipoRota tipoRota;
     private ArrayList<EstacoesElevatorias> estacoesElevatoriasArrayList;
 
-    Rota() {
+    public Rota() {
 
     }
 

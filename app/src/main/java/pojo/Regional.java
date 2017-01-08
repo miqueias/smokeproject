@@ -12,7 +12,7 @@ public class Regional {
     private String nome;
     private Date created;
 
-    Regional() {
+    public Regional() {
 
     }
 

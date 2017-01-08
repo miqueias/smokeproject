@@ -17,7 +17,7 @@ public class Operador {
     private int rotaId;
     private String validaPlaca;
 
-    Operador() {
+    public Operador() {
 
     }
 

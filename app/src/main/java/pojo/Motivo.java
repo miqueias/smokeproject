@@ -9,7 +9,7 @@ public class Motivo {
     private int id;
     private String descricao;
 
-    Motivo() {
+    public Motivo() {
 
     }
 

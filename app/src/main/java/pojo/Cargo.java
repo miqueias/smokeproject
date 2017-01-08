@@ -9,7 +9,7 @@ public class Cargo {
     private int id;
     private String descricao;
 
-    Cargo() {
+    public Cargo() {
 
     }
 

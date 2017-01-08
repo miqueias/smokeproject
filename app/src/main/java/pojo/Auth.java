@@ -6,12 +6,13 @@ import java.util.ArrayList;
  * Created by Miqueias on 1/7/17.
  */
 
-public class Auth {
+public final class Auth {
 
-    private Auth instance;
+    private static Auth instance = new Auth();
     private String status;
     private String mensagem;
     private String token;
+    private Operador operador;
     private Lider lider;
     private ArrayList<Motivo> motivoArrayList;
     private Cargo cargo;
@@ -21,11 +22,12 @@ public class Auth {
     private ArrayList<ProblemasCheckList> problemasCheckListArrayList;
     private ArrayList<Vistorias> vistoriasArrayList;
 
+
     private Auth() {
 
     }
 
-    public synchronized Auth getInstance() {
+    public static synchronized Auth getInstance() {
         if (instance == null) {
             instance = new Auth();
         }
@@ -55,6 +57,14 @@ public class Auth {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Operador getOperador() {
+        return operador;
+    }
+
+    public void setOperador(Operador operador) {
+        this.operador = operador;
     }
 
     public Lider getLider() {

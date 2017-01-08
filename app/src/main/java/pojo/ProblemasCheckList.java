@@ -9,7 +9,7 @@ public class ProblemasCheckList {
     private int id;
     private String descricao;
 
-    ProblemasCheckList() {
+    public ProblemasCheckList() {
 
     }
 

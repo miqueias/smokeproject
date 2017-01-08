@@ -15,6 +15,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -29,7 +31,7 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
     private Method method;
     private Context context;
     private String strReturn;
-    private String gsonString;
+    private String jsonString;
     private String authorization;
 
     public BaseRequester() {
@@ -76,12 +78,12 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
         this.strReturn = strReturn;
     }
 
-    public String getGsonString() {
-        return gsonString;
+    public String getJsonString() {
+        return jsonString;
     }
 
-    public void setGsonString(String gsonString) {
-        this.gsonString = gsonString;
+    public void setJsonString(String gsonString) {
+        this.jsonString = gsonString;
     }
 
     public String getAuthorization() {
@@ -95,7 +97,7 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
     @Override
     protected String doInBackground(BaseRequester... params) {
         try {
-            return sendGson(this.url, this.method, this.gsonString, this.authorization);
+            return sendGson(this.url, this.method, this.jsonString, this.authorization);
             //return sendPostRequest(this.url, this.method, this.jsonObject);
         } catch (JSONException e) {
             return null;
@@ -182,6 +184,7 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
 
 
                 HttpURLConnection conn = null;
+
                 byte[] bytes = null;
                 conn = (HttpURLConnection) url.openConnection();
 
@@ -191,7 +194,7 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
                 }
 
                 bytes = body.getBytes();
-                conn.setRequestProperty("Content-Type", "application/json");
+                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
                 conn.setReadTimeout(10000);
                 conn.setConnectTimeout(15000);
@@ -212,10 +215,8 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
                     //return MessageText.ERROR_SERVER.toString();
                     convertStreamToString = convertStreamToString(conn.getErrorStream(), "UTF-8");
                 } else {
-                    if (conn != null) {
-                        convertStreamToString = convertStreamToString(conn.getInputStream(), /*HTTP.UTF_8*/"UTF-8");
-                        conn.disconnect();
-                    }
+                    convertStreamToString = convertStreamToString(conn.getInputStream(), /*HTTP.UTF_8*/"UTF-8");
+                    conn.disconnect();
                 }
                 //returnStr = convertStreamToString;
                 return convertStreamToString;
@@ -258,4 +259,5 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
 
         return sb.toString();
     }
+
 }
