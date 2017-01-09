@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -26,7 +25,6 @@ import model.Lista;
 import pojo.Auth;
 import pojo.Vistoria;
 
-import static android.R.attr.fingerprintAuthDrawable;
 import static android.R.attr.format;
 
 /**
@@ -100,7 +98,7 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
     }
 
     @Override
-    public void onBindViewHolder(final PersonViewHolder personViewHolder, int position) {
+    public void onBindViewHolder(PersonViewHolder personViewHolder, int position) {
         personViewHolder.tvNomeSupervisor.setText(lista.get(position).getEstacoesElevatorias().getDescricao());
         personViewHolder.tvNomeEstacao.setText(lista.get(position).getEstacoesElevatorias().getRegional().getNome());
 
