@@ -1,6 +1,7 @@
 package adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,7 +13,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import br.com.monster.smokeproject.NovaVistoriaActivity;
 import br.com.monster.smokeproject.R;
+import br.com.monster.smokeproject.VistoriaActivity;
 import pojo.EstacoesElevatorias;
 
 /**
@@ -23,6 +26,7 @@ public class EstacaoAdapter extends RecyclerView.Adapter<EstacaoAdapter.PersonVi
 
     private ArrayList<EstacoesElevatorias> lista;
     public Context context;
+    int positionItem;
 
     public EstacaoAdapter() {
 
@@ -40,16 +44,18 @@ public class EstacaoAdapter extends RecyclerView.Adapter<EstacaoAdapter.PersonVi
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
 
         Typeface RalewayMedium = Typeface.createFromAsset(itemView.getResources().getAssets(), "Raleway-Medium.ttf");
-        TextView tvSupervisor;
         CheckBox cbCheck;
+        TextView tvNomeEstacao;
+
 
 
         PersonViewHolder(View itemView) {
             super(itemView);
             itemView.setClickable(true);
-            tvSupervisor = (TextView) itemView.findViewById(R.id.tvNomeEstacao);
-            tvSupervisor.setTypeface(RalewayMedium);
             cbCheck = (CheckBox) itemView.findViewById(R.id.cbCheck);
+            tvNomeEstacao = (TextView) itemView.findViewById(R.id.tvNomeEstacao);
+            tvNomeEstacao.setTypeface(RalewayMedium);
+
 
         }
     }
@@ -62,8 +68,17 @@ public class EstacaoAdapter extends RecyclerView.Adapter<EstacaoAdapter.PersonVi
     }
 
     @Override
-    public void onBindViewHolder(final PersonViewHolder personViewHolder, int position) {
-        personViewHolder.tvSupervisor.setText(lista.get(position).getDescricao());
+    public void onBindViewHolder(final PersonViewHolder personViewHolder, final int position) {
+        personViewHolder.tvNomeEstacao.setText(lista.get(position).getDescricao());
+        personViewHolder.tvNomeEstacao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,VistoriaActivity.class);
+                intent.putExtra("posicao", position);
+                context.startActivity(intent);
+
+            }
+        });
         personViewHolder.cbCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +86,8 @@ public class EstacaoAdapter extends RecyclerView.Adapter<EstacaoAdapter.PersonVi
 
             }
         });
+
+
 //        personViewHolder.tvNomeEstacao.setText(endereco.get(position).getComplemento());
 //        personViewHolder.imgCheck.setOnClickListener(new View.OnClickListener() {
 //            @Override

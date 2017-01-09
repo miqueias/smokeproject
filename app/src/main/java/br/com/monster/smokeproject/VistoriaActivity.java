@@ -23,6 +23,7 @@ public class VistoriaActivity extends AppCompatActivity {
     private Button btnNovaVistoria;
     private Button btnApoio;
     private TextView tvEscolhaAcao;
+    private int position;
 
 
     @Override
@@ -35,6 +36,11 @@ public class VistoriaActivity extends AppCompatActivity {
         toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            position = extras.getInt("posicao");
+        }
 
         //Fontes.ttf
         Typeface RalewayBold = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Bold.ttf");

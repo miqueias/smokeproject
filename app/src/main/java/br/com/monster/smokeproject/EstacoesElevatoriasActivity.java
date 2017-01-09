@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -58,7 +60,7 @@ public class EstacoesElevatoriasActivity extends AppCompatActivity {
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         rvNovaVistoria.addItemDecoration(itemDecoration);
-        EstacaoAdapter adapter = new EstacaoAdapter(auth.getRota().getEstacoesElevatoriasArrayList());
+        EstacaoAdapter adapter = new EstacaoAdapter(EstacoesElevatoriasActivity.this, auth.getRota().getEstacoesElevatoriasArrayList());
         rvNovaVistoria.setAdapter(adapter);
 
 //        rvNovaVistoria.addOnItemTouchListener(
@@ -77,6 +79,13 @@ public class EstacoesElevatoriasActivity extends AppCompatActivity {
 //                    }
 //                })
 //        );
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home, menu);
+        return true;
     }
 
 

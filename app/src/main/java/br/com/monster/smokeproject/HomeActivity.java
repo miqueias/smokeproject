@@ -1,5 +1,7 @@
 package br.com.monster.smokeproject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -133,11 +135,18 @@ public class HomeActivity extends AppCompatActivity
         btnSair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(HomeActivity.this, "clicked", Toast.LENGTH_SHORT).show();
-                // drawer.closeDrawer(GravityCompat.START);
-//                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
-//                startActivity(it);
-//                finish();
+                new AlertDialog.Builder(HomeActivity.this)
+                        .setTitle("SisInspe")
+                        .setCancelable(false)
+                        // Set Dialog Message
+                        .setMessage("Deseja realmente sair?")
+                        .setNegativeButton("Cancelar", null) // dismisses by default
+                        // Positive button
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                            }
+                        }).show();
             }
         });
 
