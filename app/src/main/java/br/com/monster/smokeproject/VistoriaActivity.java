@@ -57,6 +57,7 @@ public class VistoriaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(getBaseContext(), NovaVistoriaActivity.class);
+                it.putExtra("posicao", position);
                 startActivity(it);
                 finish();
             }
@@ -68,6 +69,7 @@ public class VistoriaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(getBaseContext(), ApoioActivity.class);
+                it.putExtra("posicao", position);
                 startActivity(it);
                 finish();
             }
@@ -76,12 +78,12 @@ public class VistoriaActivity extends AppCompatActivity {
 
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.home, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

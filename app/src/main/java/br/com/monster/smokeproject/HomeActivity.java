@@ -43,6 +43,13 @@ public class HomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         auth = Auth.getInstance();
 
+        //data atual begin
+        long date = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String dateString = sdf.format(date);
+        //data atual end
+
+
         //Fontes.ttf
         Typeface RalewayBold = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Bold.ttf");
         Typeface RalewayMedium = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Medium.ttf");
@@ -57,8 +64,22 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerview = navigationView.getHeaderView(0);
+
         TextView profilename = (TextView) headerview.findViewById(R.id.tvNomeBV);
         profilename.setText(Auth.getInstance().getOperador().getNome());
+
+        TextView rota = (TextView) headerview.findViewById(R.id.tvDescRota);
+        rota.setText("Rota: " + auth.getRota().getDescricao());
+
+        TextView tipoRota = (TextView) headerview.findViewById(R.id.tvTipoRota);
+        tipoRota.setText("Tipo de Rota: " + auth.getRota().getTipoRota().getDescricao());
+
+        TextView escala = (TextView) headerview.findViewById(R.id.tvEscala);
+        escala.setText("Escala: " + auth.getEscala().getDescricao());
+
+        TextView data = (TextView) headerview.findViewById(R.id.tvData);
+        data.setText(dateString);
+
         navigationView.setNavigationItemSelectedListener(this);
 
         tvOla = (TextView) headerview.findViewById(R.id.tvOla);
@@ -73,11 +94,6 @@ public class HomeActivity extends AppCompatActivity
         tvData = (TextView) headerview.findViewById(R.id.tvData);
         tvData = (TextView) findViewById(R.id.tvData);
         tvData.setTypeface(RalewayMedium);
-        //data atual begin
-        long date = System.currentTimeMillis();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String dateString = sdf.format(date);
-        //data atual end
         tvData.setText(dateString);
 
         tvEscala = (TextView) findViewById(R.id.tvEscala);
