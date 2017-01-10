@@ -40,6 +40,7 @@ public class VistoriaActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
             position = extras.getInt("posicao");
+            EstacoesElevatoriasActivity.estacao.finish();
         }
 
         //Fontes.ttf

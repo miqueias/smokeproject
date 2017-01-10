@@ -77,6 +77,7 @@ public class EstacaoAdapter extends RecyclerView.Adapter<EstacaoAdapter.PersonVi
                 intent.putExtra("posicao", position);
                 context.startActivity(intent);
 
+
             }
         });
         personViewHolder.cbCheck.setOnClickListener(new View.OnClickListener() {

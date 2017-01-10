@@ -1,5 +1,6 @@
 package br.com.monster.smokeproject;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ import util.RecyclerItemClickListener;
 
 public class EstacoesElevatoriasActivity extends AppCompatActivity {
 
+    public static Activity estacao;
+
     private RecyclerView rvNovaVistoria;
     private LinearLayoutManager llm;
     private ArrayList<EstacoesElevatorias> lista;
@@ -39,6 +42,7 @@ public class EstacoesElevatoriasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_nova_vistoria);
+        estacao = this;
 
         // Handle Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
