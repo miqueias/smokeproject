@@ -44,8 +44,10 @@ import adapter.PhotoGridViewAdapter;
 import adapter.VistoriaAdapter;
 import model.ImageItem;
 import model.Lista;
+import pojo.Auth;
 import util.DividerItemDecoration;
 import util.RecyclerItemClickListener;
+import util.Util;
 
 public class NovaVistoriaActivity extends AppCompatActivity {
 
@@ -70,11 +72,22 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     private EditText etLeituraCelpe, etLeituraCompesa, etCmb, etDescProblema;
     private Button btnSalvar;
     private  TextView tvAlertaSub;
+    private Auth auth;
+    private Util util;
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nova_vistoria);
+
+        auth = Auth.getInstance();
+        util.setCtxAtual(this);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            position = extras.getInt("posicao");
+        }
 
         //Fontes.ttf
         final Typeface RalewayBold = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Bold.ttf");
@@ -89,15 +102,16 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         tvVistoria = (TextView) findViewById(R.id.tvVistoria);
         tvVistoria.setTypeface(RalewayBold);
         tvData = (TextView) findViewById(R.id.tvData);
         tvData.setTypeface(RalewayMedium);
+        tvData.setText(Util.getTimeNow());
         tvAs = (TextView) findViewById(R.id.tvAs);
         tvAs.setTypeface(RalewayMedium);
         tvHora = (TextView) findViewById(R.id.tvHora);
         tvHora.setTypeface(RalewayMedium);
+        tvHora.setText(Util.getTimeNow());
         tvChecklist = (TextView) findViewById(R.id.tvChecklist);
         tvChecklist.setTypeface(RalewayBold);
         tvGaleriaImagem = (TextView) findViewById(R.id.tvGaleriaImagem);
@@ -109,18 +123,22 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         tvSupervisor.setTypeface(RalewayMedium);
         tvNomeSupervisor = (TextView) findViewById(R.id.tvNomeSupervisor);
         tvNomeSupervisor.setTypeface(RalewayMedium);
+        tvNomeSupervisor.setText(auth.getLider().getNome());
         tvEstacao = (TextView) findViewById(R.id.tvEstacao);
         tvEstacao.setTypeface(RalewayMedium);
         tvNomeEstacao = (TextView) findViewById(R.id.tvNomeEstacao);
         tvNomeEstacao.setTypeface(RalewayMedium);
+        tvNomeEstacao.setText(auth.getRota().getEstacoesElevatoriasArrayList().get(position).getDescricao());
         tvRegional = (TextView) findViewById(R.id.tvRegional);
         tvRegional.setTypeface(RalewayMedium);
         tvNomeRegional = (TextView) findViewById(R.id.tvNomeRegional);
         tvNomeRegional.setTypeface(RalewayMedium);
+        tvNomeRegional.setText(auth.getRota().getEstacoesElevatoriasArrayList().get(position).getRegional().getNome());
         tvCmb = (TextView) findViewById(R.id.tvCmb);
         tvCmb.setTypeface(RalewayMedium);
         tvQtdCmb = (TextView) findViewById(R.id.tvQtdCmb);
         tvQtdCmb.setTypeface(RalewayMedium);
+        tvQtdCmb.setText(String.valueOf(auth.getRota().getEstacoesElevatoriasArrayList().get(position).getConjuntoMotorBombaArrayList().size()));
 
         etLeituraCelpe = (EditText) findViewById(R.id.etLeituraCelpe);
         etLeituraCelpe.setTypeface(RalewayMedium);

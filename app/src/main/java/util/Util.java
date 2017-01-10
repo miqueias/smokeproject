@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 
 import br.com.monster.smokeproject.LoginActivity;
 import pojo.Auth;
@@ -231,6 +232,28 @@ public abstract class Util
 
 
         dialogo.show();
+    }
+
+    public  static String getDateNow() {
+        //data atual begin
+        long date = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String dateString = sdf.format(date);
+        //data atual end
+
+        return dateString;
+    }
+
+    public static String getTimeNow() {
+        //data atual begin
+        long date = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        sdf = new SimpleDateFormat("hh:mm:ss");
+        String timeString = sdf.format(date);
+        //data atual end
+
+        return timeString;
     }
 
 }
