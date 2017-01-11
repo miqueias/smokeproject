@@ -333,38 +333,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvChecklist" />
-
-                <CheckBox
-                    android:text="Gradeamento Limpo"
-                    android:textColor="@color/colorPrimaryDark"
+                <LinearLayout
+                    android:id="@+id/linearChecklist"
+                    android:visibility="visible"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cbGradeamento"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="16dp"
-                    android:textSize="13sp"
-                    android:layout_marginBottom="10dp"
-                    android:theme="@style/MyCheckBox"/>
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="30dp">
 
-                <CheckBox
-                    android:text="Caixa de areia limpa"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cbCaixaAreia"
-                    android:layout_marginLeft="16dp"
-                    android:textSize="13sp"
-                    android:layout_marginBottom="10dp"
-                    android:theme="@style/MyCheckBox"/>
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:id="@+id/rvChecklist"
+                        android:layout_weight="1" />
 
-                <CheckBox
-                    android:text="Sem materias sobrenadantes"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cbSemMateriais"
-                    android:layout_marginLeft="16dp"
-                    android:textSize="13sp"
-                    android:theme="@style/MyCheckBox"/>
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout

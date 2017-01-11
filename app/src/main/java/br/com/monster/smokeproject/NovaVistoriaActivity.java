@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapter.BombasAdapter;
+import adapter.ChecklistAdapter;
 import adapter.NovaVistoriaAdapter;
 import adapter.PhotoGridViewAdapter;
 import adapter.VistoriaAdapter;
@@ -54,7 +55,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     private GridView gridView;
     private PhotoGridViewAdapter gridAdapter;
 
-    private RecyclerView rvBombas;
+    private RecyclerView rvBombas, rvChecklist;
     private LinearLayoutManager llm;
     private List<Lista> lista;
     private Button btnAddFoto;
@@ -189,6 +190,30 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        rvChecklist = (RecyclerView) findViewById(R.id.rvChecklist);
+        llm = new LinearLayoutManager(this);
+        rvChecklist.setLayoutManager(llm);
+        rvChecklist.setHasFixedSize(true);
+        RecyclerView.ItemDecoration itemDecorationDois = new
+                DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
+        rvChecklist.addItemDecoration(itemDecorationDois);
+        ChecklistAdapter adapterDois = new ChecklistAdapter(lista);
+        rvChecklist.setAdapter(adapterDois);
+
+//        rvChecklist.addOnItemTouchListener(
+//                new RecyclerItemClickListener(this, rvBombas ,new RecyclerItemClickListener.OnItemClickListener() {
+//                    @Override public void onItemClick(View view, int position) {
+////                        Toast.makeText(NovaVistoriaActivity.this, "Posição " + position,
+////                                Toast.LENGTH_LONG).show();
+//
+//                    }
+//
+//                    @Override public void onLongItemClick(View view, int position) {
+//                        // do whatever
+//                    }
+//                })
+//        );
 
         rvBombas = (RecyclerView) findViewById(R.id.rvBombas);
         llm = new LinearLayoutManager(this);
