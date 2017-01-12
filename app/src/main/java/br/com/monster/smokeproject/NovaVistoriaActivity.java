@@ -93,8 +93,6 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         //Fontes.ttf
         final Typeface RalewayBold = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Bold.ttf");
         final Typeface RalewayMedium = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Medium.ttf");
-        Typeface RalewayRegular = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Regular.ttf");
-        Typeface Odebrecht = Typeface.createFromAsset(getResources().getAssets(), "odebrecht-slab-webfont.ttf");
 
         // Handle Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -228,61 +226,63 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         rvBombas.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, rvBombas ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        Toast.makeText(NovaVistoriaActivity.this, "Posição " + position,
-                                Toast.LENGTH_LONG).show();
+//                        Toast.makeText(NovaVistoriaActivity.this, "Posição " + position,
+//                                Toast.LENGTH_LONG).show();
+                        Intent it = new Intent(getBaseContext(), MotorBombaActivity.class);
+                        startActivity(it);
+//                        finish();
 
-                        LayoutInflater li = LayoutInflater.from(NovaVistoriaActivity.this);
-                        View promptsView = li.inflate(R.layout.dialog_bombas, null);
-                        final AlertDialog alertDialog = new AlertDialog.Builder(NovaVistoriaActivity.this).create();
-                        alertDialog.setView(promptsView);
-                        alertDialog.show();
-
-                        //CUSTOM DIALOG
-                        etHorimetro = (EditText) alertDialog.findViewById(R.id.etHorimetro);
-                        etHorimetro.setTypeface(RalewayMedium);
-                        etHorimetro.addTextChangedListener(new TextWatcher() {
-                            public void afterTextChanged(Editable s) {
-                                if (etHorimetro.length() >= 1) {
-                                    btnConfirmar.setEnabled(true);
-                                } else {
-                                    btnConfirmar.setEnabled(false);
-                                }
-                            }
-
-                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                            }
-
-                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                            }
-                        });
-
-                        etAmperagem = (EditText) alertDialog.findViewById(R.id.etAmperagem);
-                        etHorimetro.setTypeface(RalewayMedium);
-                        etAmperagem.addTextChangedListener(new TextWatcher() {
-                            public void afterTextChanged(Editable s) {
-                                if (etAmperagem.length() >= 1) {
-                                    btnConfirmar.setEnabled(true);
-                                } else {
-                                    btnConfirmar.setEnabled(false);
-                                }
-                            }
-
-                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                            }
-
-                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                            }
-                        });
-
-                        btnConfirmar = (Button) alertDialog.findViewById(R.id.btnConfirmar);
-                        btnCancelar = (Button) alertDialog.findViewById(R.id.btnCancelar);
-                        btnCancelar.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                alertDialog.dismiss();
-                            }
-                        });
-                        //cbNaoPrecisaTroco = (CheckBox) alertDialog.findViewById(R.id.cbNaoPrecisoTroco);
+//                        LayoutInflater li = LayoutInflater.from(NovaVistoriaActivity.this);
+//                        View promptsView = li.inflate(R.layout.dialog_bombas, null);
+//                        final AlertDialog alertDialog = new AlertDialog.Builder(NovaVistoriaActivity.this).create();
+//                        alertDialog.setView(promptsView);
+//                        alertDialog.show();
+//
+//                        //CUSTOM DIALOG
+//                        etHorimetro = (EditText) alertDialog.findViewById(R.id.etHorimetro);
+//                        etHorimetro.setTypeface(RalewayMedium);
+//                        etHorimetro.addTextChangedListener(new TextWatcher() {
+//                            public void afterTextChanged(Editable s) {
+//                                if (etHorimetro.length() >= 1) {
+//                                    btnConfirmar.setEnabled(true);
+//                                } else {
+//                                    btnConfirmar.setEnabled(false);
+//                                }
+//                            }
+//
+//                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                            }
+//
+//                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                            }
+//                        });
+//
+//                        etAmperagem = (EditText) alertDialog.findViewById(R.id.etAmperagem);
+//                        etHorimetro.setTypeface(RalewayMedium);
+//                        etAmperagem.addTextChangedListener(new TextWatcher() {
+//                            public void afterTextChanged(Editable s) {
+//                                if (etAmperagem.length() >= 1) {
+//                                    btnConfirmar.setEnabled(true);
+//                                } else {
+//                                    btnConfirmar.setEnabled(false);
+//                                }
+//                            }
+//
+//                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                            }
+//
+//                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                            }
+//                        });
+//
+//                        btnConfirmar = (Button) alertDialog.findViewById(R.id.btnConfirmar);
+//                        btnCancelar = (Button) alertDialog.findViewById(R.id.btnCancelar);
+//                        btnCancelar.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                alertDialog.dismiss();
+//                            }
+//                        });
 
 
                     }

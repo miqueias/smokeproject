@@ -101,6 +101,10 @@ public class EstacoesElevatoriasActivity extends AppCompatActivity {
                 startActivity(it);
                 finish();
                 return true;
+            case R.id.action_settings:
+                //EstacaoAdapter.PersonViewHolder.cbCheck.isChecked();
+
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
