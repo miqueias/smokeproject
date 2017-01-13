@@ -411,7 +411,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:text="TITULO DA SEÇÃO"
+                    android:text="CONJUNTO MOTOR BOMBA"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="11sp"
                     android:layout_marginLeft="16dp"

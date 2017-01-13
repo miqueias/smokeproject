@@ -17,6 +17,7 @@ import android.widget.EditText;
 import java.util.List;
 
 import adapter.ChecklistAdapter;
+import adapter.ConjuntoMotorBombaAdapter;
 import model.Lista;
 import pojo.Auth;
 import util.DividerItemDecoration;
@@ -85,8 +86,8 @@ public class MotorBombaActivity extends AppCompatActivity {
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         rvChecklist.addItemDecoration(itemDecoration);
 
-        ChecklistAdapter adapter;
-        adapter = new ChecklistAdapter(auth.getVistoriasArrayList().get(idVistoria).getConjuntoMotorBombaArrayList().get(position).getProblemasArrayList(), mode, this);
+        ConjuntoMotorBombaAdapter adapter;
+        adapter = new ConjuntoMotorBombaAdapter(auth.getVistoriasArrayList().get(idVistoria).getConjuntoMotorBombaArrayList().get(position).getProblemasArrayList(), mode, this);
 
         rvChecklist.setAdapter(adapter);
 

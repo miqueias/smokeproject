@@ -46,6 +46,7 @@ import adapter.VistoriaAdapter;
 import model.ImageItem;
 import model.Lista;
 import pojo.Auth;
+import pojo.Problemas;
 import util.DividerItemDecoration;
 import util.RecyclerItemClickListener;
 import util.Util;
@@ -58,6 +59,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     private RecyclerView rvBombas, rvChecklist;
     private LinearLayoutManager llm;
     private List<Lista> lista;
+    private ArrayList<Problemas> problemas;
     private Button btnAddFoto;
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -243,7 +245,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         RecyclerView.ItemDecoration itemDecorationDois = new
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         rvChecklist.addItemDecoration(itemDecorationDois);
-        ChecklistAdapter adapterDois = new ChecklistAdapter(lista);
+        ChecklistAdapter adapterDois = new ChecklistAdapter(problemas);
         rvChecklist.setAdapter(adapterDois);
 
 //        rvChecklist.addOnItemTouchListener(
