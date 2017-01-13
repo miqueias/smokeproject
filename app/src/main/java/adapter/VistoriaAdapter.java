@@ -136,7 +136,6 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
 
     @Override
     public int getItemCount() {
-//        return lista.size();
-        return 10;
+        return lista.size();
     }
 }

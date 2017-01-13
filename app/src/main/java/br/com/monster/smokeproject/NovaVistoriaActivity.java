@@ -92,7 +92,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
             position = extras.getInt("posicao");
-            mode = extras.getString("mode");
+            mode = extras.getString("modo");
         }
 
         //Fontes.ttf
@@ -358,6 +358,8 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                
 
             }
         });
