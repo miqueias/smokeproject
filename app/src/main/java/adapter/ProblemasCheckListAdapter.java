@@ -10,15 +10,15 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import br.com.monster.smokeproject.R;
-import pojo.Problemas;
+import pojo.ProblemasCheckList;
 
 /**
  * Created by Marlon on 13/01/2017.
  */
 
-public class ConjuntoMotorBombaAdapter extends RecyclerView.Adapter<ConjuntoMotorBombaAdapter.PersonViewHolder> {
+public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasCheckListAdapter.PersonViewHolder> {
 
-    private ArrayList<Problemas> lista;
+    private ArrayList<ProblemasCheckList> lista;
     public Context context;
     private String mode;
 
@@ -33,11 +33,11 @@ public class ConjuntoMotorBombaAdapter extends RecyclerView.Adapter<ConjuntoMoto
         }
     }
 
-    public ConjuntoMotorBombaAdapter(ArrayList<Problemas> lista) {
+    public ProblemasCheckListAdapter(ArrayList<ProblemasCheckList> lista) {
         this.lista = lista;
     }
 
-    public ConjuntoMotorBombaAdapter(ArrayList<Problemas> lista, String mode, Context context) {
+    public ProblemasCheckListAdapter(ArrayList<ProblemasCheckList> lista, String mode, Context context) {
         this.lista = lista;
         this.mode = mode;
         this.context = context;

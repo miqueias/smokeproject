@@ -1,10 +1,7 @@
 package br.com.monster.smokeproject;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,14 +13,10 @@ import android.widget.EditText;
 
 import java.util.List;
 
-import adapter.ChecklistAdapter;
-import adapter.ConjuntoMotorBombaAdapter;
+import adapter.ProblemasCheckListAdapter;
 import model.Lista;
 import pojo.Auth;
 import util.DividerItemDecoration;
-import util.RecyclerItemClickListener;
-
-import static br.com.monster.smokeproject.R.id.rvChecklist;
 
 public class MotorBombaActivity extends AppCompatActivity {
 
@@ -86,8 +79,8 @@ public class MotorBombaActivity extends AppCompatActivity {
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         rvChecklist.addItemDecoration(itemDecoration);
 
-        ConjuntoMotorBombaAdapter adapter;
-        adapter = new ConjuntoMotorBombaAdapter(auth.getVistoriasArrayList().get(idVistoria).getConjuntoMotorBombaArrayList().get(position).getProblemasArrayList(), mode, this);
+        ProblemasCheckListAdapter adapter;
+        adapter = new ProblemasCheckListAdapter(auth.getVistoriasArrayList().get(idVistoria).getConjuntoMotorBombaArrayList().get(position).getProblemasArrayList(), mode, this);
 
         rvChecklist.setAdapter(adapter);
 
