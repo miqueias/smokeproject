@@ -59,6 +59,7 @@ public class VistoriaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it = new Intent(getBaseContext(), NovaVistoriaActivity.class);
                 it.putExtra("posicao", position);
+                it.putExtra("modo", "new");
                 startActivity(it);
                 finish();
             }

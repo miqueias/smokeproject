@@ -54,8 +54,13 @@ public class VistoriaRealizadaActivity extends AppCompatActivity {
         rvVistoria.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, rvVistoria ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        Toast.makeText(VistoriaRealizadaActivity.this, "Posição " + position,
-                                Toast.LENGTH_LONG).show();
+                        //Toast.makeText(VistoriaRealizadaActivity.this, "Posição " + position,
+                        //        Toast.LENGTH_LONG).show();
+                        Intent it = new Intent(getBaseContext(), NovaVistoriaActivity.class);
+                        it.putExtra("posicao", position);
+                        it.putExtra("modo", "view");
+                        startActivity(it);
+                        finish();
 
                     }
 

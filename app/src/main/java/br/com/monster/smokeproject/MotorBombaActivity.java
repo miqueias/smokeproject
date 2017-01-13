@@ -18,6 +18,7 @@ import java.util.List;
 
 import adapter.ChecklistAdapter;
 import model.Lista;
+import pojo.Auth;
 import util.DividerItemDecoration;
 import util.RecyclerItemClickListener;
 
@@ -32,11 +33,17 @@ public class MotorBombaActivity extends AppCompatActivity {
     private EditText etHorimetro;
     private EditText etAmperagem;
     private Button btnSalvar;
+    private int position;
+    private String mode;
+    private Auth auth;
+    private int idVistoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_motor_bomba);
+
+        auth = Auth.getInstance();
 
         //Fontes.ttf
         final Typeface RalewayBold = Typeface.createFromAsset(getResources().getAssets(), "Raleway-Bold.ttf");
@@ -48,6 +55,13 @@ public class MotorBombaActivity extends AppCompatActivity {
         toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            position = extras.getInt("posicao");
+            mode = extras.getString("mode");
+            idVistoria = extras.getInt("vistoria_id");
+        }
 
         etHorimetro = (EditText) findViewById(R.id.etHorimetro);
         etHorimetro.setTypeface(RalewayMedium);
@@ -63,7 +77,6 @@ public class MotorBombaActivity extends AppCompatActivity {
             }
         });
 
-
         rvChecklist = (RecyclerView) findViewById(R.id.rvChecklist);
         llm = new LinearLayoutManager(this);
         rvChecklist.setLayoutManager(llm);
@@ -71,7 +84,10 @@ public class MotorBombaActivity extends AppCompatActivity {
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         rvChecklist.addItemDecoration(itemDecoration);
-        ChecklistAdapter adapter = new ChecklistAdapter(lista);
+
+        ChecklistAdapter adapter;
+        adapter = new ChecklistAdapter(auth.getVistoriasArrayList().get(idVistoria).getConjuntoMotorBombaArrayList().get(position).getProblemasArrayList(), mode, this);
+
         rvChecklist.setAdapter(adapter);
 
 //        rvChecklist.addOnItemTouchListener(

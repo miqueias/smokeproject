@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.monster.smokeproject.R;
 import model.Lista;
+import pojo.ConjuntoMotorBomba;
 
 /**
  * Created by Marlon on 09/12/2016.
@@ -18,8 +20,9 @@ import model.Lista;
 
 public class BombasAdapter extends RecyclerView.Adapter<BombasAdapter.PersonViewHolder> {
 
-    private List<Lista> lista;
+    private ArrayList<ConjuntoMotorBomba> lista;
     public Context context;
+    private String mode;
 
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
@@ -32,8 +35,14 @@ public class BombasAdapter extends RecyclerView.Adapter<BombasAdapter.PersonView
         }
     }
 
-    public BombasAdapter(List<Lista> lista) {
+    public BombasAdapter(ArrayList<ConjuntoMotorBomba> lista) {
         this.lista = lista;
+    }
+
+    public BombasAdapter(ArrayList<ConjuntoMotorBomba> lista, String mode, Context context) {
+        this.lista = lista;
+        this.mode = mode;
+        this.context = context;
     }
 
     @Override
@@ -45,20 +54,12 @@ public class BombasAdapter extends RecyclerView.Adapter<BombasAdapter.PersonView
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int position) {
-//        personViewHolder.tvNomeEstacao.setText(endereco.get(position).getComplemento());
+        //personViewHolder.tvNomeEstacao.setText(endereco.get(position).getComplemento());
 
-    }
-
-    public void removeListItem(int position)
-    {
-        lista.remove(position);
-        notifyItemRemoved(position);
-        Log.e("removeListItem",""+ position);
     }
 
     @Override
     public int getItemCount() {
-        return 4;
-//        return lista.size();
+        return lista.size();
     }
 }

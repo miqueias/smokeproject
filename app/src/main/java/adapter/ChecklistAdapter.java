@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.monster.smokeproject.R;
 import model.Lista;
+import pojo.Problemas;
 
 /**
  * Created by Marlon on 09/12/2016.
@@ -18,8 +20,9 @@ import model.Lista;
 
 public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.PersonViewHolder> {
 
-    private List<Lista> lista;
+    private ArrayList<Problemas> lista;
     public Context context;
+    private String mode;
 
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
@@ -32,8 +35,14 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
         }
     }
 
-    public ChecklistAdapter(List<Lista> lista) {
+    public ChecklistAdapter(ArrayList<Problemas> lista) {
         this.lista = lista;
+    }
+
+    public ChecklistAdapter(ArrayList<Problemas> lista, String mode, Context context) {
+        this.lista = lista;
+        this.mode = mode;
+        this.context = context;
     }
 
     @Override

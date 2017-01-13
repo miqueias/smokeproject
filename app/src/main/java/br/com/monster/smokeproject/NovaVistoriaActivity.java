@@ -76,6 +76,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     private Auth auth;
     private Util util;
     private int position;
+    private String mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
             position = extras.getInt("posicao");
+            mode = extras.getString("mode");
         }
 
         //Fontes.ttf
@@ -96,7 +98,13 @@ public class NovaVistoriaActivity extends AppCompatActivity {
 
         // Handle Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Nova vistoria");
+
+        if (mode.equals("view")) {
+            toolbar.setTitle("Vistoria");
+        } else {
+            toolbar.setTitle("Nova Vistoria");
+        }
+
         toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -127,27 +135,66 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         tvEstacao.setTypeface(RalewayMedium);
         tvNomeEstacao = (TextView) findViewById(R.id.tvNomeEstacao);
         tvNomeEstacao.setTypeface(RalewayMedium);
-        tvNomeEstacao.setText(auth.getRota().getEstacoesElevatoriasArrayList().get(position).getDescricao());
+
+        if (mode.equals("view")) {
+            tvNomeEstacao.setText(auth.getVistoriasArrayList().get(position).getEstacoesElevatorias().getDescricao());
+        } else {
+            tvNomeEstacao.setText(auth.getRota().getEstacoesElevatoriasArrayList().get(position).getDescricao());
+        }
+
         tvRegional = (TextView) findViewById(R.id.tvRegional);
         tvRegional.setTypeface(RalewayMedium);
         tvNomeRegional = (TextView) findViewById(R.id.tvNomeRegional);
         tvNomeRegional.setTypeface(RalewayMedium);
-        tvNomeRegional.setText(auth.getRota().getEstacoesElevatoriasArrayList().get(position).getRegional().getNome());
+
+        if (mode.equals("view")) {
+            tvNomeRegional.setText(auth.getVistoriasArrayList().get(position).getEstacoesElevatorias().getRegional().getNome());
+        } else {
+            tvNomeRegional.setText(auth.getRota().getEstacoesElevatoriasArrayList().get(position).getRegional().getNome());
+        }
+
         tvCmb = (TextView) findViewById(R.id.tvCmb);
         tvCmb.setTypeface(RalewayMedium);
         tvQtdCmb = (TextView) findViewById(R.id.tvQtdCmb);
         tvQtdCmb.setTypeface(RalewayMedium);
-        tvQtdCmb.setText(String.valueOf(auth.getRota().getEstacoesElevatoriasArrayList().get(position).getConjuntoMotorBombaArrayList().size()));
+
+        if (mode.equals("view")) {
+            tvQtdCmb.setText(String.valueOf(auth.getVistoriasArrayList().get(position).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().size()));
+        } else {
+            tvQtdCmb.setText(String.valueOf(auth.getRota().getEstacoesElevatoriasArrayList().get(position).getConjuntoMotorBombaArrayList().size()));
+        }
 
         etLeituraCelpe = (EditText) findViewById(R.id.etLeituraCelpe);
         etLeituraCelpe.setTypeface(RalewayMedium);
+
+        if (mode.equals("view")) {
+            etLeituraCelpe.setText(auth.getVistoriasArrayList().get(position).getLeituraCelpe());
+            etLeituraCelpe.setEnabled(false);
+        }
+
         etLeituraCompesa = (EditText) findViewById(R.id.etLeituraCompesa);
         etLeituraCompesa.setTypeface(RalewayMedium);
+
+        if (mode.equals("view")) {
+            etLeituraCompesa.setText(auth.getVistoriasArrayList().get(position).getLeituraCompesa());
+            etLeituraCompesa.setEnabled(false);
+        }
+
         etCmb = (EditText) findViewById(R.id.etCmb);
         etCmb.setTypeface(RalewayMedium);
+
+        if (mode.equals("view")) {
+            etCmb.setText(String.valueOf(auth.getVistoriasArrayList().get(position).getCmbsEncontradas()));
+            etCmb.setEnabled(false);
+        }
+
         etDescProblema = (EditText) findViewById(R.id.etDescProblema);
         etDescProblema.setTypeface(RalewayMedium);
 
+        if (mode.equals("view")) {
+            etDescProblema.setText(auth.getVistoriasArrayList().get(position).getDescricaoProblemas());
+            etDescProblema.setEnabled(false);
+        }
 
         btnAddFoto = (Button) findViewById(R.id.btnAddFoto);
         btnAddFoto.setTypeface(RalewayBold);
@@ -220,15 +267,25 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         rvBombas.addItemDecoration(itemDecoration);
-        BombasAdapter adapter = new BombasAdapter(lista);
+
+        BombasAdapter adapter;
+
+        if (mode.equals("view")) {
+            adapter = new BombasAdapter(auth.getVistoriasArrayList().get(position).getConjuntoMotorBombaArrayList(), mode, this);
+        } else {
+            adapter = new BombasAdapter(auth.getRota().getEstacoesElevatoriasArrayList().get(position).getConjuntoMotorBombaArrayList(), mode, this);
+        }
+
         rvBombas.setAdapter(adapter);
 
         rvBombas.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, rvBombas ,new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
+                    @Override public void onItemClick(View view, int position_cmb) {
 //                        Toast.makeText(NovaVistoriaActivity.this, "Posição " + position,
 //                                Toast.LENGTH_LONG).show();
                         Intent it = new Intent(getBaseContext(), MotorBombaActivity.class);
+                        it.putExtra("position", position_cmb);
+                        it.putExtra("vistoria_id", position);
                         startActivity(it);
 //                        finish();
 
@@ -292,6 +349,18 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                     }
                 })
         );
+
+        btnSalvar = (Button) findViewById(R.id.btnSalvar);
+        btnSalvar.setTypeface(RalewayBold);
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        if (mode.equals("view")) {
+            btnSalvar.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -407,4 +476,6 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             }
         }
     }
+
 }
+
