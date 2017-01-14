@@ -12,6 +12,8 @@ public class ConjuntoMotorBomba{
     private String numero;
     private int estacaoElevatoriaId;
     private ArrayList<Problemas> problemasArrayList;
+    private String amperagem;
+    private String horimetro;
 
     public ConjuntoMotorBomba() {
 
@@ -47,5 +49,21 @@ public class ConjuntoMotorBomba{
 
     public void setProblemasArrayList(ArrayList<Problemas> problemasArrayList) {
         this.problemasArrayList = problemasArrayList;
+    }
+
+    public String getAmperagem() {
+        return amperagem;
+    }
+
+    public void setAmperagem(String amperagem) {
+        this.amperagem = amperagem;
+    }
+
+    public String getHorimetro() {
+        return horimetro;
+    }
+
+    public void setHorimetro(String horimetro) {
+        this.horimetro = horimetro;
     }
 }

@@ -359,7 +359,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                
+
 
             }
         });
