@@ -32,12 +32,15 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
 
         Typeface RalewayMedium = Typeface.createFromAsset(itemView.getResources().getAssets(), "Raleway-Medium.ttf");
         TextView cbChecklist;
+        TextView tvNomeEstacao;
 
         PersonViewHolder(View itemView) {
             super(itemView);
             itemView.setClickable(true);
             cbChecklist = (CheckBox) itemView.findViewById(R.id.cbChecklist);
             cbChecklist.setTypeface(RalewayMedium);
+            tvNomeEstacao = (TextView) itemView.findViewById(R.id.tvNomeEstacao);
+            tvNomeEstacao.setTypeface(RalewayMedium);
 
         }
     }
@@ -61,7 +64,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int position) {
-//        personViewHolder.tvNomeEstacao.setText(endereco.get(position).getComplemento());
+        personViewHolder.tvNomeEstacao.setText(lista.get(position).getDescricao());
 
     }
 
