@@ -74,7 +74,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
 
     @Override
     public int getItemCount() {
-        return 5;
+        return lista.size();
 //        return lista.size();
     }
 }
