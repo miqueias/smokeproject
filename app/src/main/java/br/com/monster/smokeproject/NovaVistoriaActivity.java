@@ -274,7 +274,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         BombasAdapter adapter;
 
         if (mode.equals("view")) {
-            adapter = new BombasAdapter(auth.getVistoriasArrayList().get(position).getConjuntoMotorBombaArrayList(), mode, this);
+            adapter = new BombasAdapter(auth.getVistoriasArrayList().get(position).getEstacoesElevatorias().getConjuntoMotorBombaArrayList(), mode, this);
         } else {
             adapter = new BombasAdapter(auth.getRota().getEstacoesElevatoriasArrayList().get(position).getConjuntoMotorBombaArrayList(), mode, this);
         }
@@ -359,7 +359,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                
+
 
             }
         });

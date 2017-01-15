@@ -255,6 +255,8 @@ public class UserRequester {
                         conjuntoMotorBombaVistoria.setId(Integer.parseInt(jsonObjectCmbVistoria.get("id").toString()));
                         conjuntoMotorBombaVistoria.setNumero(jsonObjectCmbVistoria.get("numero").toString());
                         conjuntoMotorBombaVistoria.setEstacaoElevatoriaId(Integer.parseInt(jsonObjectCmbVistoria.get("estacao_elevatoria_id").toString()));
+                        conjuntoMotorBombaVistoria.setAmperagem(jsonObjectCmbVistoria.get("amperagem").toString());
+                        conjuntoMotorBombaVistoria.setHorimetro(jsonObjectCmbVistoria.get("horimetro").toString());
                         conjuntoMotorBombaVistoriaArrayList.add(conjuntoMotorBombaVistoria);
 
                         JSONArray jsonArrayProblemasVistoria = jsonObjectCmbVistoria.getJSONArray("problemas");
@@ -271,6 +273,7 @@ public class UserRequester {
                         }
                         conjuntoMotorBombaVistoria.setProblemasArrayList(problemasVistoriaArrayList);
                     }
+
                     estacoesElevatoriasVistoria.setConjuntoMotorBombaArrayList(conjuntoMotorBombaVistoriaArrayList);
                     vistoria.setEstacoesElevatorias(estacoesElevatoriasVistoria);
                     vistoriaArrayList.add(vistoria);
