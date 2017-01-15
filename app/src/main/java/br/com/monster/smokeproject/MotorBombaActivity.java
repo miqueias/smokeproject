@@ -62,10 +62,10 @@ public class MotorBombaActivity extends AppCompatActivity {
 
         etHorimetro = (EditText) findViewById(R.id.etHorimetro);
         etHorimetro.setTypeface(RalewayMedium);
-        etHorimetro.setText(auth.getVistoriasArrayList().get(idVistoria).getConjuntoMotorBombaArrayList().get(position).getHorimetro());
+        etHorimetro.setText(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getHorimetro());
         etAmperagem = (EditText) findViewById(R.id.etAmperagem);
         etAmperagem.setTypeface(RalewayMedium);
-        etAmperagem.setText(auth.getVistoriasArrayList().get(idVistoria).getConjuntoMotorBombaArrayList().get(position).getAmperagem());
+        etAmperagem.setText(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getAmperagem());
 
         btnSalvar = (Button) findViewById(R.id.btnSalvar);
         btnSalvar.setTypeface(RalewayMedium);

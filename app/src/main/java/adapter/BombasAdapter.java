@@ -61,7 +61,7 @@ public class BombasAdapter extends RecyclerView.Adapter<BombasAdapter.PersonView
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int position) {
-        //personViewHolder.tvNomeEstacao.setText(endereco.get(position).getComplemento());
+        personViewHolder.tvNomeEstacao.setText(lista.get(position).getNumero());
 
     }
 
