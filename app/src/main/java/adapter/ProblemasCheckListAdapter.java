@@ -1,11 +1,14 @@
 package adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -25,11 +28,14 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
 
+        Typeface RalewayMedium = Typeface.createFromAsset(itemView.getResources().getAssets(), "Raleway-Medium.ttf");
+        TextView cbChecklist;
 
         PersonViewHolder(View itemView) {
             super(itemView);
             itemView.setClickable(true);
-
+            cbChecklist = (CheckBox) itemView.findViewById(R.id.cbChecklist);
+            cbChecklist.setTypeface(RalewayMedium);
         }
     }
 
