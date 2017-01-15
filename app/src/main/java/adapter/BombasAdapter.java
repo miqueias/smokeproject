@@ -60,6 +60,6 @@ public class BombasAdapter extends RecyclerView.Adapter<BombasAdapter.PersonView
 
     @Override
     public int getItemCount() {
-        return lista.size();
+        return this.lista.size();
     }
 }

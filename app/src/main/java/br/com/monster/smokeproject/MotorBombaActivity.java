@@ -11,12 +11,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import adapter.ChecklistAdapter;
 import adapter.ProblemasCheckListAdapter;
 import model.Lista;
 import pojo.Auth;
+import pojo.ConjuntoMotorBomba;
 import util.DividerItemDecoration;
 
 public class MotorBombaActivity extends AppCompatActivity {
@@ -60,8 +62,10 @@ public class MotorBombaActivity extends AppCompatActivity {
 
         etHorimetro = (EditText) findViewById(R.id.etHorimetro);
         etHorimetro.setTypeface(RalewayMedium);
+        etHorimetro.setText(auth.getVistoriasArrayList().get(idVistoria).getConjuntoMotorBombaArrayList().get(position).getHorimetro());
         etAmperagem = (EditText) findViewById(R.id.etAmperagem);
         etAmperagem.setTypeface(RalewayMedium);
+        etAmperagem.setText(auth.getVistoriasArrayList().get(idVistoria).getConjuntoMotorBombaArrayList().get(position).getAmperagem());
 
         btnSalvar = (Button) findViewById(R.id.btnSalvar);
         btnSalvar.setTypeface(RalewayMedium);

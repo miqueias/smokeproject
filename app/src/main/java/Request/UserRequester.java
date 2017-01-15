@@ -273,6 +273,7 @@ public class UserRequester {
                         }
                         conjuntoMotorBombaVistoria.setProblemasArrayList(problemasVistoriaArrayList);
                     }
+
                     estacoesElevatoriasVistoria.setConjuntoMotorBombaArrayList(conjuntoMotorBombaVistoriaArrayList);
                     vistoria.setEstacoesElevatorias(estacoesElevatoriasVistoria);
                     vistoriaArrayList.add(vistoria);
