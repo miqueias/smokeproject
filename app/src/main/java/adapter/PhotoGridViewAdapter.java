@@ -1,59 +1,85 @@
 package adapter;
 
-import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import br.com.monster.smokeproject.NovaVistoriaActivity;
 import br.com.monster.smokeproject.R;
 import model.ImageItem;
+import model.Lista;
 
 /**
  * Created by Marlon on 26/12/2016.
  */
 
-public class PhotoGridViewAdapter extends ArrayAdapter {
-    private Context context;
-    private int layoutResourceId;
-    private ArrayList data = new ArrayList();
+public class PhotoGridViewAdapter extends RecyclerView.Adapter<PhotoGridViewAdapter.PersonViewHolder> {
+//    private ArrayList<ImageItem> lista;
+    private List<Lista> lista;
+    public Context context;
+    public static ImageView ivPhoto;
 
-    public PhotoGridViewAdapter(Context context, int layoutResourceId, ArrayList data) {
-        super(context, layoutResourceId, data);
-        this.layoutResourceId = layoutResourceId;
+    public static class PersonViewHolder extends RecyclerView.ViewHolder {
+
+
+        ImageView ivCheck;
+
+        PersonViewHolder(View itemView) {
+            super(itemView);
+            itemView.setClickable(true);
+            ivPhoto = (ImageView) itemView.findViewById(R.id.ivPhoto);
+            ivCheck = (ImageView) itemView.findViewById(R.id.ivCheck);
+
+        }
+    }
+
+    public PhotoGridViewAdapter(List<Lista> lista) {
+        this.lista = lista;
+    }
+
+
+    public PhotoGridViewAdapter(List<Lista> lista, Context context) {
+        this.lista = lista;
         this.context = context;
-        this.data = data;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        ViewHolder holder = null;
-
-        if (row == null) {
-            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-            row = inflater.inflate(layoutResourceId, parent, false);
-            holder = new ViewHolder();
-//            holder.imageTitle = (TextView) row.findViewById(R.id.text);
-            holder.image = (ImageView) row.findViewById(R.id.image);
-            row.setTag(holder);
-        } else {
-            holder = (ViewHolder) row.getTag();
-        }
-
-        ImageItem item = (ImageItem) data.get(position);
-//        holder.imageTitle.setText(item.getTitle());
-        holder.image.setImageBitmap(item.getImage());
-        return row;
+    public PersonViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_photo, viewGroup, false);
+        PersonViewHolder pvh = new PersonViewHolder(v);
+        return pvh;
     }
 
-    static class ViewHolder {
-//        TextView imageTitle;
-        ImageView image;
+    @Override
+    public void onBindViewHolder(PhotoGridViewAdapter.PersonViewHolder personViewHolder, int position) {
+//        personViewHolder.tvNomeEstacao.setText(endereco.get(position).getComplemento());
+//        NovaVistoriaActivity.btnAddFoto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(v.getContext(), "teste " , Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+    }
+
+    public void removeListItem(int position)
+    {
+        lista.remove(position);
+        notifyItemRemoved(position);
+        Log.e("removeListItem",""+ position);
+    }
+
+    @Override
+    public int getItemCount() {
+        return 5;
+//        return lista.size();
     }
 }

@@ -55,13 +55,12 @@ import util.Util;
 
 public class NovaVistoriaActivity extends AppCompatActivity {
 
-    private GridView gridView;
     private PhotoGridViewAdapter gridAdapter;
 
-    private RecyclerView rvBombas, rvChecklist;
+    private RecyclerView rvBombas, rvChecklist, rvPhotos;
     private LinearLayoutManager llm;
     private List<Lista> lista;
-    private Button btnAddFoto;
+    public static Button btnAddFoto;
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
 
@@ -208,36 +207,40 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             }
         });
 
-        gridView = (GridView) findViewById(R.id.gvPhotos);
-        gridAdapter = new PhotoGridViewAdapter(this, R.layout.grid_item_layout, getData());
-        gridView.setAdapter(gridAdapter);
+        rvPhotos = (RecyclerView) findViewById(R.id.rvPhotos);
+        llm = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        rvPhotos.setLayoutManager(llm);
+        RecyclerView.ItemDecoration itemDecorationTres = new
+                DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL_LIST);
+        rvPhotos.addItemDecoration(itemDecorationTres);
+        PhotoGridViewAdapter adapterTres = new PhotoGridViewAdapter(lista);
+        rvPhotos.setAdapter(adapterTres);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                                                ImageItem item = (ImageItem) parent.getItemAtPosition(position);
-//                                                //Create intent
-                                                Intent intent = new Intent(NovaVistoriaActivity.this, DetailsActivity.class);
-                                                intent.putExtra("title", item.getTitle());
-                                                intent.putExtra("image", item.getImage());
-//
-//                                                //Start details activity
-                                                startActivity(intent);
+        rvPhotos.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, rvPhotos ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        Toast.makeText(NovaVistoriaActivity.this, "Posição " + position,
+                                Toast.LENGTH_LONG).show();
+//                        ImageItem item = (ImageItem) parent.getItemAtPosition(position);
+////                      //Create intent
+//                        Intent intent = new Intent(NovaVistoriaActivity.this, DetailsActivity.class);
+//                        intent.putExtra("image", item.getImage());
+////
+////                      //Start details activity
+//                        startActivity(intent);
 
-                                            }
-                                        });
 
-        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                    }
 
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-                                           int position, long arg3) {
-                Toast.makeText(NovaVistoriaActivity.this, "ONLONG CLICK " + position,
-                        Toast.LENGTH_LONG).show();
-                //gridAdapter.imageItems.remove(position);
-                gridAdapter.notifyDataSetChanged();
-                //set the image as wallpaper
-                return true;
-            }
-        });
+                    @Override public void onLongItemClick(View view, int position) {
+                        Toast.makeText(NovaVistoriaActivity.this, "ONLONG CLICK " + position,
+                                Toast.LENGTH_LONG).show();
+                        //gridAdapter.imageItems.remove(position);
+                        //gridAdapter.notifyDataSetChanged();
+
+                    }
+                })
+        );
 
         rvChecklist = (RecyclerView) findViewById(R.id.rvChecklist);
         llm = new LinearLayoutManager(this);
@@ -292,59 +295,6 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                         startActivity(it);
 //                        finish();
 
-//                        LayoutInflater li = LayoutInflater.from(NovaVistoriaActivity.this);
-//                        View promptsView = li.inflate(R.layout.dialog_bombas, null);
-//                        final AlertDialog alertDialog = new AlertDialog.Builder(NovaVistoriaActivity.this).create();
-//                        alertDialog.setView(promptsView);
-//                        alertDialog.show();
-//
-//                        //CUSTOM DIALOG
-//                        etHorimetro = (EditText) alertDialog.findViewById(R.id.etHorimetro);
-//                        etHorimetro.setTypeface(RalewayMedium);
-//                        etHorimetro.addTextChangedListener(new TextWatcher() {
-//                            public void afterTextChanged(Editable s) {
-//                                if (etHorimetro.length() >= 1) {
-//                                    btnConfirmar.setEnabled(true);
-//                                } else {
-//                                    btnConfirmar.setEnabled(false);
-//                                }
-//                            }
-//
-//                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//                            }
-//
-//                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                            }
-//                        });
-//
-//                        etAmperagem = (EditText) alertDialog.findViewById(R.id.etAmperagem);
-//                        etHorimetro.setTypeface(RalewayMedium);
-//                        etAmperagem.addTextChangedListener(new TextWatcher() {
-//                            public void afterTextChanged(Editable s) {
-//                                if (etAmperagem.length() >= 1) {
-//                                    btnConfirmar.setEnabled(true);
-//                                } else {
-//                                    btnConfirmar.setEnabled(false);
-//                                }
-//                            }
-//
-//                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//                            }
-//
-//                            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                            }
-//                        });
-//
-//                        btnConfirmar = (Button) alertDialog.findViewById(R.id.btnConfirmar);
-//                        btnCancelar = (Button) alertDialog.findViewById(R.id.btnCancelar);
-//                        btnCancelar.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                alertDialog.dismiss();
-//                            }
-//                        });
-
-
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
@@ -380,17 +330,6 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    // Prepare some dummy data for gridview
-    private ArrayList<ImageItem> getData() {
-        final ArrayList<ImageItem> imageItems = new ArrayList<>();
-        TypedArray imgs = getResources().obtainTypedArray(R.array.image_ids);
-        for (int i = 0; i < imgs.length(); i++) {
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imgs.getResourceId(i, -1));
-            imageItems.add(new ImageItem(bitmap, "Image#" + i));
-        }
-        return imageItems;
     }
 
     private void selectImage() {
@@ -442,7 +381,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                     bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
                             bitmapOptions);
 
-                    //viewImage.setImageBitmap(bitmap);
+                    //PhotoGridViewAdapter.ivPhoto.setImageBitmap(bitmap);
 
                     String path = android.os.Environment
                             .getExternalStorageDirectory()
@@ -477,7 +416,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                 c.close();
                 Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
                 Log.w("image from gallery....", picturePath+"");
-                //viewImage.setImageBitmap(thumbnail);
+                PhotoGridViewAdapter.ivPhoto.setImageBitmap(thumbnail);
             }
         }
     }
