@@ -63,6 +63,10 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
     public void onBindViewHolder(PersonViewHolder personViewHolder, int position) {
         personViewHolder.cbChecklist.setText(lista.get(position).getDescricao());
 
+        if (mode.equals("view")) {
+            
+        }
+
     }
 
     public void removeListItem(int position)

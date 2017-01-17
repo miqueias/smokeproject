@@ -76,6 +76,10 @@ public class MotorBombaActivity extends AppCompatActivity {
             }
         });
 
+        if (mode.equals("view")) {
+            btnSalvar.setVisibility(View.INVISIBLE);
+        }
+
         rvChecklist = (RecyclerView) findViewById(R.id.rvChecklist);
         llm = new LinearLayoutManager(this);
         rvChecklist.setLayoutManager(llm);
