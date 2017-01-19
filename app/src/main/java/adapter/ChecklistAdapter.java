@@ -31,7 +31,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
 
         Typeface RalewayMedium = Typeface.createFromAsset(itemView.getResources().getAssets(), "Raleway-Medium.ttf");
-        TextView cbChecklist;
+        CheckBox cbChecklist;
 
         PersonViewHolder(View itemView) {
             super(itemView);
@@ -64,7 +64,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
         personViewHolder.cbChecklist.setText(lista.get(position).getDescricao());
 
         if (mode.equals("view")) {
-            
+            personViewHolder.cbChecklist.setEnabled(false);
         }
 
     }

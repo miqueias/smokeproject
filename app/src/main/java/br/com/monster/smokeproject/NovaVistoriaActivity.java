@@ -290,7 +290,8 @@ public class NovaVistoriaActivity extends AppCompatActivity {
 //                        Toast.makeText(NovaVistoriaActivity.this, "Posição " + position,
 //                                Toast.LENGTH_LONG).show();
                         Intent it = new Intent(getBaseContext(), MotorBombaActivity.class);
-                        it.putExtra("position", position_cmb);
+                        it.putExtra("posicao", position_cmb);
+                        it.putExtra("modo", "view");
                         it.putExtra("vistoria_id", position);
                         startActivity(it);
 //                        finish();
