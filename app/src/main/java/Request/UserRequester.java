@@ -229,6 +229,21 @@ public class UserRequester {
                     vistoria.setNumeroOs(jsonObjectVistoria.get("numero_os").toString());
                     vistoria.setSituacaoProblema(Integer.parseInt(jsonObjectVistoria.get("situacao_problema").toString()));
 
+                    JSONArray jsonArrayVistoriaProblemasChecklist = jsonObjectVistoria.getJSONArray("problemachecklists");
+                    ArrayList<ProblemasCheckList> problemasCheckListVistoriaArrayList = new ArrayList<>();
+
+                    for (int c = 0; c < jsonArrayVistoriaProblemasChecklist.length(); c++) {
+
+                        JSONObject jsonObjectProblemasCheckListVistoria = jsonArrayVistoriaProblemasChecklist.getJSONObject(c);
+
+                        ProblemasCheckList problemasCheckList = new ProblemasCheckList();
+                        problemasCheckList.setId(Integer.parseInt(jsonObjectProblemasCheckListVistoria.get("id").toString()));
+                        problemasCheckList.setDescricao(jsonObjectProblemasCheckListVistoria.get("descricao").toString());
+                        problemasCheckListVistoriaArrayList.add(problemasCheckList);
+                    }
+
+                    vistoria.setProblemasCheckListArrayList(problemasCheckListVistoriaArrayList);
+
                     JSONObject jsonObjectEstacaoVistoria = jsonObjectVistoria.getJSONObject("estacao_elevatoria");
                     EstacoesElevatorias estacoesElevatoriasVistoria = new EstacoesElevatorias();
                     estacoesElevatoriasVistoria.setId(Integer.parseInt(jsonObjectEstacaoVistoria.get("id").toString()));

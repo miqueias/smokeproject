@@ -249,7 +249,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         RecyclerView.ItemDecoration itemDecorationDois = new
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         rvChecklist.addItemDecoration(itemDecorationDois);
-        ProblemasCheckListAdapter adapterDois = new ProblemasCheckListAdapter(auth.getProblemasCheckListArrayList(), mode, this);
+        ProblemasCheckListAdapter adapterDois = new ProblemasCheckListAdapter(auth.getVistoriasArrayList().get(position).getProblemasCheckListArrayList(), mode, this);
         rvChecklist.setAdapter(adapterDois);
 
 //        rvChecklist.addOnItemTouchListener(

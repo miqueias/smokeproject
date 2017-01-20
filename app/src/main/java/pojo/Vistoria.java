@@ -31,6 +31,7 @@ public class Vistoria {
     private int situacaoProblema;
     private int osRealizada;
     private String numeroOs;
+    private ArrayList<ProblemasCheckList> problemasCheckListArrayList;
 
     public Vistoria() {
 
@@ -202,5 +203,13 @@ public class Vistoria {
 
     public void setNumeroOs(String numeroOs) {
         this.numeroOs = numeroOs;
+    }
+
+    public ArrayList<ProblemasCheckList> getProblemasCheckListArrayList() {
+        return problemasCheckListArrayList;
+    }
+
+    public void setProblemasCheckListArrayList(ArrayList<ProblemasCheckList> problemasCheckListArrayList) {
+        this.problemasCheckListArrayList = problemasCheckListArrayList;
     }
 }

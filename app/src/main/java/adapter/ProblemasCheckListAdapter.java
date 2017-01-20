@@ -58,7 +58,12 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int position) {
-//        personViewHolder.tvNomeEstacao.setText(endereco.get(position).getComplemento());
+        personViewHolder.cbChecklist.setText(lista.get(position).getDescricao());
+
+        if (mode.equals("view")) {
+            personViewHolder.cbChecklist.setChecked(true);
+            personViewHolder.cbChecklist.setEnabled(false);
+        }
 
     }
 
@@ -71,7 +76,6 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
 
     @Override
     public int getItemCount() {
-        return 5;
-//        return lista.size();
+        return lista.size();
     }
 }
