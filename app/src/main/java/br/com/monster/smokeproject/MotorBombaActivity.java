@@ -78,6 +78,8 @@ public class MotorBombaActivity extends AppCompatActivity {
 
         if (mode.equals("view")) {
             btnSalvar.setVisibility(View.INVISIBLE);
+            etHorimetro.setEnabled(false);
+            etAmperagem.setEnabled(false);
         }
 
         rvChecklist = (RecyclerView) findViewById(R.id.rvChecklist);
