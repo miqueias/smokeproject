@@ -111,7 +111,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        tvAlertaSub = (TextView) findViewById(R.id.tvVistoria);
+        tvAlertaSub = (TextView) findViewById(R.id.tvAlertaSub);
         tvAlertaSub.setTypeface(RalewayBold);
         tvAlertaSub.setText("Nenhum problema encontrado");
 
