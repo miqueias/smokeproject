@@ -339,7 +339,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+                Intent it = new Intent(getBaseContext(), HomeActivity.class);
                 startActivity(it);
                 finish();
                 return true;

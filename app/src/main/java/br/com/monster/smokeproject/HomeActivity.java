@@ -186,7 +186,7 @@ public class HomeActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent it = new Intent(getBaseContext(), VistoriaRealizadaActivity.class);
                 startActivity(it);
-//                finish();
+                finish();
             }
         });
 
