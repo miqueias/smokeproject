@@ -29,7 +29,7 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
 
         Typeface RalewayMedium = Typeface.createFromAsset(itemView.getResources().getAssets(), "Raleway-Medium.ttf");
-        TextView cbChecklist;
+        CheckBox cbChecklist;
 
         PersonViewHolder(View itemView) {
             super(itemView);
