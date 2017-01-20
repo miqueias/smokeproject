@@ -121,13 +121,13 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
             e.printStackTrace();
         }
 
-        if (lista.get(position).getEstacoesElevatorias().getStatus() == 1) { //vermelho
+        if (lista.get(position).getSituacaoProblema() == 1) { //vermelho
             personViewHolder.alertProblema.setText("PROBLEMA\nATIVO");
             personViewHolder.alertProblema.setBackgroundColor(ContextCompat.getColor(context, R.color.vermelho_card));
-        } else if (lista.get(position).getEstacoesElevatorias().getStatus() == 2) { //cinza
+        } else if (lista.get(position).getSituacaoProblema() == 2) { //cinza
             personViewHolder.alertProblema.setText("PROBLEMA\nREPORTADO");
             personViewHolder.alertProblema.setBackgroundColor(ContextCompat.getColor(context, R.color.cinza_card));
-        } else if (lista.get(position).getEstacoesElevatorias().getStatus() == 3) { //normal
+        } else if (lista.get(position).getSituacaoProblema() == 3) { //normal
             personViewHolder.alertProblema.setVisibility(View.GONE);
         } else {
             personViewHolder.alertProblema.setVisibility(View.GONE);

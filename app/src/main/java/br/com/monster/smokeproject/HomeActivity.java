@@ -202,7 +202,7 @@ public class HomeActivity extends AppCompatActivity
         });
 
         if (auth.getOperador().getValidaPlaca().equals("false")) {
-            btnPlaca.setVisibility(View.GONE);
+            btnPlaca.setVisibility(View.INVISIBLE);
         }
     }
 

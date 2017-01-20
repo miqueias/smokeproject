@@ -28,6 +28,9 @@ public class Vistoria {
     private int cidadeId;
     private int regionalId;
     private Regional regional;
+    private int situacaoProblema;
+    private int osRealizada;
+    private String numeroOs;
 
     public Vistoria() {
 
@@ -175,5 +178,29 @@ public class Vistoria {
 
     public void setRegional(Regional regional) {
         this.regional = regional;
+    }
+
+    public int getSituacaoProblema() {
+        return situacaoProblema;
+    }
+
+    public void setSituacaoProblema(int situacaoProblema) {
+        this.situacaoProblema = situacaoProblema;
+    }
+
+    public int getOsRealizada() {
+        return osRealizada;
+    }
+
+    public void setOsRealizada(int osRealizada) {
+        this.osRealizada = osRealizada;
+    }
+
+    public String getNumeroOs() {
+        return numeroOs;
+    }
+
+    public void setNumeroOs(String numeroOs) {
+        this.numeroOs = numeroOs;
     }
 }

@@ -225,6 +225,9 @@ public class UserRequester {
                     vistoria.setEstacaoElevatoriaId(Integer.parseInt(jsonObjectVistoria.get("estacao_elevatoria_id").toString()));
                     vistoria.setOperadorId(Integer.parseInt(jsonObjectVistoria.get("operador_id").toString()));
                     vistoria.setStatus(Integer.parseInt(jsonObjectVistoria.get("status").toString()));
+                    vistoria.setOsRealizada(Integer.parseInt(jsonObjectVistoria.get("os_realizada").toString()));
+                    vistoria.setNumeroOs(jsonObjectVistoria.get("numero_os").toString());
+                    vistoria.setSituacaoProblema(Integer.parseInt(jsonObjectVistoria.get("situacao_problema").toString()));
 
                     JSONObject jsonObjectEstacaoVistoria = jsonObjectVistoria.getJSONObject("estacao_elevatoria");
                     EstacoesElevatorias estacoesElevatoriasVistoria = new EstacoesElevatorias();
