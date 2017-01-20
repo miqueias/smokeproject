@@ -111,6 +111,22 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        tvAlertaSub = (TextView) findViewById(R.id.tvVistoria);
+        tvAlertaSub.setTypeface(RalewayBold);
+        tvAlertaSub.setText("Nenhum problema encontrado");
+
+        if (mode.equals("view")) {
+            int qtdProbelmasDestacados = auth.getVistoriasArrayList().get(position).getProblemasCheckListArrayList().size();
+
+            if (qtdProbelmasDestacados == 0) {
+                tvAlertaSub.setText("Nenhum problema encontrado");
+            } else if (qtdProbelmasDestacados == 1) {
+                tvAlertaSub.setText("1 problema encontrado");
+            } else {
+                tvAlertaSub.setText(qtdProbelmasDestacados + " problemas encontrados");
+            }
+        }
+
         tvVistoria = (TextView) findViewById(R.id.tvVistoria);
         tvVistoria.setTypeface(RalewayBold);
         tvData = (TextView) findViewById(R.id.tvData);
