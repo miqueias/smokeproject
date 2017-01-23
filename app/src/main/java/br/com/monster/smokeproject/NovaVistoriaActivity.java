@@ -438,5 +438,9 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
 }
 

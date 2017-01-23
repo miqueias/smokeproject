@@ -186,4 +186,8 @@ public class ApoioActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+    }
 }
