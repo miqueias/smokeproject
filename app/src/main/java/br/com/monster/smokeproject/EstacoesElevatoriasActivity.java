@@ -2,6 +2,7 @@ package br.com.monster.smokeproject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,7 @@ import pojo.Auth;
 import pojo.EstacoesElevatorias;
 import util.DividerItemDecoration;
 import util.RecyclerItemClickListener;
+import util.Util;
 
 public class EstacoesElevatoriasActivity extends AppCompatActivity {
 
@@ -36,6 +38,7 @@ public class EstacoesElevatoriasActivity extends AppCompatActivity {
     private ArrayList<EstacoesElevatorias> lista;
     private TextView tvEstacaoElevatoria;
     private Auth auth = Auth.getInstance();
+    private SharedPreferences sharedPreferences;
 
 
     @Override
@@ -44,6 +47,7 @@ public class EstacoesElevatoriasActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_nova_vistoria);
         estacao = this;
 
+        sharedPreferences = getSharedPreferences(Util.PREFS_NAME, 0);
         // Handle Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Vistoria");
@@ -65,24 +69,20 @@ public class EstacoesElevatoriasActivity extends AppCompatActivity {
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         rvNovaVistoria.addItemDecoration(itemDecoration);
         EstacaoAdapter adapter = new EstacaoAdapter(EstacoesElevatoriasActivity.this, auth.getRota().getEstacoesElevatoriasArrayList());
+        adapter.setSharedPreferences(sharedPreferences);
         rvNovaVistoria.setAdapter(adapter);
+    }
 
-//        rvNovaVistoria.addOnItemTouchListener(
-//                new RecyclerItemClickListener(this, rvNovaVistoria ,new RecyclerItemClickListener.OnItemClickListener() {
-//                    @Override public void onItemClick(View view, int position) {
-//                        Toast.makeText(EstacoesElevatoriasActivity.this, "Posição " + position,
-//                                Toast.LENGTH_LONG).show();
-//                        Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
-//                        startActivity(it);
-//                        finish();
-//
-//                    }
-//
-//                    @Override public void onLongItemClick(View view, int position) {
-//                        // do whatever
-//                    }
-//                })
-//        );
+    @Override
+    public void onResume(){
+        super.onResume();
+
+
+    }
+
+    private void loadPreferencesCheckList() {
+
+
     }
 
     @Override

@@ -2,6 +2,7 @@ package adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,6 +28,7 @@ public class EstacaoAdapter extends RecyclerView.Adapter<EstacaoAdapter.PersonVi
     private ArrayList<EstacoesElevatorias> lista;
     public Context context;
     int positionItem;
+    SharedPreferences sharedPreferences;
 
     public EstacaoAdapter() {
 
@@ -35,6 +37,14 @@ public class EstacaoAdapter extends RecyclerView.Adapter<EstacaoAdapter.PersonVi
     public EstacaoAdapter(Context context, ArrayList<EstacoesElevatorias> lista) {
         this.context = context;
         this.lista = lista;
+    }
+
+    public SharedPreferences getSharedPreferences() {
+        return sharedPreferences;
+    }
+
+    public void setSharedPreferences(SharedPreferences sharedPreferences) {
+        this.sharedPreferences = sharedPreferences;
     }
 
     public EstacaoAdapter(ArrayList<EstacoesElevatorias> lista) {
@@ -47,15 +57,12 @@ public class EstacaoAdapter extends RecyclerView.Adapter<EstacaoAdapter.PersonVi
         CheckBox cbCheck;
         TextView tvNomeEstacao;
 
-
-
         PersonViewHolder(View itemView) {
             super(itemView);
             itemView.setClickable(true);
             cbCheck = (CheckBox) itemView.findViewById(R.id.cbCheck);
             tvNomeEstacao = (TextView) itemView.findViewById(R.id.tvNomeEstacao);
             tvNomeEstacao.setTypeface(RalewayMedium);
-
 
         }
     }
@@ -70,34 +77,37 @@ public class EstacaoAdapter extends RecyclerView.Adapter<EstacaoAdapter.PersonVi
     @Override
     public void onBindViewHolder(final PersonViewHolder personViewHolder, final int position) {
         personViewHolder.tvNomeEstacao.setText(lista.get(position).getDescricao());
+
+        int i = sharedPreferences.getInt("estacao_elevatoria_"+position, -1);
+
+        if (i > -1) {
+            personViewHolder.cbCheck.setChecked(true);
+        }
+
         personViewHolder.tvNomeEstacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,VistoriaActivity.class);
                 intent.putExtra("posicao", position);
                 context.startActivity(intent);
-
-
             }
         });
         personViewHolder.cbCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                int i = sharedPreferences.getInt("estacao_elevatoria_"+position, -1);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
 
+                if (i == -1) {
+                    editor.putInt("estacao_elevatoria_"+position, position);
+                    editor.apply();
+                } else {
+                    editor.remove("estacao_elevatoria_"+position);
+                    editor.apply();
+                }
             }
         });
-
-
-//        personViewHolder.tvNomeEstacao.setText(endereco.get(position).getComplemento());
-//        personViewHolder.imgCheck.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                personViewHolder.imgCheck.setVisibility(View.INVISIBLE);
-//            }
-//        });
-
     }
 
 

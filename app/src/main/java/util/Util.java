@@ -24,6 +24,7 @@ public abstract class Util
     private static Context ctxAtual;
     private static Message message = null;
     private static ProgressDialog pd = null;
+    public static final String PREFS_NAME = "ESTACOES_TRABALHADAS";
 
     public static String ChangeStringTosha1(String input) throws NoSuchAlgorithmException {
         MessageDigest mDigest = MessageDigest.getInstance("SHA1");
