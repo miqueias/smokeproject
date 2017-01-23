@@ -95,6 +95,12 @@ public class VistoriaActivity extends AppCompatActivity {
                 startActivity(it);
                 finish();
                 return true;
+            case R.id.action_home:
+                Intent iti = new Intent(getBaseContext(), HomeActivity.class);
+                startActivity(iti);
+                finish();
+
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -103,5 +109,12 @@ public class VistoriaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.homee, menu);
+        return true;
     }
 }

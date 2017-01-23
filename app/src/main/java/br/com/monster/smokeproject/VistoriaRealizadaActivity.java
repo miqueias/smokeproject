@@ -80,10 +80,21 @@ public class VistoriaRealizadaActivity extends AppCompatActivity {
                 startActivity(it);
                 finish();
                 return true;
+            case R.id.action_home:
+                Intent iti = new Intent(getBaseContext(), HomeActivity.class);
+                startActivity(iti);
+                finish();
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.homee, menu);
+        return true;
     }
 
     @Override

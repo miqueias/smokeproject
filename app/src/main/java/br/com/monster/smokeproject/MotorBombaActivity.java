@@ -1,5 +1,6 @@
 package br.com.monster.smokeproject;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -119,6 +120,10 @@ public class MotorBombaActivity extends AppCompatActivity {
 //                startActivity(it);
                 finish();
                 return true;
+//            case R.id.action_home:
+//                Intent iti = new Intent(getBaseContext(), HomeActivity.class);
+//                startActivity(iti);
+//                finish();
 
             default:
                 return super.onOptionsItemSelected(item);

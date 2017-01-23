@@ -20,6 +20,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -343,6 +345,10 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                 startActivity(it);
                 finish();
                 return true;
+            case R.id.action_home:
+                Intent iti = new Intent(getBaseContext(), HomeActivity.class);
+                startActivity(iti);
+                finish();
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -440,6 +446,13 @@ public class NovaVistoriaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.homee, menu);
+        return true;
     }
 
 }

@@ -105,9 +105,10 @@ public class EstacoesElevatoriasActivity extends AppCompatActivity {
                 startActivity(it);
                 finish();
                 return true;
-            case R.id.action_settings:
-                //EstacaoAdapter.PersonViewHolder.cbCheck.isChecked();
-
+            case R.id.action_filter:
+                Intent iti = new Intent(getBaseContext(), HomeActivity.class);
+                startActivity(iti);
+                finish();
                 return true;
 
             default:
