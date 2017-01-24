@@ -26,6 +26,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
     private ArrayList<Problemas> lista;
     public Context context;
     private String mode;
+    private ArrayList<Integer> arrayListCheck;
 
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
@@ -38,7 +39,6 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
             itemView.setClickable(true);
             cbChecklist = (CheckBox) itemView.findViewById(R.id.cbChecklist);
             cbChecklist.setTypeface(RalewayMedium);
-
         }
     }
 
@@ -50,6 +50,39 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
         this.lista = lista;
         this.mode = mode;
         this.context = context;
+        arrayListCheck = new ArrayList<>();
+    }
+
+    public ArrayList<Problemas> getLista() {
+        return lista;
+    }
+
+    public void setLista(ArrayList<Problemas> lista) {
+        this.lista = lista;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public ArrayList<Integer> getArrayListCheck() {
+        return arrayListCheck;
+    }
+
+    public void setArrayListCheck(ArrayList<Integer> arrayListCheck) {
+        this.arrayListCheck = arrayListCheck;
     }
 
     @Override
@@ -60,12 +93,23 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
     }
 
     @Override
-    public void onBindViewHolder(PersonViewHolder personViewHolder, int position) {
+    public void onBindViewHolder(final PersonViewHolder personViewHolder, final int position) {
         personViewHolder.cbChecklist.setText(lista.get(position).getDescricao());
 
         if (mode.equals("view")) {
             personViewHolder.cbChecklist.setChecked(true);
             personViewHolder.cbChecklist.setEnabled(false);
+        } else {
+            personViewHolder.cbChecklist.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (personViewHolder.cbChecklist.isChecked()) {
+                        arrayListCheck.add(lista.get(position).getId());
+                    } else {
+                        arrayListCheck.remove(lista.get(position).getId());
+                    }
+                }
+            });
         }
 
     }

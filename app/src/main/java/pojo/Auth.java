@@ -23,6 +23,8 @@ public final class Auth {
     private ArrayList<Vistoria> vistoriasArrayList;
     private String statusAPI;
     private String mensagemErroApi;
+    private String login;
+    private String senha;
 
     public Auth() {
 
@@ -146,5 +148,21 @@ public final class Auth {
 
     public void setMensagemErroApi(String mensagemErroApi) {
         this.mensagemErroApi = mensagemErroApi;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }

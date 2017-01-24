@@ -24,6 +24,7 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
     private ArrayList<ProblemasCheckList> lista;
     public Context context;
     private String mode;
+    private ArrayList<Integer> arrayListCheck;
 
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
@@ -43,10 +44,43 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
         this.lista = lista;
     }
 
+    public ArrayList<ProblemasCheckList> getLista() {
+        return lista;
+    }
+
+    public void setLista(ArrayList<ProblemasCheckList> lista) {
+        this.lista = lista;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public ArrayList<Integer> getArrayListCheck() {
+        return arrayListCheck;
+    }
+
+    public void setArrayListCheck(ArrayList<Integer> arrayListCheck) {
+        this.arrayListCheck = arrayListCheck;
+    }
+
     public ProblemasCheckListAdapter(ArrayList<ProblemasCheckList> lista, String mode, Context context) {
         this.lista = lista;
         this.mode = mode;
         this.context = context;
+        arrayListCheck = new ArrayList<>();
     }
 
     @Override
@@ -57,14 +91,30 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
     }
 
     @Override
-    public void onBindViewHolder(PersonViewHolder personViewHolder, int position) {
+    public void onBindViewHolder(final PersonViewHolder personViewHolder, final int position) {
         personViewHolder.cbChecklist.setText(lista.get(position).getDescricao());
 
         if (mode.equals("view")) {
             personViewHolder.cbChecklist.setChecked(true);
             personViewHolder.cbChecklist.setEnabled(false);
-        }
+        } else {
+            personViewHolder.cbChecklist.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (personViewHolder.cbChecklist.isChecked()) {
+                        arrayListCheck.add(lista.get(position).getId());
+                    } else {
+                        arrayListCheck.remove(lista.get(position).getId());
+                    }
 
+                    /*for (int i = 0; i < arrayListCheck.size(); i++) {
+                        if (arrayListCheck.get(i) == position) {
+
+                        }
+                    }*/
+                }
+            });
+        }
     }
 
     public void removeListItem(int position)

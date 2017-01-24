@@ -29,8 +29,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,6 +42,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import adapter.BombasAdapter;
 import adapter.ChecklistAdapter;
@@ -46,11 +50,17 @@ import adapter.NovaVistoriaAdapter;
 import adapter.PhotoGridViewAdapter;
 import adapter.ProblemasCheckListAdapter;
 import adapter.VistoriaAdapter;
+import dto.DataTransferObject;
+import exception.VistoriaException;
 import model.ImageItem;
 import model.Lista;
 import pojo.Auth;
+import pojo.ConjuntoMotorBomba;
 import pojo.Problemas;
 import pojo.ProblemasCheckList;
+import pojo.Vistoria;
+import request.UserRequester;
+import request.VistoriaRequester;
 import util.DividerItemDecoration;
 import util.RecyclerItemClickListener;
 import util.Util;
@@ -81,6 +91,9 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     private Util util;
     private int position;
     private String mode;
+    private ArrayList<ConjuntoMotorBomba> conjuntoMotorBombaArrayList;
+    public ImageView ivPhoto1, ivPhoto2, ivPhoto3;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +120,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             toolbar.setTitle("Vistoria");
         } else {
             toolbar.setTitle("Nova Vistoria");
+            conjuntoMotorBombaArrayList = new ArrayList<>();
         }
 
         toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -127,6 +141,8 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             } else {
                 tvAlertaSub.setText(qtdProbelmasDestacados + " problemas encontrados");
             }
+        } else {
+            tvAlertaSub.setText("");
         }
 
         tvVistoria = (TextView) findViewById(R.id.tvVistoria);
@@ -237,28 +253,48 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         rvPhotos.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, rvPhotos ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        Toast.makeText(NovaVistoriaActivity.this, "Posição " + position,
-                                Toast.LENGTH_LONG).show();
-//                        ImageItem item = (ImageItem) parent.getItemAtPosition(position);
-////                      //Create intent
-//                        Intent intent = new Intent(NovaVistoriaActivity.this, DetailsActivity.class);
-//                        intent.putExtra("image", item.getImage());
-////
-////                      //Start details activity
-//                        startActivity(intent);
-
-
+                        selectImage();
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
-                        Toast.makeText(NovaVistoriaActivity.this, "ONLONG CLICK " + position,
-                                Toast.LENGTH_LONG).show();
-                        //gridAdapter.imageItems.remove(position);
-                        //gridAdapter.notifyDataSetChanged();
 
                     }
                 })
         );
+
+        ivPhoto1 = (ImageView) findViewById(R.id.ivPhoto1);
+        ivPhoto1.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(ivPhoto1.getDrawable() != null){
+                    ivPhoto1.setImageResource(0);
+                    ivPhoto1.setVisibility(View.GONE);
+                }
+                return false;
+            }
+        });
+        ivPhoto2 = (ImageView) findViewById(R.id.ivPhoto2);
+        ivPhoto2.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(ivPhoto2.getDrawable() != null){
+                    ivPhoto2.setImageResource(0);
+                    ivPhoto2.setVisibility(View.GONE);
+                }
+                return false;
+            }
+        });
+        ivPhoto3 = (ImageView) findViewById(R.id.ivPhoto3);
+        ivPhoto3.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(ivPhoto3.getDrawable() != null){
+                    ivPhoto3.setImageResource(0);
+                    ivPhoto3.setVisibility(View.GONE);
+                }
+                return false;
+            }
+        });
 
         rvChecklist = (RecyclerView) findViewById(R.id.rvChecklist);
         llm = new LinearLayoutManager(this);
@@ -269,20 +305,6 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         rvChecklist.addItemDecoration(itemDecorationDois);
         ProblemasCheckListAdapter adapterDois = new ProblemasCheckListAdapter(auth.getVistoriasArrayList().get(position).getProblemasCheckListArrayList(), mode, this);
         rvChecklist.setAdapter(adapterDois);
-
-//        rvChecklist.addOnItemTouchListener(
-//                new RecyclerItemClickListener(this, rvBombas ,new RecyclerItemClickListener.OnItemClickListener() {
-//                    @Override public void onItemClick(View view, int position) {
-////                        Toast.makeText(NovaVistoriaActivity.this, "Posição " + position,
-////                                Toast.LENGTH_LONG).show();
-//
-//                    }
-//
-//                    @Override public void onLongItemClick(View view, int position) {
-//                        // do whatever
-//                    }
-//                })
-//        );
 
         rvBombas = (RecyclerView) findViewById(R.id.rvBombas);
         llm = new LinearLayoutManager(this);
@@ -305,15 +327,11 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         rvBombas.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, rvBombas ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position_cmb) {
-//                        Toast.makeText(NovaVistoriaActivity.this, "Posição " + position,
-//                                Toast.LENGTH_LONG).show();
                         Intent it = new Intent(getBaseContext(), MotorBombaActivity.class);
                         it.putExtra("posicao", position_cmb);
-                        it.putExtra("modo", "view");
+                        it.putExtra("modo", mode);
                         it.putExtra("vistoria_id", position);
                         startActivity(it);
-//                        finish();
-
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
@@ -324,16 +342,100 @@ public class NovaVistoriaActivity extends AppCompatActivity {
 
         btnSalvar = (Button) findViewById(R.id.btnSalvar);
         btnSalvar.setTypeface(RalewayBold);
-        btnSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-
-            }
-        });
         if (mode.equals("view")) {
             btnSalvar.setVisibility(View.INVISIBLE);
+        } else {
+            btnSalvar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (etLeituraCelpe.getText().toString().trim().equals("")) {
+                        Util.AtivaDialogHandler(5, "", "");
+                        Util.AtivaDialogHandler(1, "SisInspe", "Leitura celpe não informada!");
+                    } else if (etLeituraCompesa.getText().toString().trim().equals("")) {
+                        Util.AtivaDialogHandler(5, "", "");
+                        Util.AtivaDialogHandler(1, "SisInspe", "Leitura compesa não informada!");
+                    } else if (etCmb.getText().toString().trim().equals("")) {
+                        Util.AtivaDialogHandler(5, "", "");
+                        Util.AtivaDialogHandler(1, "SisInspe", "Quantidade de CMB`s não informada!");
+                    } else {
+
+                        Util.AtivaDialogHandler(2, "", "Registrando Vistoria...");
+
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Vistoria vistoria = new Vistoria();
+
+                                vistoria.setLeituraCelpe(etLeituraCelpe.getText().toString().trim());
+                                vistoria.setLeituraCompesa(etLeituraCompesa.getText().toString().trim());
+                                vistoria.setCmbsEncontradas(Integer.parseInt(etCmb.getText().toString().trim()));
+                                vistoria.setDescricaoProblemas(etDescProblema.getText().toString().trim());
+
+                                ProblemasCheckListAdapter problemasCheckListAdapter = (ProblemasCheckListAdapter) rvChecklist.getAdapter();
+                                ArrayList<Integer> checklists = problemasCheckListAdapter.getArrayListCheck();
+
+                                VistoriaRequester vistoriaRequester = new VistoriaRequester();
+
+                                try {
+                                    UserRequester userRequester = new UserRequester();
+                                    userRequester.loadAuth(auth.getLogin(), auth.getSenha(), "");
+
+                                    vistoriaRequester.registrarVistoria(vistoria, checklists, conjuntoMotorBombaArrayList);
+                                    Util.AtivaDialogHandler(5, "", "");
+                                    Util.AtivaDialogHandler(1, "SisInspe", "Vistoria registada com sucesso, obrigado!");
+                                    finish();
+                                } catch (JSONException e) {
+                                    Util.AtivaDialogHandler(5, "", "");
+                                    Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
+                                } catch (InterruptedException e) {
+                                    Util.AtivaDialogHandler(5, "", "");
+                                    Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
+                                } catch (ExecutionException e) {
+                                    Util.AtivaDialogHandler(5, "", "");
+                                    Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
+                                } catch (VistoriaException e) {
+                                    Util.AtivaDialogHandler(5, "", "");
+                                    Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
+                                }
+                            }
+                        }).start();
+                    }
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if (mode.equals("new")) {
+            if (DataTransferObject.getInstance().getDto() != null) {
+                if (conjuntoMotorBombaArrayList.size() > 0) {
+                    ConjuntoMotorBomba conjuntoMotorBomba = (ConjuntoMotorBomba) DataTransferObject.getInstance().getDto();
+                    for (int i = 0; i < conjuntoMotorBombaArrayList.size(); i++) {
+                        if (conjuntoMotorBombaArrayList.get(i).getId() == conjuntoMotorBomba.getId()) {
+                            conjuntoMotorBombaArrayList.remove(i);
+                        }
+                    }
+                }
+                conjuntoMotorBombaArrayList.add((ConjuntoMotorBomba) DataTransferObject.getInstance().getDto());
+
+                BombasAdapter bombasAdapter = (BombasAdapter) rvBombas.getAdapter();
+
+                if (conjuntoMotorBombaArrayList.size() > 0) {
+                    ArrayList<Integer> arrayListConjuntoMotorBomba = new ArrayList<>();
+                    for (int i = 0; i < conjuntoMotorBombaArrayList.size(); i++) {
+                        arrayListConjuntoMotorBomba.add(conjuntoMotorBombaArrayList.get(i).getId());
+                    }
+                    bombasAdapter.setArrayListSelect(arrayListConjuntoMotorBomba);
+                    rvBombas.setAdapter(bombasAdapter);
+                }
+                DataTransferObject.getInstance().setDto(null);
+            } else {
+                DataTransferObject.getInstance().setDto(null);
+            }
         }
     }
 
@@ -357,19 +459,17 @@ public class NovaVistoriaActivity extends AppCompatActivity {
 
     private void selectImage() {
 
-        final CharSequence[] options = { "Camera", "Galeria"};
+        final CharSequence[] options = { "Abrir Câmera"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(NovaVistoriaActivity.this);
-            builder.setTitle("Seleciona uma foto");
+        builder.setTitle(R.string.app_name);
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Camera"))
+                if (options[item].equals("Abrir Câmera"))
                 {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-                    startActivityForResult(intent, 1);
+                    Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(i,1);
                 }
                 else if (options[item].equals("Galeria"))
                 {
@@ -390,56 +490,37 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
-                File f = new File(Environment.getExternalStorageDirectory().toString());
-                for (File temp : f.listFiles()) {
-                    if (temp.getName().equals("temp.jpg")) {
-                        f = temp;
-                        break;
+                if (data != null) {
+                    Bundle bundle = data.getExtras();
+                    if (bundle != null) {
+                        //Recupera o Bitmap retornado pela câmera
+                        bitmap = (Bitmap) bundle.get("data");
+
+                        //Atualiza a imagem na tela
+                        if (ivPhoto1.getDrawable() == null) {
+                            ivPhoto1.setVisibility(View.VISIBLE);
+                            ivPhoto1.setImageBitmap(bitmap);
+                        } else if (ivPhoto2.getDrawable() == null) {
+                            ivPhoto2.setVisibility(View.VISIBLE);
+                            ivPhoto2.setImageBitmap(bitmap);
+                        } else {
+                            ivPhoto3.setVisibility(View.VISIBLE);
+                            ivPhoto3.setImageBitmap(bitmap);
+                        }
                     }
-                }
-                try {
-                    Bitmap bitmap;
-                    BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-
-                    bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
-                            bitmapOptions);
-
-                    //PhotoGridViewAdapter.ivPhoto.setImageBitmap(bitmap);
-
-                    String path = android.os.Environment
-                            .getExternalStorageDirectory()
-                            + File.separator
-                            + "Phoenix" + File.separator + "default";
-                    f.delete();
-                    OutputStream outFile = null;
-                    File file = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
-                    try {
-                        outFile = new FileOutputStream(file);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outFile);
-                        outFile.flush();
-                        outFile.close();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
             } else if (requestCode == 2) {
 
                 Uri selectedImage = data.getData();
-                String[] filePath = { MediaStore.Images.Media.DATA };
-                Cursor c = getContentResolver().query(selectedImage,filePath, null, null, null);
+                String[] filePath = {MediaStore.Images.Media.DATA};
+                Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
                 c.moveToFirst();
                 int columnIndex = c.getColumnIndex(filePath[0]);
                 String picturePath = c.getString(columnIndex);
                 c.close();
                 Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                Log.w("image from gallery....", picturePath+"");
-                PhotoGridViewAdapter.ivPhoto.setImageBitmap(thumbnail);
+                Log.w("image from gallery....", picturePath + "");
+                ivPhoto1.setImageBitmap(thumbnail);
             }
         }
     }

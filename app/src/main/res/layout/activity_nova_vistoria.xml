@@ -312,7 +312,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:hint="CMB encontradas"
                     android:textSize="16sp"
                     android:layout_marginLeft="16dp"
@@ -383,13 +383,38 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_height="match_parent">
+                android:layout_marginRight="20dp">
+
+                <ImageView
+                    android:id="@+id/ivPhoto1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY"/>
+
+                <ImageView
+                    android:id="@+id/ivPhoto2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY" />
+
+                <ImageView
+                    android:id="@+id/ivPhoto3"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvPhotos"
+                    android:visibility="gone"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
 
@@ -437,7 +462,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     android:gravity="top|left"
-                    android:maxLines="10"                    android:hint="Descrição do problema"
+                    android:maxLines="10"
+                    android:hint="Descrição do problema"
                     android:textColor="@color/black"
                     android:backgroundTint="@color/black"
                     android:layout_marginBottom="70dp"

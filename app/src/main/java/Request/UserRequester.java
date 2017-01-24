@@ -71,6 +71,8 @@ public class UserRequester {
             JSONObject jsonObjectDados = jsonObjectAuth.getJSONObject("dados");
 
             auth.setToken(jsonObjectDados.get("token").toString());
+            auth.setLogin(login);
+            auth.setSenha(senha);
 
             //operador
             JSONObject jsonObjectOperador = jsonObjectDados.getJSONObject("operador");

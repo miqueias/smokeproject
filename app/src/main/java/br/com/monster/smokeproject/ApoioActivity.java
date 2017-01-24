@@ -29,6 +29,7 @@ import pojo.Motivo;
 import request.BaseRequester;
 import request.Method;
 import request.Requester;
+import request.UserRequester;
 import util.Util;
 
 public class ApoioActivity extends AppCompatActivity {
@@ -133,11 +134,13 @@ public class ApoioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Util.AtivaDialogHandler(2, "", "Registrando Apio...");
+                Util.AtivaDialogHandler(2, "", "Registrando Apoio...");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
+                            UserRequester userRequester = new UserRequester();
+                            userRequester.loadAuth(auth.getLogin(), auth.getSenha(), "");
                             auth = Auth.getInstance();
                             JSONObject jsonPut = new JSONObject();
                             jsonPut.put("token", auth.getToken());

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class BombasAdapter extends RecyclerView.Adapter<BombasAdapter.PersonView
     private ArrayList<ConjuntoMotorBomba> lista;
     public Context context;
     private String mode;
+    private ArrayList<Integer> arrayListSelect;
 
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
@@ -32,12 +34,14 @@ public class BombasAdapter extends RecyclerView.Adapter<BombasAdapter.PersonView
 
         Typeface RalewayMedium = Typeface.createFromAsset(itemView.getResources().getAssets(), "Raleway-Medium.ttf");
         TextView tvNomeEstacao;
+        LinearLayout linearLayout;
 
         PersonViewHolder(View itemView) {
             super(itemView);
             itemView.setClickable(true);
             tvNomeEstacao = (TextView) itemView.findViewById(R.id.tvNomeEstacao);
             tvNomeEstacao.setTypeface(RalewayMedium);
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
 
         }
     }
@@ -50,6 +54,39 @@ public class BombasAdapter extends RecyclerView.Adapter<BombasAdapter.PersonView
         this.lista = lista;
         this.mode = mode;
         this.context = context;
+        arrayListSelect = new ArrayList<>();
+    }
+
+    public ArrayList<ConjuntoMotorBomba> getLista() {
+        return lista;
+    }
+
+    public void setLista(ArrayList<ConjuntoMotorBomba> lista) {
+        this.lista = lista;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public ArrayList<Integer> getArrayListSelect() {
+        return arrayListSelect;
+    }
+
+    public void setArrayListSelect(ArrayList<Integer> arrayListSelect) {
+        this.arrayListSelect = arrayListSelect;
     }
 
     @Override
@@ -62,6 +99,19 @@ public class BombasAdapter extends RecyclerView.Adapter<BombasAdapter.PersonView
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int position) {
         personViewHolder.tvNomeEstacao.setText(lista.get(position).getNumero());
+
+        if (arrayListSelect.size() > 0) {
+            for (int i = 0; i < arrayListSelect.size(); i++) {
+                if (arrayListSelect.get(i) == lista.get(position).getId()) {
+                    personViewHolder.tvNomeEstacao.setBackgroundColor(context.getResources().getColor(R.color.bg_lista));
+                    personViewHolder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.bg_lista));
+                } else {
+                    //personViewHolder.tvNomeEstacao.setBackgroundColor(context.getResources().getColor(R.color.white));
+                    //personViewHolder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.white));
+                }
+            }
+        }
+
 
     }
 

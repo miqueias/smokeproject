@@ -60,10 +60,10 @@ public class VistoriaRequester {
                     }
 
                     if (arrayListProblemas.size() > 0) {
-                        jsonObjectCmb.put("problemas_encontrados", arrayListProblemas);
+                        jsonObjectCmb.put("problemas_encontrados", new JSONArray(arrayListProblemas));
                     }
                 }
-                jsonPut.put("cmbs", new JSONArray(jsonObjectCmb));
+                jsonPut.put("cmbs", jsonObjectCmb);
             }
         }
 

@@ -17,9 +17,11 @@ import java.util.List;
 
 import adapter.ChecklistAdapter;
 import adapter.ProblemasCheckListAdapter;
+import dto.DataTransferObject;
 import model.Lista;
 import pojo.Auth;
 import pojo.ConjuntoMotorBomba;
+import pojo.Problemas;
 import util.DividerItemDecoration;
 
 public class MotorBombaActivity extends AppCompatActivity {
@@ -63,24 +65,12 @@ public class MotorBombaActivity extends AppCompatActivity {
 
         etHorimetro = (EditText) findViewById(R.id.etHorimetro);
         etHorimetro.setTypeface(RalewayMedium);
-        etHorimetro.setText(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getHorimetro());
         etAmperagem = (EditText) findViewById(R.id.etAmperagem);
         etAmperagem.setTypeface(RalewayMedium);
-        etAmperagem.setText(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getAmperagem());
-
-        btnSalvar = (Button) findViewById(R.id.btnSalvar);
-        btnSalvar.setTypeface(RalewayMedium);
-        btnSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         if (mode.equals("view")) {
-            btnSalvar.setVisibility(View.INVISIBLE);
-            etHorimetro.setEnabled(false);
-            etAmperagem.setEnabled(false);
+            etHorimetro.setText(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getHorimetro());
+            etAmperagem.setText(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getAmperagem());
         }
 
         rvChecklist = (RecyclerView) findViewById(R.id.rvChecklist);
@@ -96,19 +86,36 @@ public class MotorBombaActivity extends AppCompatActivity {
 
         rvChecklist.setAdapter(adapter);
 
-//        rvChecklist.addOnItemTouchListener(
-//                new RecyclerItemClickListener(this, rvChecklist ,new RecyclerItemClickListener.OnItemClickListener() {
-//                    @Override public void onItemClick(View view, int position) {
-////                        Toast.makeText(NovaVistoriaActivity.this, "Posição " + position,
-////                                Toast.LENGTH_LONG).show();
-//
-//                    }
-//
-//                    @Override public void onLongItemClick(View view, int position) {
-//                        // do whatever
-//                    }
-//                })
-//        );
+        btnSalvar = (Button) findViewById(R.id.btnSalvar);
+        btnSalvar.setTypeface(RalewayMedium);
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConjuntoMotorBomba conjuntoMotorBomba = new ConjuntoMotorBomba();
+                conjuntoMotorBomba.setId(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getId());
+                conjuntoMotorBomba.setHorimetro(etHorimetro.getText().toString().trim());
+                conjuntoMotorBomba.setAmperagem(etAmperagem.getText().toString().trim());
+
+                ChecklistAdapter checkListAdapter = (ChecklistAdapter) rvChecklist.getAdapter();
+                ArrayList<Integer> checklists = checkListAdapter.getArrayListCheck();
+                ArrayList<Problemas> problemasArrayList = new ArrayList<Problemas>();
+
+                for (int i = 0; i < checklists.size(); i++) {
+                    Problemas problemas = new Problemas();
+                    problemas.setId(checklists.get(i));
+                    problemasArrayList.add(problemas);
+                }
+                conjuntoMotorBomba.setProblemasArrayList(problemasArrayList);
+                DataTransferObject.getInstance().setDto(conjuntoMotorBomba);
+                finish();
+            }
+        });
+
+        if (mode.equals("view")) {
+            btnSalvar.setVisibility(View.INVISIBLE);
+            etHorimetro.setEnabled(false);
+            etAmperagem.setEnabled(false);
+        }
 
     }
 
