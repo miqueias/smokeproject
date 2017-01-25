@@ -378,6 +378,9 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                     @Override public void onItemClick(View view, int position_cmb) {
                         Intent it = new Intent(getBaseContext(), MotorBombaActivity.class);
                         it.putExtra("posicao", position_cmb);
+                        if (mode.equals("new")) {
+                            it.putExtra("id_cmb", auth.getRota().getEstacoesElevatoriasArrayList().get(position).getConjuntoMotorBombaArrayList().get(position_cmb).getId());
+                        }
                         it.putExtra("modo", mode);
                         it.putExtra("vistoria_id", position);
                         startActivity(it);
