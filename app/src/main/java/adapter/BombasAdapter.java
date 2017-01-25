@@ -34,14 +34,14 @@ public class BombasAdapter extends RecyclerView.Adapter<BombasAdapter.PersonView
 
         Typeface RalewayMedium = Typeface.createFromAsset(itemView.getResources().getAssets(), "Raleway-Medium.ttf");
         TextView tvNomeEstacao;
-        LinearLayout linearLayout;
+        LinearLayout linearLayoutBomba;
 
         PersonViewHolder(View itemView) {
             super(itemView);
             itemView.setClickable(true);
             tvNomeEstacao = (TextView) itemView.findViewById(R.id.tvNomeEstacao);
             tvNomeEstacao.setTypeface(RalewayMedium);
-            linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
+            linearLayoutBomba = (LinearLayout) itemView.findViewById(R.id.linearLayoutBomba);
 
         }
     }
@@ -103,8 +103,8 @@ public class BombasAdapter extends RecyclerView.Adapter<BombasAdapter.PersonView
         if (arrayListSelect.size() > 0) {
             for (int i = 0; i < arrayListSelect.size(); i++) {
                 if (arrayListSelect.get(i) == lista.get(position).getId()) {
-                    personViewHolder.tvNomeEstacao.setBackgroundColor(context.getResources().getColor(R.color.bg_lista));
-                    personViewHolder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.bg_lista));
+                    //personViewHolder.tvNomeEstacao.setBackgroundColor(context.getResources().getColor(R.color.bg_lista));
+                    personViewHolder.linearLayoutBomba.setBackgroundColor(context.getResources().getColor(R.color.bg_lista));
                 } else {
                     //personViewHolder.tvNomeEstacao.setBackgroundColor(context.getResources().getColor(R.color.white));
                     //personViewHolder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.white));

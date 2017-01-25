@@ -267,8 +267,20 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 if(ivPhoto1.getDrawable() != null){
-                    ivPhoto1.setImageResource(0);
-                    ivPhoto1.setVisibility(View.GONE);
+                    new AlertDialog.Builder(NovaVistoriaActivity.this)
+                            .setTitle("SisInspe")
+                            .setCancelable(false)
+                            // Set Dialog Message
+                            .setMessage("Deseja realmente apagar foto?")
+                            .setNegativeButton("Cancelar", null) // dismisses by default
+                            // Positive button
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ivPhoto1.setImageResource(0);
+                                    ivPhoto1.setVisibility(View.GONE);
+                                }
+                            }).show();
+
                 }
                 return false;
             }
@@ -278,8 +290,20 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 if(ivPhoto2.getDrawable() != null){
-                    ivPhoto2.setImageResource(0);
-                    ivPhoto2.setVisibility(View.GONE);
+                    new AlertDialog.Builder(NovaVistoriaActivity.this)
+                            .setTitle("SisInspe")
+                            .setCancelable(false)
+                            // Set Dialog Message
+                            .setMessage("Deseja realmente apagar foto?")
+                            .setNegativeButton("Cancelar", null) // dismisses by default
+                            // Positive button
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ivPhoto2.setImageResource(0);
+                                    ivPhoto2.setVisibility(View.GONE);
+                                }
+                            }).show();
+
                 }
                 return false;
             }
@@ -289,8 +313,19 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 if(ivPhoto3.getDrawable() != null){
-                    ivPhoto3.setImageResource(0);
-                    ivPhoto3.setVisibility(View.GONE);
+                    new AlertDialog.Builder(NovaVistoriaActivity.this)
+                            .setTitle("SisInspe")
+                            .setCancelable(false)
+                            // Set Dialog Message
+                            .setMessage("Deseja realmente apagar foto?")
+                            .setNegativeButton("Cancelar", null) // dismisses by default
+                            // Positive button
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ivPhoto3.setImageResource(0);
+                                    ivPhoto3.setVisibility(View.GONE);
+                                }
+                            }).show();
                 }
                 return false;
             }
