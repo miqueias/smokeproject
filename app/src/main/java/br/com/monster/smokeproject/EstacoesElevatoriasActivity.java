@@ -110,7 +110,14 @@ public class EstacoesElevatoriasActivity extends AppCompatActivity {
                 startActivity(iti);
                 finish();
                 return true;
-
+            case R.id.action_settings:
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+                EstacaoAdapter adapter = new EstacaoAdapter(EstacoesElevatoriasActivity.this, auth.getRota().getEstacoesElevatoriasArrayList());
+                adapter.setSharedPreferences(sharedPreferences);
+                rvNovaVistoria.setAdapter(adapter);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
