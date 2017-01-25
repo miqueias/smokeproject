@@ -82,7 +82,11 @@ public class MotorBombaActivity extends AppCompatActivity {
         rvChecklist.addItemDecoration(itemDecoration);
 
         ChecklistAdapter adapter;
-        adapter = new ChecklistAdapter(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getProblemasArrayList(), mode, this);
+        if (mode.equals("view")) {
+            adapter = new ChecklistAdapter(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getProblemasArrayList(), mode, this);
+        } else {
+            adapter = new ChecklistAdapter(auth.getProblemasArrayList(), mode, this);
+        }
 
         rvChecklist.setAdapter(adapter);
 

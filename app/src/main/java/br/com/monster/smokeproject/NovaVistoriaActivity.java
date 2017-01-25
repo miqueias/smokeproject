@@ -346,7 +346,13 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         RecyclerView.ItemDecoration itemDecorationDois = new
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         rvChecklist.addItemDecoration(itemDecorationDois);
-        ProblemasCheckListAdapter adapterDois = new ProblemasCheckListAdapter(auth.getVistoriasArrayList().get(position).getProblemasCheckListArrayList(), mode, this);
+        ProblemasCheckListAdapter adapterDois;
+        if (mode.equals("view")) {
+            adapterDois = new ProblemasCheckListAdapter(auth.getVistoriasArrayList().get(position).getProblemasCheckListArrayList(), mode, this);
+        } else {
+            adapterDois = new ProblemasCheckListAdapter(auth.getProblemasCheckListArrayList(), mode, this);
+        }
+
         rvChecklist.setAdapter(adapterDois);
 
         rvBombas = (RecyclerView) findViewById(R.id.rvBombas);
