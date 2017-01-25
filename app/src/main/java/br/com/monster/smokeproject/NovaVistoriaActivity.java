@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -31,36 +32,26 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import adapter.BombasAdapter;
-import adapter.ChecklistAdapter;
-import adapter.NovaVistoriaAdapter;
 import adapter.PhotoGridViewAdapter;
 import adapter.ProblemasCheckListAdapter;
-import adapter.VistoriaAdapter;
 import dto.DataTransferObject;
 import exception.VistoriaException;
-import model.ImageItem;
 import model.Lista;
 import pojo.Auth;
 import pojo.ConjuntoMotorBomba;
-import pojo.Problemas;
-import pojo.ProblemasCheckList;
 import pojo.Vistoria;
 import request.UserRequester;
 import request.VistoriaRequester;
@@ -98,6 +89,8 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     private ImageView ivPhoto1, ivPhoto2, ivPhoto3;
     private Bitmap bitmap;
     private String sPhotoUm, sPhotoDois, sPhotoTres;
+    private LinearLayout panel_problema, panel_problema_externo;
+    private CardView cvAlerta;
 
 
     @Override
@@ -128,6 +121,10 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             conjuntoMotorBombaArrayList = new ArrayList<>();
         }
 
+        panel_problema_externo = (LinearLayout) findViewById(R.id.panel_problema_externo);
+        panel_problema = (LinearLayout) findViewById(R.id.panel_problema);
+        cvAlerta = (CardView) findViewById(R.id.cvAlerta);
+
         toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -147,6 +144,9 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                 tvAlertaSub.setText(qtdProbelmasDestacados + " problemas encontrados");
             }
         } else {
+            panel_problema.setVisibility(View.GONE);
+            panel_problema_externo.setVisibility(View.GONE);
+            cvAlerta.setVisibility(View.GONE);
             tvAlertaSub.setText("");
         }
 
@@ -283,6 +283,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     ivPhoto1.setImageResource(0);
                                     ivPhoto1.setVisibility(View.GONE);
+                                    sPhotoUm = "";
                                 }
                             }).show();
 
@@ -306,6 +307,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     ivPhoto2.setImageResource(0);
                                     ivPhoto2.setVisibility(View.GONE);
+                                    sPhotoDois = "";
                                 }
                             }).show();
 
@@ -329,6 +331,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     ivPhoto3.setImageResource(0);
                                     ivPhoto3.setVisibility(View.GONE);
+                                    sPhotoTres = "";
                                 }
                             }).show();
                 }
@@ -412,6 +415,9 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                 vistoria.setLeituraCompesa(etLeituraCompesa.getText().toString().trim());
                                 vistoria.setCmbsEncontradas(Integer.parseInt(etCmb.getText().toString().trim()));
                                 vistoria.setDescricaoProblemas(etDescProblema.getText().toString().trim());
+                                vistoria.setFoto1(sPhotoUm);
+                                vistoria.setFoto2(sPhotoDois);
+                                vistoria.setFoto3(sPhotoTres);
 
                                 ProblemasCheckListAdapter problemasCheckListAdapter = (ProblemasCheckListAdapter) rvChecklist.getAdapter();
                                 ArrayList<Integer> checklists = problemasCheckListAdapter.getArrayListCheck();
@@ -425,8 +431,11 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                     vistoriaRequester.registrarVistoria(vistoria, checklists, conjuntoMotorBombaArrayList);
                                     Util.AtivaDialogHandler(5, "", "");
                                     Util.AtivaDialogHandler(1, "SisInspe", "Vistoria registada com sucesso, obrigado!");
+                                    Intent it = new Intent(getBaseContext(), HomeActivity.class);
+                                    startActivity(it);
+                                    finish();
 
-                                    new AlertDialog.Builder(NovaVistoriaActivity.this)
+                                    /*new AlertDialog.Builder(NovaVistoriaActivity.this)
                                             .setTitle("SisInspe")
                                             .setCancelable(false)
                                             // Set Dialog Message
@@ -438,7 +447,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                                     startActivity(it);
                                                     finish();
                                                 }
-                                            }).show();
+                                            }).show();*/
                                 } catch (JSONException e) {
                                     Util.AtivaDialogHandler(5, "", "");
                                     Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());

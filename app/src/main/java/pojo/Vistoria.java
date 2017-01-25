@@ -32,6 +32,9 @@ public class Vistoria {
     private int osRealizada;
     private String numeroOs;
     private ArrayList<ProblemasCheckList> problemasCheckListArrayList;
+    private String foto1;
+    private String foto2;
+    private String foto3;
 
     public Vistoria() {
 
@@ -211,5 +214,29 @@ public class Vistoria {
 
     public void setProblemasCheckListArrayList(ArrayList<ProblemasCheckList> problemasCheckListArrayList) {
         this.problemasCheckListArrayList = problemasCheckListArrayList;
+    }
+
+    public String getFoto1() {
+        return foto1;
+    }
+
+    public void setFoto1(String foto1) {
+        this.foto1 = foto1;
+    }
+
+    public String getFoto2() {
+        return foto2;
+    }
+
+    public void setFoto2(String foto2) {
+        this.foto2 = foto2;
+    }
+
+    public String getFoto3() {
+        return foto3;
+    }
+
+    public void setFoto3(String foto3) {
+        this.foto3 = foto3;
     }
 }

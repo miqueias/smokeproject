@@ -40,6 +40,7 @@ public class VistoriaRequester {
         jsonPut.put("leitura_compesa", vistoria.getLeituraCompesa());
         jsonPut.put("cmbs_encontradas", vistoria.getCmbsEncontradas());
         jsonPut.put("descricao_dos_problemas", vistoria.getDescricaoProblemas());
+        jsonPut.put("base64", vistoria.getFoto1());
 
         if (arrayListCheckList.size() > 0) {
             //jsonPut.put("checklists", new JSONArray (arrayListCheckList));
