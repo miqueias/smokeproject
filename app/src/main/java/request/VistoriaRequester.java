@@ -1,11 +1,13 @@
 package request;
 
+import android.util.Base64;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -26,9 +28,9 @@ public class VistoriaRequester {
 
     }
 
-    public void registrarVistoria(Vistoria vistoria, ArrayList<Integer> arrayListCheckList, ArrayList<ConjuntoMotorBomba> arrayListCmb) throws JSONException, InterruptedException, ExecutionException, VistoriaException {
+    public void registrarVistoria(Vistoria vistoria, ArrayList<Integer> arrayListCheckList, ArrayList<ConjuntoMotorBomba> arrayListCmb) throws JSONException, InterruptedException, ExecutionException, VistoriaException, UnsupportedEncodingException {
 
-        final JSONObject jsonPut = new JSONObject();
+        JSONObject jsonPut = new JSONObject();
         auth =  Auth.getInstance();
         ArrayList<Integer> arrayListProblemas;
 
@@ -40,7 +42,18 @@ public class VistoriaRequester {
         jsonPut.put("descricao_dos_problemas", vistoria.getDescricaoProblemas());
 
         if (arrayListCheckList.size() > 0) {
-            jsonPut.put("checklists", new JSONArray (arrayListCheckList));
+            //jsonPut.put("checklists", new JSONArray (arrayListCheckList));
+
+            String checklists = "";
+            for (int i = 0; i < arrayListCheckList.size(); i++) {
+                checklists = checklists + arrayListCheckList.get(i) + ",";
+            }
+
+            if (!checklists.equals("")) {
+                checklists = "{" + checklists.substring(0, checklists.length() - 1) + "}";
+            }
+
+            jsonPut.put("checklists", checklists);
         }
 
         if (arrayListCmb.size() > 0) {
@@ -60,16 +73,25 @@ public class VistoriaRequester {
                     }
 
                     if (arrayListProblemas.size() > 0) {
-                        jsonObjectCmb.put("problemas_encontrados", new JSONArray(arrayListProblemas));
+                        String problemas = "";
+                        for (int j = 0; j < arrayListProblemas.size(); j++) {
+                            problemas = problemas + arrayListProblemas.get(j) + ",";
+                        }
+
+                        if (!problemas.equals("")) {
+                            problemas = "{" + problemas.substring(0, problemas.length() - 1) + "}";
+                        }
+                        jsonObjectCmb.put("problemas_encontrados", problemas);
                     }
                 }
-                jsonPut.put("cmbs", jsonObjectCmb);
+                jsonPut.put("cmbs"+i, jsonObjectCmb.toString());
             }
         }
 
         BaseRequester baseRequester = new BaseRequester();
         baseRequester.setUrl(Requester.API_URL + "/add_vistoria");
         baseRequester.setMethod(Method.POST);
+
         baseRequester.setJsonString(jsonPut.toString());
 
         String jsonReturn = baseRequester.execute(baseRequester).get();

@@ -92,6 +92,7 @@ public class MotorBombaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ConjuntoMotorBomba conjuntoMotorBomba = new ConjuntoMotorBomba();
+                conjuntoMotorBomba.setEstacaoElevatoriaId(auth.getVistoriasArrayList().get(idVistoria).getEstacaoElevatoriaId());
                 conjuntoMotorBomba.setId(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getId());
                 conjuntoMotorBomba.setHorimetro(etHorimetro.getText().toString().trim());
                 conjuntoMotorBomba.setAmperagem(etAmperagem.getText().toString().trim());
