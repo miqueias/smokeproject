@@ -38,7 +38,7 @@ public class VistoriaRequester {
         jsonPut.put("operador_id", auth.getOperador().getId());
         jsonPut.put("leitura_celpe", vistoria.getLeituraCelpe());
         jsonPut.put("leitura_compesa", vistoria.getLeituraCompesa());
-        jsonPut.put("cmbs_encontratadas", vistoria.getCmbsEncontradas());
+        jsonPut.put("cmbs_encontradas", vistoria.getCmbsEncontradas());
         jsonPut.put("descricao_dos_problemas", vistoria.getDescricaoProblemas());
 
         if (arrayListCheckList.size() > 0) {

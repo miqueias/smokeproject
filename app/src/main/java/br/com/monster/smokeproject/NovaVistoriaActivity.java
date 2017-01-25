@@ -425,6 +425,8 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                     vistoriaRequester.registrarVistoria(vistoria, checklists, conjuntoMotorBombaArrayList);
                                     Util.AtivaDialogHandler(5, "", "");
                                     Util.AtivaDialogHandler(1, "SisInspe", "Vistoria registada com sucesso, obrigado!");
+                                    Intent it = new Intent(getBaseContext(), HomeActivity.class);
+                                    startActivity(it);
                                     finish();
                                 } catch (JSONException e) {
                                     Util.AtivaDialogHandler(5, "", "");
