@@ -425,9 +425,20 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                     vistoriaRequester.registrarVistoria(vistoria, checklists, conjuntoMotorBombaArrayList);
                                     Util.AtivaDialogHandler(5, "", "");
                                     Util.AtivaDialogHandler(1, "SisInspe", "Vistoria registada com sucesso, obrigado!");
-                                    Intent it = new Intent(getBaseContext(), HomeActivity.class);
-                                    startActivity(it);
-                                    finish();
+
+                                    new AlertDialog.Builder(NovaVistoriaActivity.this)
+                                            .setTitle("SisInspe")
+                                            .setCancelable(false)
+                                            // Set Dialog Message
+                                            .setMessage("Vistoria registada com sucesso, obrigado!")
+                                            // Positive button
+                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    Intent it = new Intent(getBaseContext(), HomeActivity.class);
+                                                    startActivity(it);
+                                                    finish();
+                                                }
+                                            }).show();
                                 } catch (JSONException e) {
                                     Util.AtivaDialogHandler(5, "", "");
                                     Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
