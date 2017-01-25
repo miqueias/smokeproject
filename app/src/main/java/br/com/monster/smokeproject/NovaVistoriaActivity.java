@@ -18,6 +18,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,6 +36,7 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -74,6 +76,9 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     private List<Lista> lista;
     public static Button btnAddFoto;
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    private ImageView ivPhoto1, ivPhoto2, ivPhoto3;
+    private Bitmap bitmap;
+    private String sPhotoUm, sPhotoDois, sPhotoTres;
 
 
     //CUSTOM DIALOG
@@ -92,8 +97,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     private int position;
     private String mode;
     private ArrayList<ConjuntoMotorBomba> conjuntoMotorBombaArrayList;
-    public ImageView ivPhoto1, ivPhoto2, ivPhoto3;
-    private Bitmap bitmap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -531,31 +535,34 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                         //Recupera o Bitmap retornado pela câmera
                         bitmap = (Bitmap) bundle.get("data");
 
-                        //Atualiza a imagem na tela
+                        //Atualiza a imagem na tela e transforma em base64
                         if (ivPhoto1.getDrawable() == null) {
                             ivPhoto1.setVisibility(View.VISIBLE);
                             ivPhoto1.setImageBitmap(bitmap);
+                            sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
                         } else if (ivPhoto2.getDrawable() == null) {
                             ivPhoto2.setVisibility(View.VISIBLE);
                             ivPhoto2.setImageBitmap(bitmap);
+                            sPhotoDois = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
                         } else {
                             ivPhoto3.setVisibility(View.VISIBLE);
                             ivPhoto3.setImageBitmap(bitmap);
+                            sPhotoTres = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
                         }
                     }
                 }
             } else if (requestCode == 2) {
 
-                Uri selectedImage = data.getData();
-                String[] filePath = {MediaStore.Images.Media.DATA};
-                Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
-                c.moveToFirst();
-                int columnIndex = c.getColumnIndex(filePath[0]);
-                String picturePath = c.getString(columnIndex);
-                c.close();
-                Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                Log.w("image from gallery....", picturePath + "");
-                ivPhoto1.setImageBitmap(thumbnail);
+//                Uri selectedImage = data.getData();
+//                String[] filePath = {MediaStore.Images.Media.DATA};
+//                Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
+//                c.moveToFirst();
+//                int columnIndex = c.getColumnIndex(filePath[0]);
+//                String picturePath = c.getString(columnIndex);
+//                c.close();
+//                Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+//                Log.w("image from gallery....", picturePath + "");
+//                ivPhoto1.setImageBitmap(thumbnail);
             }
         }
     }
@@ -570,6 +577,21 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         inflater.inflate(R.menu.homee, menu);
         return true;
     }
+
+    public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality)
+    {
+        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
+        image.compress(compressFormat, quality, byteArrayOS);
+        return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
+    }
+
+    public static Bitmap decodeBase64(String input)
+    {
+        byte[] decodedBytes = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+    }
+
+//    Bitmap myBitmapAgain = decodeBase64(myBase64Image);
 
 }
 
