@@ -17,9 +17,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
 import java.text.SimpleDateFormat;
+import java.util.concurrent.ExecutionException;
 
 import pojo.Auth;
+import request.UserRequester;
+import util.Util;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -42,6 +47,7 @@ public class HomeActivity extends AppCompatActivity
         toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         setSupportActionBar(toolbar);
         auth = Auth.getInstance();
+        Util.setCtxAtual(this);
 
         //data atual begin
         long date = System.currentTimeMillis();
@@ -184,9 +190,30 @@ public class HomeActivity extends AppCompatActivity
         btnVistoriaRealizada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(getBaseContext(), VistoriaRealizadaActivity.class);
-                startActivity(it);
-                finish();
+                Util.AtivaDialogHandler(2, "", "Carregando vistorias realizadas...");
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        UserRequester userRequester = new UserRequester();
+                        try {
+                            userRequester.loadAuth(auth.getLogin(), auth.getSenha(), "");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        }
+
+                        Intent it = new Intent(getBaseContext(), VistoriaRealizadaActivity.class);
+                        startActivity(it);
+                        finish();
+                    }
+                }).start();
+
+
+
             }
         });
 

@@ -107,7 +107,7 @@ public class VistoriaAdapter extends RecyclerView.Adapter<VistoriaAdapter.Person
 
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            Date date = format.parse(lista.get(position).getEstacoesElevatorias().getCreated());
+            Date date = format.parse(lista.get(position).getCreated());
 
             format = new SimpleDateFormat("dd/MM/yyyy");
             String newDate = format.format(date);
