@@ -100,6 +100,9 @@ public class BombasAdapter extends RecyclerView.Adapter<BombasAdapter.PersonView
     public void onBindViewHolder(PersonViewHolder personViewHolder, int position) {
         personViewHolder.tvNomeEstacao.setText(lista.get(position).getNumero());
 
+        if (mode.equals("view")) {
+            personViewHolder.linearLayoutBomba.setBackgroundColor(context.getResources().getColor(R.color.bg_lista));
+        }
         if (arrayListSelect.size() > 0) {
             for (int i = 0; i < arrayListSelect.size(); i++) {
                 if (arrayListSelect.get(i) == lista.get(position).getId()) {

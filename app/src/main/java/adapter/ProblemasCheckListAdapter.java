@@ -95,8 +95,11 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
         personViewHolder.cbChecklist.setText(lista.get(position).getDescricao());
 
         if (mode.equals("view")) {
-            personViewHolder.cbChecklist.setChecked(true);
             personViewHolder.cbChecklist.setEnabled(false);
+
+            if (lista.get(position).isChecked()) {
+                personViewHolder.cbChecklist.setChecked(true);
+            }
         } else {
             personViewHolder.cbChecklist.setOnClickListener(new View.OnClickListener() {
                 @Override

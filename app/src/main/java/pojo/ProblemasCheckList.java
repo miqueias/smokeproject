@@ -8,6 +8,7 @@ public class ProblemasCheckList {
 
     private int id;
     private String descricao;
+    private boolean checked;
 
     public ProblemasCheckList() {
 
@@ -27,5 +28,13 @@ public class ProblemasCheckList {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

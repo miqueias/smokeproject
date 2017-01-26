@@ -9,6 +9,7 @@ public class Problemas {
     private int id;
     private String descricao;
     private int status;
+    private boolean checked;
 
     public Problemas() {
 
@@ -36,5 +37,13 @@ public class Problemas {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

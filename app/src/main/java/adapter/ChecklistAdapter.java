@@ -97,7 +97,9 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
         personViewHolder.cbChecklist.setText(lista.get(position).getDescricao());
 
         if (mode.equals("view")) {
-            personViewHolder.cbChecklist.setChecked(true);
+            if (lista.get(position).isChecked()) {
+                personViewHolder.cbChecklist.setChecked(true);
+            }
             personViewHolder.cbChecklist.setEnabled(false);
         } else {
             personViewHolder.cbChecklist.setOnClickListener(new View.OnClickListener() {

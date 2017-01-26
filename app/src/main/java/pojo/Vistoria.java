@@ -3,6 +3,8 @@ package pojo;
 import java.util.ArrayList;
 import java.util.Date;
 
+import adapter.ProblemasCheckListAdapter;
+
 /**
  * Created by Miqueias on 1/8/17.
  */
@@ -35,6 +37,7 @@ public class Vistoria {
     private String foto1;
     private String foto2;
     private String foto3;
+    private ArrayList<ProblemasCheckList> problemasMarcadosCheckListAdapters;
 
     public Vistoria() {
 
@@ -238,5 +241,13 @@ public class Vistoria {
 
     public void setFoto3(String foto3) {
         this.foto3 = foto3;
+    }
+
+    public ArrayList<ProblemasCheckList> getProblemasMarcadosCheckListAdapters() {
+        return problemasMarcadosCheckListAdapters;
+    }
+
+    public void setProblemasMarcadosCheckListAdapters(ArrayList<ProblemasCheckList> problemasMarcadosCheckListAdapters) {
+        this.problemasMarcadosCheckListAdapters = problemasMarcadosCheckListAdapters;
     }
 }

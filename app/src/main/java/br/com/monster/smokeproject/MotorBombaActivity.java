@@ -22,6 +22,7 @@ import model.Lista;
 import pojo.Auth;
 import pojo.ConjuntoMotorBomba;
 import pojo.Problemas;
+import pojo.ProblemasCheckList;
 import util.DividerItemDecoration;
 
 public class MotorBombaActivity extends AppCompatActivity {
@@ -85,7 +86,24 @@ public class MotorBombaActivity extends AppCompatActivity {
 
         ChecklistAdapter adapter;
         if (mode.equals("view")) {
-            adapter = new ChecklistAdapter(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getProblemasArrayList(), mode, this);
+            ArrayList<Problemas> problemasCheckLists = new ArrayList<>();
+
+            for (int i = 0; i < auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getProblemasArrayList().size(); i++) {
+                Problemas problemasCheckList = new Problemas();
+                problemasCheckList.setId(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getProblemasArrayList().get(i).getId());
+                problemasCheckList.setDescricao(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getProblemasArrayList().get(i).getDescricao());
+                problemasCheckList.setChecked(true);
+                problemasCheckLists.add(problemasCheckList);
+            }
+
+            for (int i = 0; i < auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getProblemasNaoMarcadosArrayList().size(); i++) {
+                Problemas problemasCheckList = new Problemas();
+                problemasCheckList.setId(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getProblemasNaoMarcadosArrayList().get(i).getId());
+                problemasCheckList.setDescricao(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getProblemasNaoMarcadosArrayList().get(i).getDescricao());
+                problemasCheckList.setChecked(false);
+                problemasCheckLists.add(problemasCheckList);
+            }
+            adapter = new ChecklistAdapter(problemasCheckLists, mode, this);
         } else {
             adapter = new ChecklistAdapter(auth.getProblemasArrayList(), mode, this);
         }

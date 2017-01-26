@@ -52,6 +52,7 @@ import exception.VistoriaException;
 import model.Lista;
 import pojo.Auth;
 import pojo.ConjuntoMotorBomba;
+import pojo.ProblemasCheckList;
 import pojo.Vistoria;
 import request.UserRequester;
 import request.VistoriaRequester;
@@ -348,7 +349,24 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         rvChecklist.addItemDecoration(itemDecorationDois);
         ProblemasCheckListAdapter adapterDois;
         if (mode.equals("view")) {
-            adapterDois = new ProblemasCheckListAdapter(auth.getVistoriasArrayList().get(position).getProblemasCheckListArrayList(), mode, this);
+            ArrayList<ProblemasCheckList> problemasCheckLists = new ArrayList<>();
+
+            for (int i = 0; i < auth.getVistoriasArrayList().get(position).getProblemasMarcadosCheckListAdapters().size(); i++) {
+                ProblemasCheckList problemasCheckList = new ProblemasCheckList();
+                problemasCheckList.setId(auth.getVistoriasArrayList().get(position).getProblemasMarcadosCheckListAdapters().get(i).getId());
+                problemasCheckList.setDescricao(auth.getVistoriasArrayList().get(position).getProblemasMarcadosCheckListAdapters().get(i).getDescricao());
+                problemasCheckList.setChecked(true);
+                problemasCheckLists.add(problemasCheckList);
+            }
+
+            for (int i = 0; i < auth.getVistoriasArrayList().get(position).getProblemasCheckListArrayList().size(); i++) {
+                ProblemasCheckList problemasCheckList = new ProblemasCheckList();
+                problemasCheckList.setId(auth.getVistoriasArrayList().get(position).getProblemasCheckListArrayList().get(i).getId());
+                problemasCheckList.setDescricao(auth.getVistoriasArrayList().get(position).getProblemasCheckListArrayList().get(i).getDescricao());
+                problemasCheckList.setChecked(false);
+                problemasCheckLists.add(problemasCheckList);
+            }
+            adapterDois = new ProblemasCheckListAdapter(problemasCheckLists, mode, this);
         } else {
             adapterDois = new ProblemasCheckListAdapter(auth.getProblemasCheckListArrayList(), mode, this);
         }

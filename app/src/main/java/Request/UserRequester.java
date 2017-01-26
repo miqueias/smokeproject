@@ -246,6 +246,20 @@ public class UserRequester {
 
                     vistoria.setProblemasCheckListArrayList(problemasCheckListVistoriaArrayList);
 
+                    JSONArray jsonArrayVistoriaProblemasMarcadosChecklist = jsonObjectVistoria.getJSONArray("marcadoschecklists");
+                    ArrayList<ProblemasCheckList> problemasCheckListMarcadosVistoriaArrayList = new ArrayList<>();
+
+                    for (int w = 0; w < jsonArrayVistoriaProblemasMarcadosChecklist.length(); w++) {
+                        JSONObject jsonObjectProblemasMarcadosCheckListVistoria = jsonArrayVistoriaProblemasMarcadosChecklist.getJSONObject(w);
+
+                        ProblemasCheckList problemasCheckList = new ProblemasCheckList();
+                        problemasCheckList.setId(Integer.parseInt(jsonObjectProblemasMarcadosCheckListVistoria.get("id").toString()));
+                        problemasCheckList.setDescricao(jsonObjectProblemasMarcadosCheckListVistoria.get("descricao").toString());
+                        problemasCheckListMarcadosVistoriaArrayList.add(problemasCheckList);
+                    }
+
+                    vistoria.setProblemasMarcadosCheckListAdapters(problemasCheckListMarcadosVistoriaArrayList);
+
                     JSONObject jsonObjectEstacaoVistoria = jsonObjectVistoria.getJSONObject("estacao_elevatoria");
                     EstacoesElevatorias estacoesElevatoriasVistoria = new EstacoesElevatorias();
                     estacoesElevatoriasVistoria.setId(Integer.parseInt(jsonObjectEstacaoVistoria.get("id").toString()));
@@ -292,6 +306,20 @@ public class UserRequester {
                             problemasVistoriaArrayList.add(problemasVistoria);
                         }
                         conjuntoMotorBombaVistoria.setProblemasArrayList(problemasVistoriaArrayList);
+
+                        JSONArray jsonArrayProblemasNaoMarcadosVistoria = jsonObjectCmbVistoria.getJSONArray("problemas_nao_marcados");
+                        ArrayList<Problemas> problemasNaoMarcadosVistoriaArrayList = new ArrayList<Problemas>();
+
+                        for (int u = 0; u < jsonArrayProblemasNaoMarcadosVistoria.length(); u++) {
+
+                            JSONObject jsonObjectProblemasNaoMarcadosVistoria = jsonArrayProblemasNaoMarcadosVistoria.getJSONObject(u);
+                            Problemas problemasVistoria = new Problemas();
+                            problemasVistoria.setId(Integer.parseInt(jsonObjectProblemasNaoMarcadosVistoria.get("id").toString()));
+                            problemasVistoria.setDescricao(jsonObjectProblemasNaoMarcadosVistoria.get("descricao").toString());
+                            problemasVistoria.setStatus(Integer.parseInt(jsonObjectProblemasNaoMarcadosVistoria.get("status").toString()));
+                            problemasNaoMarcadosVistoriaArrayList.add(problemasVistoria);
+                        }
+                        conjuntoMotorBombaVistoria.setProblemasNaoMarcadosArrayList(problemasNaoMarcadosVistoriaArrayList);
                     }
 
                     estacoesElevatoriasVistoria.setConjuntoMotorBombaArrayList(conjuntoMotorBombaVistoriaArrayList);
