@@ -392,6 +392,7 @@
 
                 <ImageView
                     android:id="@+id/ivPhoto1"
+                    android:visibility="gone"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginLeft="5dp"
@@ -400,6 +401,7 @@
 
                 <ImageView
                     android:id="@+id/ivPhoto2"
+                    android:visibility="gone"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginLeft="5dp"
@@ -408,6 +410,7 @@
 
                 <ImageView
                     android:id="@+id/ivPhoto3"
+                    android:visibility="gone"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginLeft="5dp"

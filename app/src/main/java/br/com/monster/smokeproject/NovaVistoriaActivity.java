@@ -69,8 +69,10 @@ import pojo.Vistoria;
 import request.UserRequester;
 import request.VistoriaRequester;
 import util.DividerItemDecoration;
+import util.ImageResizeUtils;
 import util.MyFileContentProvider;
 import util.RecyclerItemClickListener;
+import util.SDCardUtils;
 import util.Util;
 
 public class NovaVistoriaActivity extends AppCompatActivity {
@@ -82,6 +84,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     private List<Lista> lista;
     public static Button btnAddFoto;
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    private File file;
 
 
     //CUSTOM DIALOG
@@ -613,9 +616,11 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int item) {
                 if (options[item].equals("Abrir Câmera")) {
-                    Intent intent = new Intent();
+                    //Cria o caminho do arquivo no SD Card
+                    file = SDCardUtils.getPrivateFile(getBaseContext(), "foto.jpg", Environment.DIRECTORY_PICTURES);
+                    //Chama itent informando o arquivo para salvar a foto
                     Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    i.putExtra(MediaStore.EXTRA_OUTPUT, MyFileContentProvider.CONTENT_URI);
+                    i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
                     startActivityForResult(i,1);
                 } else if (options[item].equals("Galeria")) {
                     Intent intent = new   Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -637,6 +642,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                     //Bundle bundle = data.getExtras();
                     //if (bundle != null) {
                     //    bitmap = (Bitmap) bundle.get("data");
+                showImage(file);
 
 
                 /**
@@ -650,65 +656,56 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                  * possa pegar e mandar pro servidor
                  *
                  */
-                if (ivPhoto1.getDrawable() == null) {
-                            File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
-                                    + "/Android/data/"
-                                    + getApplicationContext().getPackageName()
-                                    + "/files");
-                            if (! mediaStorageDir.exists()){
-                                if (! mediaStorageDir.mkdirs()){
-                                    Toast.makeText(getBaseContext(),
-
-                                            "Error while creaty derectory", Toast.LENGTH_LONG)
-
-                                            .show();
-                                }
-                            }
-                            String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
-                            String imageName = "S_"+timeStamp+".jpg";
-                            File out = new File(mediaStorageDir.getPath(), imageName);
-
-
-
-
-                            /*if(!out.exists()) {
-
-                                Toast.makeText(getBaseContext(),
-
-                                        "Error while capturing image", Toast.LENGTH_LONG)
-
-                                        .show();
-
-                                return;
-
-                            }*/
-
-                            Bitmap mBitmap = BitmapFactory.decodeFile(out.getAbsolutePath());
-                            ivPhoto1.setVisibility(View.VISIBLE);
-                            ivPhoto1.setImageBitmap(mBitmap);
-                            //sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
-
-                            final String imagepath = out.getAbsolutePath();
-
-                            //Util.AtivaDialogHandler(2, "", "Upload de foto...");
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-
-                                    uploadFile(imagepath);
-
-                                }
-                            }).start();
-
-                        } else if (ivPhoto2.getDrawable() == null) {
-                            ivPhoto2.setVisibility(View.VISIBLE);
-                            ivPhoto2.setImageBitmap(bitmap);
-                            sPhotoDois = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
-                        } else {
-                            ivPhoto3.setVisibility(View.VISIBLE);
-                            ivPhoto3.setImageBitmap(bitmap);
-                            sPhotoTres = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
-                        }
+//                if (ivPhoto1.getDrawable() == null) {
+//                            File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
+//                                    + "/Android/data/"
+//                                    + getApplicationContext().getPackageName()
+//                                    + "/files");
+//                            if (! mediaStorageDir.exists()){
+//                                if (! mediaStorageDir.mkdirs()){
+//                                    Toast.makeText(getBaseContext(),
+//
+//                                            "Error while creaty derectory", Toast.LENGTH_LONG)
+//
+//                                            .show();
+//                                }
+//                            }
+//                            String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
+//                            String imageName = "S_"+timeStamp+".jpg";
+//                            File out = new File(mediaStorageDir.getPath(), imageName);
+//
+//
+//
+//
+//                            /*if(!out.exists()) {
+//
+//                                Toast.makeText(getBaseContext(),
+//
+//                                        "Error while capturing image", Toast.LENGTH_LONG)
+//
+//                                        .show();
+//
+//                                return;
+//
+//                            }*/
+//
+//                            Bitmap mBitmap = BitmapFactory.decodeFile(out.getAbsolutePath());
+//                            ivPhoto1.setVisibility(View.VISIBLE);
+//                            ivPhoto1.setImageBitmap(mBitmap);
+//                            //sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+//
+//                            final String imagepath = out.getAbsolutePath();
+//
+//                            //Util.AtivaDialogHandler(2, "", "Upload de foto...");
+//                            new Thread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//
+//                                    uploadFile(imagepath);
+//
+//                                }
+//                            }).start();
+//                        }
                     //}
                 //}
             } else if (requestCode == 2) {
@@ -892,6 +889,38 @@ public class NovaVistoriaActivity extends AppCompatActivity {
 
 //    Bitmap myBitmapAgain = decodeBase64(myBase64Image);
 
+
+private void showImage(File file) {
+    if(file != null && file.exists()) {
+        Log.d("foto", file.getAbsolutePath());
+        if (ivPhoto1.getDrawable() == null) {
+            ivPhoto1.setVisibility(View.VISIBLE);
+            int w = ivPhoto1.getWidth();
+            int h = ivPhoto1.getHeight();
+            //Redimensiona a imagem para o tamanho do IV
+            Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
+            ivPhoto1.setImageBitmap(bitmap);
+            sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+        } else if (ivPhoto2.getDrawable() == null) {
+            ivPhoto2.setVisibility(View.VISIBLE);
+            int w = ivPhoto2.getWidth();
+            int h = ivPhoto2.getHeight();
+            //Redimensiona a imagem para o tamanho do IV
+            Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
+            ivPhoto2.setImageBitmap(bitmap);
+            sPhotoDois = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+        } else {
+            int w = ivPhoto3.getWidth();
+            int h = ivPhoto3.getHeight();
+            //Redimensiona a imagem para o tamanho do IV
+            Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
+            ivPhoto3.setImageBitmap(bitmap);
+            ivPhoto3.setVisibility(View.VISIBLE);
+            sPhotoTres = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+        }
+
+    }
+}
 
 
 }
