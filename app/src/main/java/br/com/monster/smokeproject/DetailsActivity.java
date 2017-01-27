@@ -1,8 +1,11 @@
 package br.com.monster.smokeproject;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,8 +21,8 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.details_activity);
 
         Bundle extras = getIntent().getExtras();
-        Bitmap bmp = (Bitmap) extras.getParcelable("imagebitmap");
+        Uri myUri = Uri.parse(extras.getString("imageUri"));
         ImageView imageView = (ImageView) findViewById(R.id.image);
-        imageView.setImageBitmap(bmp);
+        imageView.setImageURI(myUri);
     }
 }

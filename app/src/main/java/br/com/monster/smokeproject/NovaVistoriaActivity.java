@@ -85,6 +85,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     public static Button btnAddFoto;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private File file;
+    private String fileName;
 
 
     //CUSTOM DIALOG
@@ -291,13 +292,13 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(getBaseContext(), DetailsActivity.class);
-                ivPhoto1.buildDrawingCache();
-                Bitmap image= ivPhoto1.getDrawingCache();
-
                 Bundle extras = new Bundle();
-                extras.putParcelable("imagebitmap", image);
+                it.putExtra("imageUri", fileName);
                 it.putExtras(extras);
                 startActivity(it);
+                //ivPhoto1.buildDrawingCache();
+                //Bitmap image= ivPhoto1.getDrawingCache();
+                // extras.putParcelable("imagebitmap", image);
             }
         });
         ivPhoto1.setOnLongClickListener(new View.OnLongClickListener() {
@@ -328,11 +329,8 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(getBaseContext(), DetailsActivity.class);
-                ivPhoto2.buildDrawingCache();
-                Bitmap image= ivPhoto2.getDrawingCache();
-
                 Bundle extras = new Bundle();
-                extras.putParcelable("imagebitmap", image);
+                it.putExtra("imageUri", fileName);
                 it.putExtras(extras);
                 startActivity(it);
             }
@@ -727,7 +725,8 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     public int uploadFile(String sourceFileUri) {
 
 
-        String fileName = sourceFileUri;
+        //String fileName = sourceFileUri;
+
 
         HttpURLConnection conn = null;
         DataOutputStream dos = null;
@@ -900,7 +899,9 @@ private void showImage(File file) {
             //Redimensiona a imagem para o tamanho do IV
             Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
             ivPhoto1.setImageBitmap(bitmap);
-            sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+//            sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/foto.jpg")));
+            uploadFile(fileName);
         } else if (ivPhoto2.getDrawable() == null) {
             ivPhoto2.setVisibility(View.VISIBLE);
             int w = ivPhoto2.getWidth();
@@ -908,15 +909,15 @@ private void showImage(File file) {
             //Redimensiona a imagem para o tamanho do IV
             Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
             ivPhoto2.setImageBitmap(bitmap);
-            sPhotoDois = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
-        } else {
+            //sPhotoDois = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+        } else if (ivPhoto3.getDrawable() == null) {
             int w = ivPhoto3.getWidth();
             int h = ivPhoto3.getHeight();
             //Redimensiona a imagem para o tamanho do IV
             Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
             ivPhoto3.setImageBitmap(bitmap);
             ivPhoto3.setVisibility(View.VISIBLE);
-            sPhotoTres = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+            //sPhotoTres = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
         }
 
     }
