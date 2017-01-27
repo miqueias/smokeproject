@@ -269,6 +269,19 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         );
 
         ivPhoto1 = (ImageView) findViewById(R.id.ivPhoto1);
+        ivPhoto1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getBaseContext(), DetailsActivity.class);
+                ivPhoto1.buildDrawingCache();
+                Bitmap image= ivPhoto1.getDrawingCache();
+
+                Bundle extras = new Bundle();
+                extras.putParcelable("imagebitmap", image);
+                it.putExtras(extras);
+                startActivity(it);
+            }
+        });
         ivPhoto1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -293,6 +306,19 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             }
         });
         ivPhoto2 = (ImageView) findViewById(R.id.ivPhoto2);
+        ivPhoto2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getBaseContext(), DetailsActivity.class);
+                ivPhoto2.buildDrawingCache();
+                Bitmap image= ivPhoto2.getDrawingCache();
+
+                Bundle extras = new Bundle();
+                extras.putParcelable("imagebitmap", image);
+                it.putExtras(extras);
+                startActivity(it);
+            }
+        });
         ivPhoto2.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -317,6 +343,19 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             }
         });
         ivPhoto3 = (ImageView) findViewById(R.id.ivPhoto3);
+        ivPhoto3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getBaseContext(), DetailsActivity.class);
+                ivPhoto3.buildDrawingCache();
+                Bitmap image= ivPhoto3.getDrawingCache();
+
+                Bundle extras = new Bundle();
+                extras.putParcelable("imagebitmap", image);
+                it.putExtras(extras);
+                startActivity(it);
+            }
+        });
         ivPhoto3.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
