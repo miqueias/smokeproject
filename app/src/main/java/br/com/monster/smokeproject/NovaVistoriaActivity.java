@@ -155,7 +155,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         tvVistoria.setTypeface(RalewayBold);
         tvData = (TextView) findViewById(R.id.tvData);
         tvData.setTypeface(RalewayMedium);
-        tvData.setText(Util.getTimeNow());
+        tvData.setText(Util.getDateNow());
         tvAs = (TextView) findViewById(R.id.tvAs);
         tvAs.setTypeface(RalewayMedium);
         tvHora = (TextView) findViewById(R.id.tvHora);
@@ -593,15 +593,15 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                         if (ivPhoto1.getDrawable() == null) {
                             ivPhoto1.setVisibility(View.VISIBLE);
                             ivPhoto1.setImageBitmap(bitmap);
-                            sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+                            sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 70);
                         } else if (ivPhoto2.getDrawable() == null) {
                             ivPhoto2.setVisibility(View.VISIBLE);
                             ivPhoto2.setImageBitmap(bitmap);
-                            sPhotoDois = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+                            sPhotoDois = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 70);
                         } else {
                             ivPhoto3.setVisibility(View.VISIBLE);
                             ivPhoto3.setImageBitmap(bitmap);
-                            sPhotoTres = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+                            sPhotoTres = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 70);
                         }
                     }
                 }
@@ -636,7 +636,10 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     {
         ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
         image.compress(compressFormat, quality, byteArrayOS);
-        return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
+        byte[] byteFormat = byteArrayOS.toByteArray();
+        return Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+        //byte[] byteFormat = "MIQUEIAS".getBytes();
+        //return Base64.encodeToString(byteFormat, Base64.NO_WRAP);
     }
 
     public static Bitmap decodeBase64(String input)

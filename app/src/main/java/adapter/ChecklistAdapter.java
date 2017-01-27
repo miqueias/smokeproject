@@ -108,7 +108,7 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
                     if (personViewHolder.cbChecklist.isChecked()) {
                         arrayListCheck.add(lista.get(position).getId());
                     } else {
-                        arrayListCheck.remove(lista.get(position).getId());
+                        arrayListCheck.remove(position);
                     }
                 }
             });
