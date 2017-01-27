@@ -637,11 +637,24 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                     //Bundle bundle = data.getExtras();
                     //if (bundle != null) {
                     //    bitmap = (Bitmap) bundle.get("data");
-                        if (ivPhoto1.getDrawable() == null) {
+
+
+                /**
+                 * Monster, o mediaStorageDir deveria pegar a foto e colocar ela nessa pasta
+                 * /storage/emulated/0/Android/data/br.com.monster.smokeproject/files
+                 *
+                 * o problema é que ele não faz isso, a pasta até existe, mas, está vazia.
+                 * Com isso eu não consigo saber onde a foto ta pra mandar pro servidor
+                 *
+                 * é basicamente esse o problema, salvar a foto em algum lugar que a gente
+                 * possa pegar e mandar pro servidor
+                 *
+                 */
+                if (ivPhoto1.getDrawable() == null) {
                             File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
                                     + "/Android/data/"
                                     + getApplicationContext().getPackageName()
-                                    + "/Files");
+                                    + "/files");
                             if (! mediaStorageDir.exists()){
                                 if (! mediaStorageDir.mkdirs()){
                                     Toast.makeText(getBaseContext(),
