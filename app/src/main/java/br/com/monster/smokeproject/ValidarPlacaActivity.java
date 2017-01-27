@@ -79,7 +79,7 @@ public class ValidarPlacaActivity extends AppCompatActivity {
                     if (jsonObjectPlaca.get("status").equals("ERRO")) {
                         snackbar = Snackbar.make(linearLayout, jsonObjectPlaca.get("mensagem").toString(), Snackbar.LENGTH_INDEFINITE);
                     } else {
-                        snackbar = Snackbar.make(linearLayout, "CÓDIGO: " + jsonObjectPlaca.get("mensagem").toString(), Snackbar.LENGTH_INDEFINITE);
+                        snackbar = Snackbar.make(linearLayout, "CÓDIGO: " + jsonObjectPlaca.getJSONObject("dados").get("codigo").toString(), Snackbar.LENGTH_INDEFINITE);
                     }
 
                 } catch (JSONException e) {

@@ -1,6 +1,8 @@
 package br.com.monster.smokeproject;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -39,8 +41,18 @@ import android.widget.Toast;
 import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -57,6 +69,7 @@ import pojo.Vistoria;
 import request.UserRequester;
 import request.VistoriaRequester;
 import util.DividerItemDecoration;
+import util.MyFileContentProvider;
 import util.RecyclerItemClickListener;
 import util.Util;
 
@@ -92,6 +105,8 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     private String sPhotoUm, sPhotoDois, sPhotoTres;
     private LinearLayout panel_problema, panel_problema_externo;
     private CardView cvAlerta;
+    private String upLoadServerUri = "http://www.academiajedi.com.br/uploads/upload.php";
+    private int serverResponseCode = 0;
 
 
     @Override
@@ -597,18 +612,15 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Abrir Câmera"))
-                {
+                if (options[item].equals("Abrir Câmera")) {
+                    Intent intent = new Intent();
                     Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    i.putExtra(MediaStore.EXTRA_OUTPUT, MyFileContentProvider.CONTENT_URI);
                     startActivityForResult(i,1);
-                }
-                else if (options[item].equals("Galeria"))
-                {
+                } else if (options[item].equals("Galeria")) {
                     Intent intent = new   Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(intent, 2);
-
-                }
-                else if (options[item].equals("Cancelar")) {
+                } else if (options[item].equals("Cancelar")) {
                     dialog.dismiss();
                 }
             }
@@ -621,43 +633,221 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
-                if (data != null) {
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        //Recupera o Bitmap retornado pela câmera
-                        bitmap = (Bitmap) bundle.get("data");
-
-                        //Atualiza a imagem na tela
-                        //Atualiza a imagem na tela e transforma em base64
+                //if (data != null) {
+                    //Bundle bundle = data.getExtras();
+                    //if (bundle != null) {
+                    //    bitmap = (Bitmap) bundle.get("data");
                         if (ivPhoto1.getDrawable() == null) {
+                            File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
+                                    + "/Android/data/"
+                                    + getApplicationContext().getPackageName()
+                                    + "/Files");
+                            if (! mediaStorageDir.exists()){
+                                if (! mediaStorageDir.mkdirs()){
+                                    Toast.makeText(getBaseContext(),
+
+                                            "Error while creaty derectory", Toast.LENGTH_LONG)
+
+                                            .show();
+                                }
+                            }
+                            String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
+                            String imageName = "S_"+timeStamp+".jpg";
+                            File out = new File(mediaStorageDir.getPath(), imageName);
+
+
+
+
+                            /*if(!out.exists()) {
+
+                                Toast.makeText(getBaseContext(),
+
+                                        "Error while capturing image", Toast.LENGTH_LONG)
+
+                                        .show();
+
+                                return;
+
+                            }*/
+
+                            Bitmap mBitmap = BitmapFactory.decodeFile(out.getAbsolutePath());
                             ivPhoto1.setVisibility(View.VISIBLE);
-                            ivPhoto1.setImageBitmap(bitmap);
-                            sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 70);
+                            ivPhoto1.setImageBitmap(mBitmap);
+                            //sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+
+                            final String imagepath = out.getAbsolutePath();
+
+                            //Util.AtivaDialogHandler(2, "", "Upload de foto...");
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    uploadFile(imagepath);
+
+                                }
+                            }).start();
+
                         } else if (ivPhoto2.getDrawable() == null) {
                             ivPhoto2.setVisibility(View.VISIBLE);
                             ivPhoto2.setImageBitmap(bitmap);
-                            sPhotoDois = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 70);
+                            sPhotoDois = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
                         } else {
                             ivPhoto3.setVisibility(View.VISIBLE);
                             ivPhoto3.setImageBitmap(bitmap);
-                            sPhotoTres = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 70);
+                            sPhotoTres = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
                         }
-                    }
-                }
+                    //}
+                //}
             } else if (requestCode == 2) {
 
-                //Uri selectedImage = data.getData();
-                //String[] filePath = {MediaStore.Images.Media.DATA};
-                //Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
-                //c.moveToFirst();
-                //int columnIndex = c.getColumnIndex(filePath[0]);
-                //String picturePath = c.getString(columnIndex);
-                //c.close();
-                //Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                //Log.w("image from gallery....", picturePath + "");
-                //ivPhoto1.setImageBitmap(thumbnail);
             }
         }
+    }
+
+    public String getPath(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+        cursor.moveToFirst();
+        String imagePath = cursor.getString(column_index);
+
+        return cursor.getString(column_index);
+    }
+
+    public int uploadFile(String sourceFileUri) {
+
+
+        String fileName = sourceFileUri;
+
+        HttpURLConnection conn = null;
+        DataOutputStream dos = null;
+        String lineEnd = "\r\n";
+        String twoHyphens = "--";
+        String boundary = "*****";
+        int bytesRead, bytesAvailable, bufferSize;
+        byte[] buffer;
+        int maxBufferSize = 1 * 1024 * 1024;
+        File sourceFile = new File(sourceFileUri);
+
+        if (!sourceFile.isFile()) {
+
+            //dialog.dismiss();
+
+            //Log.e("uploadFile", "Source File not exist :"+imagepath);
+
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    //messageText.setText("Source File not exist :"+ imagepath);
+                    //Toast.makeText(this, "Source File not exist :"+ imagepath, Toast.LENGTH_LONG)
+                }
+            });
+
+            return 0;
+
+        }
+        else
+        {
+            try {
+
+                // open a URL connection to the Servlet
+                FileInputStream fileInputStream = new FileInputStream(sourceFile);
+                URL url = new URL(upLoadServerUri);
+
+                // Open a HTTP  connection to  the URL
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setDoInput(true); // Allow Inputs
+                conn.setDoOutput(true); // Allow Outputs
+                conn.setUseCaches(false); // Don't use a Cached Copy
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Connection", "Keep-Alive");
+                conn.setRequestProperty("ENCTYPE", "multipart/form-data");
+                conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+                conn.setRequestProperty("uploaded_file", fileName);
+
+                dos = new DataOutputStream(conn.getOutputStream());
+
+                dos.writeBytes(twoHyphens + boundary + lineEnd);
+                dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\""
+                        + fileName + "\"" + lineEnd);
+
+                dos.writeBytes(lineEnd);
+
+                // create a buffer of  maximum size
+                bytesAvailable = fileInputStream.available();
+
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                buffer = new byte[bufferSize];
+
+                // read file and write it into form...
+                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+                while (bytesRead > 0) {
+
+                    dos.write(buffer, 0, bufferSize);
+                    bytesAvailable = fileInputStream.available();
+                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                    bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+                }
+
+                // send multipart form data necesssary after file data...
+                dos.writeBytes(lineEnd);
+                dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+                // Responses from the server (code and message)
+                serverResponseCode = conn.getResponseCode();
+                String serverResponseMessage = conn.getResponseMessage();
+
+                Log.i("uploadFile", "HTTP Response is : "
+                        + serverResponseMessage + ": " + serverResponseCode);
+
+                if(serverResponseCode == 200){
+
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            String msg = "File Upload Completed.\n\n See uploaded file here : \n\n"
+                                    +" F:/wamp/wamp/www/uploads";
+                            //messageText.setText(msg);
+                            Toast.makeText(NovaVistoriaActivity.this, "File Upload Complete.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+                //close the streams //
+                fileInputStream.close();
+                dos.flush();
+                dos.close();
+
+            } catch (MalformedURLException ex) {
+
+                //dialog.dismiss();
+                ex.printStackTrace();
+
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        //messageText.setText("MalformedURLException Exception : check script url.");
+                        Toast.makeText(NovaVistoriaActivity.this, "MalformedURLException", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                Log.e("Upload file to server", "error: " + ex.getMessage(), ex);
+            } catch (Exception e) {
+
+                //dialog.dismiss();
+                e.printStackTrace();
+
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        //messageText.setText("Got Exception : see logcat ");
+                        Toast.makeText(NovaVistoriaActivity.this, "Got Exception : see logcat ", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                //Log.e("Upload file to server Exception", "Exception : "  + e.getMessage(), e);
+            }
+            //dialog.dismiss();
+            return serverResponseCode;
+
+        } // End else block
     }
 
     @Override
