@@ -40,10 +40,12 @@ public class VistoriaRequester {
         jsonPut.put("leitura_compesa", vistoria.getLeituraCompesa());
         jsonPut.put("cmbs_encontradas", vistoria.getCmbsEncontradas());
         jsonPut.put("descricao_dos_problemas", vistoria.getDescricaoProblemas());
-        byte[] byteFormat = "TIAGO".getBytes();
+        String nome = "TIAGO";
+        byte[] byteFormat = vistoria.getFoto1().getBytes("UTF-8");
         //return Base64.encodeToString(byteFormat, Base64.NO_WRAP);
         //jsonPut.put("base64", vistoria.getFoto1());
-        jsonPut.put("base64", Base64.encodeToString(byteFormat, Base64.NO_WRAP));
+        //jsonPut.put("base64", Base64.encodeToString(byteFormat, Base64.NO_WRAP).replace("=", "$"));
+        jsonPut.put("base64", Base64.encodeToString(byteFormat, Base64.NO_WRAP).replace("=", "#$#$"));
 
         if (arrayListCheckList.size() > 0) {
             //jsonPut.put("checklists", new JSONArray (arrayListCheckList));

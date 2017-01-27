@@ -17,13 +17,9 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.details_activity);
 
-        String title = getIntent().getStringExtra("title");
-        Bitmap bitmap = getIntent().getParcelableExtra("image");
-
-        TextView titleTextView = (TextView) findViewById(R.id.title);
-        titleTextView.setText(title);
-
+        Bundle extras = getIntent().getExtras();
+        Bitmap bmp = (Bitmap) extras.getParcelable("imagebitmap");
         ImageView imageView = (ImageView) findViewById(R.id.image);
-        imageView.setImageBitmap(bitmap);
+        imageView.setImageBitmap(bmp);
     }
 }
