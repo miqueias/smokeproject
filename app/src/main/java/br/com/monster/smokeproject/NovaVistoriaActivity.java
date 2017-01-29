@@ -516,20 +516,6 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                     Intent it = new Intent(getBaseContext(), HomeActivity.class);
                                     startActivity(it);
                                     finish();
-
-                                    /*new AlertDialog.Builder(NovaVistoriaActivity.this)
-                                            .setTitle("SisInspe")
-                                            .setCancelable(false)
-                                            // Set Dialog Message
-                                            .setMessage("Vistoria registada com sucesso, obrigado!")
-                                            // Positive button
-                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    Intent it = new Intent(getBaseContext(), HomeActivity.class);
-                                                    startActivity(it);
-                                                    finish();
-                                                }
-                                            }).show();*/
                                 } catch (JSONException e) {
                                     Util.AtivaDialogHandler(5, "", "");
                                     Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
@@ -636,227 +622,11 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
-                //if (data != null) {
-                    //Bundle bundle = data.getExtras();
-                    //if (bundle != null) {
-                    //    bitmap = (Bitmap) bundle.get("data");
                 showImage(file);
-
-
-                /**
-                 * Monster, o mediaStorageDir deveria pegar a foto e colocar ela nessa pasta
-                 * /storage/emulated/0/Android/data/br.com.monster.smokeproject/files
-                 *
-                 * o problema é que ele não faz isso, a pasta até existe, mas, está vazia.
-                 * Com isso eu não consigo saber onde a foto ta pra mandar pro servidor
-                 *
-                 * é basicamente esse o problema, salvar a foto em algum lugar que a gente
-                 * possa pegar e mandar pro servidor
-                 *
-                 */
-//                if (ivPhoto1.getDrawable() == null) {
-//                            File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
-//                                    + "/Android/data/"
-//                                    + getApplicationContext().getPackageName()
-//                                    + "/files");
-//                            if (! mediaStorageDir.exists()){
-//                                if (! mediaStorageDir.mkdirs()){
-//                                    Toast.makeText(getBaseContext(),
-//
-//                                            "Error while creaty derectory", Toast.LENGTH_LONG)
-//
-//                                            .show();
-//                                }
-//                            }
-//                            String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
-//                            String imageName = "S_"+timeStamp+".jpg";
-//                            File out = new File(mediaStorageDir.getPath(), imageName);
-//
-//
-//
-//
-//                            /*if(!out.exists()) {
-//
-//                                Toast.makeText(getBaseContext(),
-//
-//                                        "Error while capturing image", Toast.LENGTH_LONG)
-//
-//                                        .show();
-//
-//                                return;
-//
-//                            }*/
-//
-//                            Bitmap mBitmap = BitmapFactory.decodeFile(out.getAbsolutePath());
-//                            ivPhoto1.setVisibility(View.VISIBLE);
-//                            ivPhoto1.setImageBitmap(mBitmap);
-//                            //sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
-//
-//                            final String imagepath = out.getAbsolutePath();
-//
-//                            //Util.AtivaDialogHandler(2, "", "Upload de foto...");
-//                            new Thread(new Runnable() {
-//                                @Override
-//                                public void run() {
-//
-//                                    uploadFile(imagepath);
-//
-//                                }
-//                            }).start();
-//                        }
-                    //}
-                //}
             } else if (requestCode == 2) {
 
             }
         }
-    }
-
-    public String getPath(Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-        cursor.moveToFirst();
-        String imagePath = cursor.getString(column_index);
-
-        return cursor.getString(column_index);
-    }
-
-    public int uploadFile(String sourceFileUri) {
-
-
-        //String fileName = sourceFileUri;
-
-
-        HttpURLConnection conn = null;
-        DataOutputStream dos = null;
-        String lineEnd = "\r\n";
-        String twoHyphens = "--";
-        String boundary = "*****";
-        int bytesRead, bytesAvailable, bufferSize;
-        byte[] buffer;
-        int maxBufferSize = 1 * 1024 * 1024;
-        File sourceFile = new File(sourceFileUri);
-
-        if (!sourceFile.isFile()) {
-
-            //dialog.dismiss();
-
-            //Log.e("uploadFile", "Source File not exist :"+imagepath);
-
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    //messageText.setText("Source File not exist :"+ imagepath);
-                    //Toast.makeText(this, "Source File not exist :"+ imagepath, Toast.LENGTH_LONG)
-                }
-            });
-
-            return 0;
-
-        }
-        else
-        {
-            try {
-
-                // open a URL connection to the Servlet
-                FileInputStream fileInputStream = new FileInputStream(sourceFile);
-                URL url = new URL(upLoadServerUri);
-
-                // Open a HTTP  connection to  the URL
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setDoInput(true); // Allow Inputs
-                conn.setDoOutput(true); // Allow Outputs
-                conn.setUseCaches(false); // Don't use a Cached Copy
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Connection", "Keep-Alive");
-                conn.setRequestProperty("ENCTYPE", "multipart/form-data");
-                conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
-                conn.setRequestProperty("uploaded_file", fileName);
-
-                dos = new DataOutputStream(conn.getOutputStream());
-
-                dos.writeBytes(twoHyphens + boundary + lineEnd);
-                dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\""
-                        + fileName + "\"" + lineEnd);
-
-                dos.writeBytes(lineEnd);
-
-                // create a buffer of  maximum size
-                bytesAvailable = fileInputStream.available();
-
-                bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                buffer = new byte[bufferSize];
-
-                // read file and write it into form...
-                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-
-                while (bytesRead > 0) {
-
-                    dos.write(buffer, 0, bufferSize);
-                    bytesAvailable = fileInputStream.available();
-                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                    bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-
-                }
-
-                // send multipart form data necesssary after file data...
-                dos.writeBytes(lineEnd);
-                dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
-
-                // Responses from the server (code and message)
-                serverResponseCode = conn.getResponseCode();
-                String serverResponseMessage = conn.getResponseMessage();
-
-                Log.i("uploadFile", "HTTP Response is : "
-                        + serverResponseMessage + ": " + serverResponseCode);
-
-                if(serverResponseCode == 200){
-
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            String msg = "File Upload Completed.\n\n See uploaded file here : \n\n"
-                                    +" F:/wamp/wamp/www/uploads";
-                            //messageText.setText(msg);
-                            Toast.makeText(NovaVistoriaActivity.this, "File Upload Complete.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-                //close the streams //
-                fileInputStream.close();
-                dos.flush();
-                dos.close();
-
-            } catch (MalformedURLException ex) {
-
-                //dialog.dismiss();
-                ex.printStackTrace();
-
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        //messageText.setText("MalformedURLException Exception : check script url.");
-                        Toast.makeText(NovaVistoriaActivity.this, "MalformedURLException", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                Log.e("Upload file to server", "error: " + ex.getMessage(), ex);
-            } catch (Exception e) {
-
-                //dialog.dismiss();
-                e.printStackTrace();
-
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        //messageText.setText("Got Exception : see logcat ");
-                        Toast.makeText(NovaVistoriaActivity.this, "Got Exception : see logcat ", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                //Log.e("Upload file to server Exception", "Exception : "  + e.getMessage(), e);
-            }
-            //dialog.dismiss();
-            return serverResponseCode;
-
-        } // End else block
     }
 
     @Override
@@ -875,7 +645,11 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
         image.compress(compressFormat, quality, byteArrayOS);
         byte[] byteFormat = byteArrayOS.toByteArray();
-        return Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+        return Base64.encodeToString(byteFormat, Base64.NO_PADDING);
+
+
+
+
         //byte[] byteFormat = "MIQUEIAS".getBytes();
         //return Base64.encodeToString(byteFormat, Base64.NO_WRAP);
     }
@@ -891,6 +665,8 @@ public class NovaVistoriaActivity extends AppCompatActivity {
 
 private void showImage(File file) {
     if(file != null && file.exists()) {
+        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
+        String imageName = "S_"+timeStamp+".jpg";
         Log.d("foto", file.getAbsolutePath());
         if (ivPhoto1.getDrawable() == null) {
             ivPhoto1.setVisibility(View.VISIBLE);
@@ -899,9 +675,9 @@ private void showImage(File file) {
             //Redimensiona a imagem para o tamanho do IV
             Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
             ivPhoto1.setImageBitmap(bitmap);
-//            sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
-            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/foto.jpg")));
-            uploadFile(fileName);
+            sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
+            //uploadFile(fileName);
         } else if (ivPhoto2.getDrawable() == null) {
             ivPhoto2.setVisibility(View.VISIBLE);
             int w = ivPhoto2.getWidth();
@@ -909,7 +685,8 @@ private void showImage(File file) {
             //Redimensiona a imagem para o tamanho do IV
             Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
             ivPhoto2.setImageBitmap(bitmap);
-            //sPhotoDois = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+            sPhotoDois = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
         } else if (ivPhoto3.getDrawable() == null) {
             int w = ivPhoto3.getWidth();
             int h = ivPhoto3.getHeight();
@@ -917,7 +694,8 @@ private void showImage(File file) {
             Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
             ivPhoto3.setImageBitmap(bitmap);
             ivPhoto3.setVisibility(View.VISIBLE);
-            //sPhotoTres = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+            sPhotoTres = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
         }
 
     }
