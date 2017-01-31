@@ -43,7 +43,7 @@ public class VistoriaRequester {
 
         if (vistoria.getFoto1() != null) {
             if (!vistoria.getFoto1().equals("")) {
-                jsonPut.put("foto0", vistoria.getFoto1());
+                jsonPut.put("foto0", vistoria.getFoto1().replace("=", "#$#$"));
             }
         }
 

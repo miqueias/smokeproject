@@ -11,10 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
+
 import org.json.JSONException;
 
 import java.util.concurrent.ExecutionException;
 
+import io.fabric.sdk.android.Fabric;
 import pojo.Auth;
 import request.UserRequester;
 import util.Internet;
@@ -31,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_login);
 
         Util.setCtxAtual(this);

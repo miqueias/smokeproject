@@ -55,6 +55,11 @@
             android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_motor_bomba"
             android:theme="@style/AppTheme" ></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="d8ff9925924fa10046e7f8eb13fcbdc1ada7b548"
+            />
     </application>
+
 
 </manifest>

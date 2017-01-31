@@ -109,9 +109,9 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     private String sPhotoUm, sPhotoDois, sPhotoTres;
     private LinearLayout panel_problema, panel_problema_externo;
     private CardView cvAlerta;
-    private String upLoadServerUri = "http://www.academiajedi.com.br/uploads/upload.php";
-    private int serverResponseCode = 0;
-
+    private ArrayList<String> arrayListFotos;
+    String timeStamp;
+    String imageName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +139,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         } else {
             toolbar.setTitle("Nova Vistoria");
             conjuntoMotorBombaArrayList = new ArrayList<>();
+            arrayListFotos = new ArrayList<>();
         }
 
         panel_problema_externo = (LinearLayout) findViewById(R.id.panel_problema_externo);
@@ -291,14 +292,26 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         ivPhoto1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //getResources().getResourceName((Integer)ivPhoto1.getTag());
+
                 Intent it = new Intent(getBaseContext(), DetailsActivity.class);
                 Bundle extras = new Bundle();
-                it.putExtra("imageUri", fileName);
+
+                String fileNameAux = "";
+                if (arrayListFotos.size() > 0) {
+                    for (int i = 0; i < arrayListFotos.size(); i++) {
+                        fileNameAux = arrayListFotos.get(i);
+
+                        if (fileNameAux.substring(0, 1).equals("1")) {
+                            break;
+                        }
+                    }
+                }
+
+                it.putExtra("imageUri", fileNameAux);
                 it.putExtras(extras);
                 startActivity(it);
-                //ivPhoto1.buildDrawingCache();
-                //Bitmap image= ivPhoto1.getDrawingCache();
-                // extras.putParcelable("imagebitmap", image);
             }
         });
         ivPhoto1.setOnLongClickListener(new View.OnLongClickListener() {
@@ -317,6 +330,17 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                     ivPhoto1.setImageResource(0);
                                     ivPhoto1.setVisibility(View.GONE);
                                     sPhotoUm = "";
+
+                                    String fileNameAux = "";
+                                    if (arrayListFotos.size() > 0) {
+                                        for (int i = 0; i < arrayListFotos.size(); i++) {
+                                            fileNameAux = arrayListFotos.get(i);
+
+                                            if (fileNameAux.substring(0, 1).equals("1")) {
+                                                arrayListFotos.remove(i);
+                                            }
+                                        }
+                                    }
                                 }
                             }).show();
 
@@ -330,7 +354,17 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it = new Intent(getBaseContext(), DetailsActivity.class);
                 Bundle extras = new Bundle();
-                it.putExtra("imageUri", fileName);
+                String fileNameAux = "";
+                if (arrayListFotos.size() > 0) {
+                    for (int i = 0; i < arrayListFotos.size(); i++) {
+                        fileNameAux = arrayListFotos.get(i);
+
+                        if (fileNameAux.substring(0, 1).equals("2")) {
+                            break;
+                        }
+                    }
+                }
+                it.putExtra("imageUri", fileNameAux);
                 it.putExtras(extras);
                 startActivity(it);
             }
@@ -351,6 +385,16 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                     ivPhoto2.setImageResource(0);
                                     ivPhoto2.setVisibility(View.GONE);
                                     sPhotoDois = "";
+                                    String fileNameAux = "";
+                                    if (arrayListFotos.size() > 0) {
+                                        for (int i = 0; i < arrayListFotos.size(); i++) {
+                                            fileNameAux = arrayListFotos.get(i);
+
+                                            if (fileNameAux.substring(0, 1).equals("2")) {
+                                                arrayListFotos.remove(i);
+                                            }
+                                        }
+                                    }
                                 }
                             }).show();
 
@@ -363,11 +407,22 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(getBaseContext(), DetailsActivity.class);
-                ivPhoto3.buildDrawingCache();
-                Bitmap image= ivPhoto3.getDrawingCache();
+                //ivPhoto3.buildDrawingCache();
+                //Bitmap image= ivPhoto3.getDrawingCache();
 
                 Bundle extras = new Bundle();
-                extras.putParcelable("imagebitmap", image);
+                String fileNameAux = "";
+                if (arrayListFotos.size() > 0) {
+                    for (int i = 0; i < arrayListFotos.size(); i++) {
+                        fileNameAux = arrayListFotos.get(i);
+
+                        if (fileNameAux.substring(0, 1).equals("3")) {
+                            break;
+                        }
+                    }
+                }
+
+                it.putExtra("imageUri", fileNameAux);
                 it.putExtras(extras);
                 startActivity(it);
             }
@@ -388,6 +443,16 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                     ivPhoto3.setImageResource(0);
                                     ivPhoto3.setVisibility(View.GONE);
                                     sPhotoTres = "";
+                                    String fileNameAux = "";
+                                    if (arrayListFotos.size() > 0) {
+                                        for (int i = 0; i < arrayListFotos.size(); i++) {
+                                            fileNameAux = arrayListFotos.get(i);
+
+                                            if (fileNameAux.substring(0, 1).equals("3")) {
+                                                arrayListFotos.remove(i);
+                                            }
+                                        }
+                                    }
                                 }
                             }).show();
                 }
@@ -600,8 +665,10 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int item) {
                 if (options[item].equals("Abrir Câmera")) {
+                    timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
+                    imageName = "S_"+timeStamp+".jpg";
                     //Cria o caminho do arquivo no SD Card
-                    file = SDCardUtils.getPrivateFile(getBaseContext(), "foto.jpg", Environment.DIRECTORY_PICTURES);
+                    file = SDCardUtils.getPrivateFile(getBaseContext(), imageName, Environment.DIRECTORY_PICTURES);
                     //Chama itent informando o arquivo para salvar a foto
                     Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
@@ -622,7 +689,8 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
-                showImage(file);
+                arrayListFotos.add(imageName);
+                showImage(file, imageName);
             } else if (requestCode == 2) {
 
             }
@@ -645,28 +713,18 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
         image.compress(compressFormat, quality, byteArrayOS);
         byte[] byteFormat = byteArrayOS.toByteArray();
-        return Base64.encodeToString(byteFormat, Base64.NO_PADDING);
+        return Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+}
 
-
-
-
-        //byte[] byteFormat = "MIQUEIAS".getBytes();
-        //return Base64.encodeToString(byteFormat, Base64.NO_WRAP);
-    }
-
-    public static Bitmap decodeBase64(String input)
-    {
+    public static Bitmap decodeBase64(String input) {
         byte[] decodedBytes = Base64.decode(input, 0);
         return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
 
-//    Bitmap myBitmapAgain = decodeBase64(myBase64Image);
 
-
-private void showImage(File file) {
+private void showImage(File file, String imageName) {
     if(file != null && file.exists()) {
-        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
-        String imageName = "S_"+timeStamp+".jpg";
+
         Log.d("foto", file.getAbsolutePath());
         if (ivPhoto1.getDrawable() == null) {
             ivPhoto1.setVisibility(View.VISIBLE);
@@ -675,8 +733,8 @@ private void showImage(File file) {
             //Redimensiona a imagem para o tamanho do IV
             Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
             ivPhoto1.setImageBitmap(bitmap);
-            sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
-            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
+            sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 50);
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/1_"+imageName)));
             //uploadFile(fileName);
         } else if (ivPhoto2.getDrawable() == null) {
             ivPhoto2.setVisibility(View.VISIBLE);
@@ -685,8 +743,8 @@ private void showImage(File file) {
             //Redimensiona a imagem para o tamanho do IV
             Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
             ivPhoto2.setImageBitmap(bitmap);
-            sPhotoDois = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
-            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
+            sPhotoDois = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 50);
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/2_"+imageName)));
         } else if (ivPhoto3.getDrawable() == null) {
             int w = ivPhoto3.getWidth();
             int h = ivPhoto3.getHeight();
@@ -694,8 +752,8 @@ private void showImage(File file) {
             Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
             ivPhoto3.setImageBitmap(bitmap);
             ivPhoto3.setVisibility(View.VISIBLE);
-            sPhotoTres = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
-            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
+            sPhotoTres = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 50);
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/3_"+imageName)));
         }
 
     }

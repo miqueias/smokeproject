@@ -152,6 +152,10 @@ public class HomeActivity extends AppCompatActivity
             }
         });
 
+        if (auth.getOperador().getValidaPlaca().equals("false")) {
+            btnPlaca.setVisibility(View.INVISIBLE);
+        }
+
         btnSair = (Button) headerview.findViewById(R.id.btnSair);
         btnSair.setTypeface(RalewayMedium);
         btnSair.setOnClickListener(new View.OnClickListener() {
