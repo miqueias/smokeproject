@@ -54,6 +54,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.concurrent.ExecutionException;
 
 import adapter.BombasAdapter;
@@ -119,7 +120,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nova_vistoria);
 
         auth = Auth.getInstance();
-        util.setCtxAtual(this);
+        Util.setCtxAtual(this);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
@@ -303,7 +304,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                     for (int i = 0; i < arrayListFotos.size(); i++) {
                         fileNameAux = arrayListFotos.get(i);
 
-                        if (fileNameAux.substring(0, 1).equals("1")) {
+                        if (String.valueOf(fileNameAux.charAt(76)).equals("1")) {
                             break;
                         }
                     }
@@ -336,7 +337,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                         for (int i = 0; i < arrayListFotos.size(); i++) {
                                             fileNameAux = arrayListFotos.get(i);
 
-                                            if (fileNameAux.substring(0, 1).equals("1")) {
+                                            if (String.valueOf(fileNameAux.charAt(76)).equals("1")) {
                                                 arrayListFotos.remove(i);
                                             }
                                         }
@@ -359,7 +360,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                     for (int i = 0; i < arrayListFotos.size(); i++) {
                         fileNameAux = arrayListFotos.get(i);
 
-                        if (fileNameAux.substring(0, 1).equals("2")) {
+                        if (String.valueOf(fileNameAux.charAt(76)).equals("2")) {
                             break;
                         }
                     }
@@ -390,7 +391,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                         for (int i = 0; i < arrayListFotos.size(); i++) {
                                             fileNameAux = arrayListFotos.get(i);
 
-                                            if (fileNameAux.substring(0, 1).equals("2")) {
+                                            if (String.valueOf(fileNameAux.charAt(76)).equals("2")) {
                                                 arrayListFotos.remove(i);
                                             }
                                         }
@@ -416,7 +417,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                     for (int i = 0; i < arrayListFotos.size(); i++) {
                         fileNameAux = arrayListFotos.get(i);
 
-                        if (fileNameAux.substring(0, 1).equals("3")) {
+                        if (String.valueOf(fileNameAux.charAt(76)).equals("3")) {
                             break;
                         }
                     }
@@ -448,7 +449,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                         for (int i = 0; i < arrayListFotos.size(); i++) {
                                             fileNameAux = arrayListFotos.get(i);
 
-                                            if (fileNameAux.substring(0, 1).equals("3")) {
+                                            if (String.valueOf(fileNameAux.charAt(76)).equals("3")) {
                                                 arrayListFotos.remove(i);
                                             }
                                         }
@@ -540,67 +541,68 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    if (etLeituraCelpe.getText().toString().trim().equals("")) {
-                        Util.AtivaDialogHandler(5, "", "");
-                        Util.AtivaDialogHandler(1, "SisInspe", "Leitura celpe não informada!");
-                    } else if (etLeituraCompesa.getText().toString().trim().equals("")) {
-                        Util.AtivaDialogHandler(5, "", "");
-                        Util.AtivaDialogHandler(1, "SisInspe", "Leitura compesa não informada!");
-                    } else if (etCmb.getText().toString().trim().equals("")) {
-                        Util.AtivaDialogHandler(5, "", "");
-                        Util.AtivaDialogHandler(1, "SisInspe", "Quantidade de CMB`s não informada!");
-                    } else {
-
                         Util.AtivaDialogHandler(2, "", "Registrando Vistoria...");
 
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                Vistoria vistoria = new Vistoria();
 
-                                vistoria.setLeituraCelpe(etLeituraCelpe.getText().toString().trim());
-                                vistoria.setLeituraCompesa(etLeituraCompesa.getText().toString().trim());
-                                vistoria.setCmbsEncontradas(Integer.parseInt(etCmb.getText().toString().trim()));
-                                vistoria.setDescricaoProblemas(etDescProblema.getText().toString().trim());
-                                vistoria.setFoto1(sPhotoUm);
-                                vistoria.setFoto2(sPhotoDois);
-                                vistoria.setFoto3(sPhotoTres);
+                                if (etLeituraCelpe.getText().toString().trim().equals("")) {
+                                    Util.AtivaDialogHandler(5, "", "");
+                                    Util.AtivaDialogHandler(1, "SisInspe", "Leitura celpe não informada!");
+                                } else if (etLeituraCompesa.getText().toString().trim().equals("")) {
+                                    Util.AtivaDialogHandler(5, "", "");
+                                    Util.AtivaDialogHandler(1, "SisInspe", "Leitura compesa não informada!");
+                                } else if (etCmb.getText().toString().trim().equals("")) {
+                                    Util.AtivaDialogHandler(5, "", "");
+                                    Util.AtivaDialogHandler(1, "SisInspe", "Quantidade de CMB`s não informada!");
+                                } else {
 
-                                ProblemasCheckListAdapter problemasCheckListAdapter = (ProblemasCheckListAdapter) rvChecklist.getAdapter();
-                                ArrayList<Integer> checklists = problemasCheckListAdapter.getArrayListCheck();
+                                    Vistoria vistoria = new Vistoria();
 
-                                VistoriaRequester vistoriaRequester = new VistoriaRequester();
+                                    vistoria.setLeituraCelpe(etLeituraCelpe.getText().toString().trim());
+                                    vistoria.setLeituraCompesa(etLeituraCompesa.getText().toString().trim());
+                                    vistoria.setCmbsEncontradas(Integer.parseInt(etCmb.getText().toString().trim()));
+                                    vistoria.setDescricaoProblemas(etDescProblema.getText().toString().trim());
+                                    vistoria.setFoto1(sPhotoUm);
+                                    vistoria.setFoto2(sPhotoDois);
+                                    vistoria.setFoto3(sPhotoTres);
 
-                                try {
-                                    UserRequester userRequester = new UserRequester();
-                                    userRequester.loadAuth(auth.getLogin(), auth.getSenha(), "");
+                                    ProblemasCheckListAdapter problemasCheckListAdapter = (ProblemasCheckListAdapter) rvChecklist.getAdapter();
+                                    ArrayList<Integer> checklists = problemasCheckListAdapter.getArrayListCheck();
 
-                                    vistoriaRequester.registrarVistoria(vistoria, checklists, conjuntoMotorBombaArrayList);
-                                    Util.AtivaDialogHandler(5, "", "");
-                                    Util.AtivaDialogHandler(1, "SisInspe", "Vistoria registada com sucesso, obrigado!");
-                                    Intent it = new Intent(getBaseContext(), HomeActivity.class);
-                                    startActivity(it);
-                                    finish();
-                                } catch (JSONException e) {
-                                    Util.AtivaDialogHandler(5, "", "");
-                                    Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
-                                } catch (InterruptedException e) {
-                                    Util.AtivaDialogHandler(5, "", "");
-                                    Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
-                                } catch (ExecutionException e) {
-                                    Util.AtivaDialogHandler(5, "", "");
-                                    Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
-                                } catch (VistoriaException e) {
-                                    Util.AtivaDialogHandler(5, "", "");
-                                    Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
-                                } catch (UnsupportedEncodingException e) {
-                                    Util.AtivaDialogHandler(5, "", "");
-                                    Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
+                                    VistoriaRequester vistoriaRequester = new VistoriaRequester();
+
+                                    try {
+                                        UserRequester userRequester = new UserRequester();
+                                        userRequester.loadAuth(auth.getLogin(), auth.getSenha(), "");
+
+                                        vistoriaRequester.registrarVistoria(vistoria, checklists, conjuntoMotorBombaArrayList);
+                                        Util.AtivaDialogHandler(5, "", "");
+                                        Util.AtivaDialogHandler(1, "SisInspe", "Vistoria registada com sucesso, obrigado!");
+                                        Intent it = new Intent(getBaseContext(), HomeActivity.class);
+                                        startActivity(it);
+                                        finish();
+                                    } catch (JSONException e) {
+                                        Util.AtivaDialogHandler(5, "", "");
+                                        Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
+                                    } catch (InterruptedException e) {
+                                        Util.AtivaDialogHandler(5, "", "");
+                                        Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
+                                    } catch (ExecutionException e) {
+                                        Util.AtivaDialogHandler(5, "", "");
+                                        Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
+                                    } catch (VistoriaException e) {
+                                        Util.AtivaDialogHandler(5, "", "");
+                                        Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
+                                    } catch (UnsupportedEncodingException e) {
+                                        Util.AtivaDialogHandler(5, "", "");
+                                        Util.AtivaDialogHandler(1, "SisInspe", e.getMessage());
+                                    }
                                 }
                             }
                         }).start();
                     }
-                }
             });
         }
     }
@@ -667,6 +669,24 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                 if (options[item].equals("Abrir Câmera")) {
                     timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
                     imageName = "S_"+timeStamp+".jpg";
+
+                    if (ivPhoto1.getDrawable() == null && (ivPhoto2.getDrawable() != null && ivPhoto3.getDrawable() != null)) {
+                        imageName = "1_" + imageName;
+                    }
+
+                    if (ivPhoto2.getDrawable() == null && (ivPhoto1.getDrawable() != null && ivPhoto3.getDrawable() != null)) {
+                        imageName = "2_" + imageName;
+                    }
+
+                    if (ivPhoto3.getDrawable() == null && (ivPhoto1.getDrawable() != null && ivPhoto2.getDrawable() != null)) {
+                        imageName = "3_" + imageName;
+                    }
+
+                    if (ivPhoto3.getDrawable() == null && ivPhoto1.getDrawable() == null && ivPhoto2.getDrawable() == null) {
+                        imageName = "1_" + imageName;
+                    }
+
+
                     //Cria o caminho do arquivo no SD Card
                     file = SDCardUtils.getPrivateFile(getBaseContext(), imageName, Environment.DIRECTORY_PICTURES);
                     //Chama itent informando o arquivo para salvar a foto
@@ -689,7 +709,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
-                arrayListFotos.add(imageName);
+                arrayListFotos.add("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName);
                 showImage(file, imageName);
             } else if (requestCode == 2) {
 
@@ -734,7 +754,7 @@ private void showImage(File file, String imageName) {
             Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
             ivPhoto1.setImageBitmap(bitmap);
             sPhotoUm = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 50);
-            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/1_"+imageName)));
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
             //uploadFile(fileName);
         } else if (ivPhoto2.getDrawable() == null) {
             ivPhoto2.setVisibility(View.VISIBLE);
@@ -744,7 +764,7 @@ private void showImage(File file, String imageName) {
             Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
             ivPhoto2.setImageBitmap(bitmap);
             sPhotoDois = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 50);
-            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/2_"+imageName)));
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
         } else if (ivPhoto3.getDrawable() == null) {
             int w = ivPhoto3.getWidth();
             int h = ivPhoto3.getHeight();
@@ -753,7 +773,7 @@ private void showImage(File file, String imageName) {
             ivPhoto3.setImageBitmap(bitmap);
             ivPhoto3.setVisibility(View.VISIBLE);
             sPhotoTres = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 50);
-            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/3_"+imageName)));
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
         }
 
     }
