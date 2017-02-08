@@ -24,6 +24,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,25 +35,38 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ValidarPlacaActivity"
             android:label="@string/title_activity_validar"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".VistoriaActivity"
             android:label="@string/title_activity_validar"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".NovaVistoriaActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".ApoioActivity" />
-        <activity android:name=".VistoriaRealizadaActivity" />
-        <activity android:name=".DetailsActivity" />
-        <activity android:name=".EstacoesElevatoriasActivity" />
+        <activity
+            android:name=".ApoioActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VistoriaRealizadaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EstacoesElevatoriasActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MotorBombaActivity"
             android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_motor_bomba"
             android:theme="@style/AppTheme" ></activity>
         <meta-data
