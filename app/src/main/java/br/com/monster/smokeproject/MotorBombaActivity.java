@@ -39,6 +39,7 @@ public class MotorBombaActivity extends AppCompatActivity {
     private Auth auth;
     private int idVistoria;
     private int idCmb;
+    private int estacaoElevatoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class MotorBombaActivity extends AppCompatActivity {
             mode = extras.getString("modo");
             idVistoria = extras.getInt("vistoria_id");
             idCmb = extras.getInt("id_cmb");
+            estacaoElevatoria = extras.getInt("estacao_elevatoria");
         }
 
         etHorimetro = (EditText) findViewById(R.id.etHorimetro);
@@ -116,7 +118,13 @@ public class MotorBombaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ConjuntoMotorBomba conjuntoMotorBomba = new ConjuntoMotorBomba();
-                conjuntoMotorBomba.setEstacaoElevatoriaId(auth.getVistoriasArrayList().get(idVistoria).getEstacaoElevatoriaId());
+
+                if (auth.getVistoriasArrayList().size() == 0) {
+                    conjuntoMotorBomba.setEstacaoElevatoriaId(estacaoElevatoria);
+                } else {
+                    conjuntoMotorBomba.setEstacaoElevatoriaId(auth.getVistoriasArrayList().get(idVistoria).getEstacaoElevatoriaId());
+                }
+
                 conjuntoMotorBomba.setId(idCmb);
                 conjuntoMotorBomba.setHorimetro(etHorimetro.getText().toString().trim());
                 conjuntoMotorBomba.setAmperagem(etAmperagem.getText().toString().trim());

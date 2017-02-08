@@ -89,6 +89,7 @@ public class EstacaoAdapter extends RecyclerView.Adapter<EstacaoAdapter.PersonVi
             public void onClick(View v) {
                 Intent intent = new Intent(context,VistoriaActivity.class);
                 intent.putExtra("posicao", position);
+                intent.putExtra("estacao_elevatoria", lista.get(position).getId());
                 context.startActivity(intent);
             }
         });

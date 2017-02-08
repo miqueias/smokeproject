@@ -113,6 +113,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     private ArrayList<String> arrayListFotos;
     String timeStamp;
     String imageName;
+    int estacaoElevatoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +127,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
         if(extras != null) {
             position = extras.getInt("posicao");
             mode = extras.getString("modo");
+            estacaoElevatoria = extras.getInt("estacao_elevatoria");
         }
 
         //Fontes.ttf
@@ -517,6 +519,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                     @Override public void onItemClick(View view, int position_cmb) {
                         Intent it = new Intent(getBaseContext(), MotorBombaActivity.class);
                         it.putExtra("posicao", position_cmb);
+                        it.putExtra("estacao_elevatoria", estacaoElevatoria);
                         if (mode.equals("new")) {
                             it.putExtra("id_cmb", auth.getRota().getEstacoesElevatoriasArrayList().get(position).getConjuntoMotorBombaArrayList().get(position_cmb).getId());
                         }
