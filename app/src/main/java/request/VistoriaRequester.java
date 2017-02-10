@@ -49,13 +49,49 @@ public class VistoriaRequester {
 
         if (vistoria.getFoto2() != null) {
             if (!vistoria.getFoto2().equals("")) {
-                jsonPut.put("foto1", vistoria.getFoto2());
+                jsonPut.put("foto1", vistoria.getFoto2().replace("=", "#$#$"));
             }
         }
 
         if (vistoria.getFoto3() != null) {
             if (!vistoria.getFoto3().equals("")) {
-                jsonPut.put("foto2", vistoria.getFoto3());
+                jsonPut.put("foto2", vistoria.getFoto3().replace("=", "#$#$"));
+            }
+        }
+
+        if (vistoria.getFoto4() != null) {
+            if (!vistoria.getFoto4().equals("")) {
+                jsonPut.put("foto3", vistoria.getFoto4().replace("=", "#$#$"));
+            }
+        }
+
+        if (vistoria.getFoto5() != null) {
+            if (!vistoria.getFoto5().equals("")) {
+                jsonPut.put("foto4", vistoria.getFoto5().replace("=", "#$#$"));
+            }
+        }
+
+        if (vistoria.getFoto6() != null) {
+            if (!vistoria.getFoto6().equals("")) {
+                jsonPut.put("foto5", vistoria.getFoto6().replace("=", "#$#$"));
+            }
+        }
+
+        if (vistoria.getFoto7() != null) {
+            if (!vistoria.getFoto7().equals("")) {
+                jsonPut.put("foto6", vistoria.getFoto7().replace("=", "#$#$"));
+            }
+        }
+
+        if (vistoria.getFoto8() != null) {
+            if (!vistoria.getFoto8().equals("")) {
+                jsonPut.put("foto7", vistoria.getFoto8().replace("=", "#$#$"));
+            }
+        }
+
+        if (vistoria.getFoto9() != null) {
+            if (!vistoria.getFoto9().equals("")) {
+                jsonPut.put("foto8", vistoria.getFoto9().replace("=", "#$#$"));
             }
         }
 

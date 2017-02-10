@@ -894,12 +894,12 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                     vistoria.setFoto1(sPhotoUm);
                                     vistoria.setFoto2(sPhotoDois);
                                     vistoria.setFoto3(sPhotoTres);
-                                    vistoria.setFoto3(sPhotoQuatro);
-                                    vistoria.setFoto3(sPhotoCinco);
-                                    vistoria.setFoto3(sPhotoSeis);
-                                    vistoria.setFoto3(sPhotoSete);
-                                    vistoria.setFoto3(sPhotoOito);
-                                    vistoria.setFoto3(sPhotoNove);
+                                    vistoria.setFoto4(sPhotoQuatro);
+                                    vistoria.setFoto5(sPhotoCinco);
+                                    vistoria.setFoto6(sPhotoSeis);
+                                    vistoria.setFoto7(sPhotoSete);
+                                    vistoria.setFoto8(sPhotoOito);
+                                    vistoria.setFoto9(sPhotoNove);
 
                                     ProblemasCheckListAdapter problemasCheckListAdapter = (ProblemasCheckListAdapter) rvChecklist.getAdapter();
                                     ArrayList<Integer> checklists = problemasCheckListAdapter.getArrayListCheck();
@@ -1003,22 +1003,65 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                     timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
                     imageName = "S_"+timeStamp+".jpg";
 
-                    if (ivPhoto1.getDrawable() == null && (ivPhoto2.getDrawable() != null && ivPhoto3.getDrawable() != null)) {
+                    if (ivPhoto1.getDrawable() == null && (ivPhoto2.getDrawable() != null && ivPhoto3.getDrawable() != null && ivPhoto4.getDrawable() != null
+                                                        && ivPhoto5.getDrawable() != null && ivPhoto6.getDrawable() != null && ivPhoto7.getDrawable() != null
+                                                        && ivPhoto8.getDrawable() != null && ivPhoto9.getDrawable() != null)) {
                         imageName = "1_" + imageName;
                     }
 
-                    if (ivPhoto2.getDrawable() == null && (ivPhoto1.getDrawable() != null && ivPhoto3.getDrawable() != null)) {
+                    if (ivPhoto2.getDrawable() == null && (ivPhoto1.getDrawable() != null && ivPhoto3.getDrawable() != null && ivPhoto4.getDrawable() != null
+                            && ivPhoto5.getDrawable() != null && ivPhoto6.getDrawable() != null && ivPhoto7.getDrawable() != null
+                            && ivPhoto8.getDrawable() != null && ivPhoto9.getDrawable() != null)) {
                         imageName = "2_" + imageName;
                     }
 
-                    if (ivPhoto3.getDrawable() == null && (ivPhoto1.getDrawable() != null && ivPhoto2.getDrawable() != null)) {
+                    if (ivPhoto3.getDrawable() == null && (ivPhoto1.getDrawable() != null && ivPhoto3.getDrawable() != null && ivPhoto4.getDrawable() != null
+                            && ivPhoto5.getDrawable() != null && ivPhoto6.getDrawable() != null && ivPhoto7.getDrawable() != null
+                            && ivPhoto8.getDrawable() != null && ivPhoto9.getDrawable() != null)) {
                         imageName = "3_" + imageName;
                     }
 
-                    if (ivPhoto3.getDrawable() == null && ivPhoto1.getDrawable() == null && ivPhoto2.getDrawable() == null) {
-                        imageName = "1_" + imageName;
+                    if (ivPhoto4.getDrawable() == null && (ivPhoto1.getDrawable() != null && ivPhoto3.getDrawable() != null && ivPhoto2.getDrawable() != null
+                            && ivPhoto5.getDrawable() != null && ivPhoto6.getDrawable() != null && ivPhoto7.getDrawable() != null
+                            && ivPhoto8.getDrawable() != null && ivPhoto9.getDrawable() != null)) {
+                        imageName = "4_" + imageName;
                     }
 
+                    if (ivPhoto5.getDrawable() == null && (ivPhoto1.getDrawable() != null && ivPhoto3.getDrawable() != null && ivPhoto4.getDrawable() != null
+                            && ivPhoto2.getDrawable() != null && ivPhoto6.getDrawable() != null && ivPhoto7.getDrawable() != null
+                            && ivPhoto8.getDrawable() != null && ivPhoto9.getDrawable() != null)) {
+                        imageName = "5_" + imageName;
+                    }
+
+                    if (ivPhoto6.getDrawable() == null && (ivPhoto1.getDrawable() != null && ivPhoto3.getDrawable() != null && ivPhoto4.getDrawable() != null
+                            && ivPhoto5.getDrawable() != null && ivPhoto2.getDrawable() != null && ivPhoto7.getDrawable() != null
+                            && ivPhoto8.getDrawable() != null && ivPhoto9.getDrawable() != null)) {
+                        imageName = "6_" + imageName;
+                    }
+
+                    if (ivPhoto7.getDrawable() == null && (ivPhoto1.getDrawable() != null && ivPhoto3.getDrawable() != null && ivPhoto4.getDrawable() != null
+                            && ivPhoto5.getDrawable() != null && ivPhoto6.getDrawable() != null && ivPhoto2.getDrawable() != null
+                            && ivPhoto8.getDrawable() != null && ivPhoto9.getDrawable() != null)) {
+                        imageName = "7_" + imageName;
+                    }
+
+                    if (ivPhoto8.getDrawable() == null && (ivPhoto1.getDrawable() != null && ivPhoto3.getDrawable() != null && ivPhoto4.getDrawable() != null
+                            && ivPhoto5.getDrawable() != null && ivPhoto6.getDrawable() != null && ivPhoto7.getDrawable() != null
+                            && ivPhoto2.getDrawable() != null && ivPhoto9.getDrawable() != null)) {
+                        imageName = "8_" + imageName;
+                    }
+
+                    if (ivPhoto9.getDrawable() == null && (ivPhoto1.getDrawable() != null && ivPhoto3.getDrawable() != null && ivPhoto4.getDrawable() != null
+                            && ivPhoto5.getDrawable() != null && ivPhoto6.getDrawable() != null && ivPhoto7.getDrawable() != null
+                            && ivPhoto8.getDrawable() != null && ivPhoto2.getDrawable() != null)) {
+                        imageName = "9_" + imageName;
+                    }
+
+                    if (ivPhoto1.getDrawable() == null && ivPhoto2.getDrawable() == null && ivPhoto3.getDrawable() == null && ivPhoto4.getDrawable() == null
+                            && ivPhoto5.getDrawable() == null && ivPhoto6.getDrawable() == null && ivPhoto7.getDrawable() == null
+                            && ivPhoto8.getDrawable() == null && ivPhoto9.getDrawable() == null) {
+                        imageName = "1_" + imageName;
+                    }
 
                     //Cria o caminho do arquivo no SD Card
                     file = SDCardUtils.getPrivateFile(getBaseContext(), imageName, Environment.DIRECTORY_PICTURES);

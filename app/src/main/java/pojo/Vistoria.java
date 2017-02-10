@@ -37,6 +37,12 @@ public class Vistoria {
     private String foto1;
     private String foto2;
     private String foto3;
+    private String foto4;
+    private String foto5;
+    private String foto6;
+    private String foto7;
+    private String foto8;
+    private String foto9;
     private ArrayList<ProblemasCheckList> problemasMarcadosCheckListAdapters;
 
     public Vistoria() {
@@ -249,5 +255,53 @@ public class Vistoria {
 
     public void setProblemasMarcadosCheckListAdapters(ArrayList<ProblemasCheckList> problemasMarcadosCheckListAdapters) {
         this.problemasMarcadosCheckListAdapters = problemasMarcadosCheckListAdapters;
+    }
+
+    public String getFoto4() {
+        return foto4;
+    }
+
+    public void setFoto4(String foto4) {
+        this.foto4 = foto4;
+    }
+
+    public String getFoto5() {
+        return foto5;
+    }
+
+    public void setFoto5(String foto5) {
+        this.foto5 = foto5;
+    }
+
+    public String getFoto6() {
+        return foto6;
+    }
+
+    public void setFoto6(String foto6) {
+        this.foto6 = foto6;
+    }
+
+    public String getFoto7() {
+        return foto7;
+    }
+
+    public void setFoto7(String foto7) {
+        this.foto7 = foto7;
+    }
+
+    public String getFoto8() {
+        return foto8;
+    }
+
+    public void setFoto8(String foto8) {
+        this.foto8 = foto8;
+    }
+
+    public String getFoto9() {
+        return foto9;
+    }
+
+    public void setFoto9(String foto9) {
+        this.foto9 = foto9;
     }
 }
