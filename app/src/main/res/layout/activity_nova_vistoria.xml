@@ -343,7 +343,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="30dp">
+                    android:layout_marginBottom="30dp"
+                    android:layout_weight="1">
 
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
@@ -417,11 +418,87 @@
                     android:layout_marginRight="5dp"
                     android:scaleType="fitXY" />
 
+
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvPhotos"
                     android:visibility="gone"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <ImageView
+                    android:id="@+id/ivPhoto4"
+                    android:visibility="gone"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY"/>
+
+                <ImageView
+                    android:id="@+id/ivPhoto5"
+                    android:visibility="gone"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY" />
+
+                <ImageView
+                    android:id="@+id/ivPhoto6"
+                    android:visibility="gone"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <ImageView
+                    android:id="@+id/ivPhoto7"
+                    android:visibility="gone"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY"/>
+
+                <ImageView
+                    android:id="@+id/ivPhoto8"
+                    android:visibility="gone"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY" />
+
+                <ImageView
+                    android:id="@+id/ivPhoto9"
+                    android:visibility="gone"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY" />
 
             </LinearLayout>
 
@@ -448,7 +525,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="25dp"
-                    android:layout_marginBottom="50dp">
+                    android:layout_marginBottom="50dp"
+                    android:layout_weight="1">
                     <!--android:layout_marginLeft="16dp"-->
                     <!--android:layout_marginRight="16dp"-->
 

@@ -105,9 +105,9 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     private int position;
     private String mode;
     private ArrayList<ConjuntoMotorBomba> conjuntoMotorBombaArrayList;
-    private ImageView ivPhoto1, ivPhoto2, ivPhoto3;
+    private ImageView ivPhoto1, ivPhoto2, ivPhoto3, ivPhoto4, ivPhoto5, ivPhoto6, ivPhoto7, ivPhoto8, ivPhoto9;
     private Bitmap bitmap;
-    private String sPhotoUm, sPhotoDois, sPhotoTres;
+    private String sPhotoUm, sPhotoDois, sPhotoTres, sPhotoQuatro, sPhotoCinco, sPhotoSeis, sPhotoSete, sPhotoOito, sPhotoNove;
     private LinearLayout panel_problema, panel_problema_externo;
     private CardView cvAlerta;
     private ArrayList<String> arrayListFotos;
@@ -462,6 +462,330 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                 return false;
             }
         });
+        ivPhoto4 = (ImageView) findViewById(R.id.ivPhoto4);
+        ivPhoto4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getBaseContext(), DetailsActivity.class);
+                Bundle extras = new Bundle();
+                String fileNameAux = "";
+                if (arrayListFotos.size() > 0) {
+                    for (int i = 0; i < arrayListFotos.size(); i++) {
+                        fileNameAux = arrayListFotos.get(i);
+
+                        if (String.valueOf(fileNameAux.charAt(76)).equals("4")) {
+                            break;
+                        }
+                    }
+                }
+                it.putExtra("imageUri", fileNameAux);
+                it.putExtras(extras);
+                startActivity(it);
+            }
+        });
+        ivPhoto4.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(ivPhoto4.getDrawable() != null){
+                    new AlertDialog.Builder(NovaVistoriaActivity.this)
+                            .setTitle("SisInspe")
+                            .setCancelable(false)
+                            // Set Dialog Message
+                            .setMessage("Deseja realmente apagar foto?")
+                            .setNegativeButton("Cancelar", null) // dismisses by default
+                            // Positive button
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ivPhoto4.setImageResource(0);
+                                    ivPhoto4.setVisibility(View.GONE);
+                                    sPhotoQuatro = "";
+                                    String fileNameAux = "";
+                                    if (arrayListFotos.size() > 0) {
+                                        for (int i = 0; i < arrayListFotos.size(); i++) {
+                                            fileNameAux = arrayListFotos.get(i);
+
+                                            if (String.valueOf(fileNameAux.charAt(76)).equals("4")) {
+                                                arrayListFotos.remove(i);
+                                            }
+                                        }
+                                    }
+                                }
+                            }).show();
+
+                }
+                return false;
+            }
+        });
+        ivPhoto5 = (ImageView) findViewById(R.id.ivPhoto5);
+        ivPhoto5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getBaseContext(), DetailsActivity.class);
+                Bundle extras = new Bundle();
+                String fileNameAux = "";
+                if (arrayListFotos.size() > 0) {
+                    for (int i = 0; i < arrayListFotos.size(); i++) {
+                        fileNameAux = arrayListFotos.get(i);
+
+                        if (String.valueOf(fileNameAux.charAt(76)).equals("5")) {
+                            break;
+                        }
+                    }
+                }
+                it.putExtra("imageUri", fileNameAux);
+                it.putExtras(extras);
+                startActivity(it);
+            }
+        });
+        ivPhoto5.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(ivPhoto5.getDrawable() != null){
+                    new AlertDialog.Builder(NovaVistoriaActivity.this)
+                            .setTitle("SisInspe")
+                            .setCancelable(false)
+                            // Set Dialog Message
+                            .setMessage("Deseja realmente apagar foto?")
+                            .setNegativeButton("Cancelar", null) // dismisses by default
+                            // Positive button
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ivPhoto5.setImageResource(0);
+                                    ivPhoto5.setVisibility(View.GONE);
+                                    sPhotoCinco = "";
+                                    String fileNameAux = "";
+                                    if (arrayListFotos.size() > 0) {
+                                        for (int i = 0; i < arrayListFotos.size(); i++) {
+                                            fileNameAux = arrayListFotos.get(i);
+
+                                            if (String.valueOf(fileNameAux.charAt(76)).equals("5")) {
+                                                arrayListFotos.remove(i);
+                                            }
+                                        }
+                                    }
+                                }
+                            }).show();
+
+                }
+                return false;
+            }
+        });
+        ivPhoto6 = (ImageView) findViewById(R.id.ivPhoto6);
+        ivPhoto6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getBaseContext(), DetailsActivity.class);
+                Bundle extras = new Bundle();
+                String fileNameAux = "";
+                if (arrayListFotos.size() > 0) {
+                    for (int i = 0; i < arrayListFotos.size(); i++) {
+                        fileNameAux = arrayListFotos.get(i);
+
+                        if (String.valueOf(fileNameAux.charAt(76)).equals("6")) {
+                            break;
+                        }
+                    }
+                }
+                it.putExtra("imageUri", fileNameAux);
+                it.putExtras(extras);
+                startActivity(it);
+            }
+        });
+        ivPhoto6.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(ivPhoto6.getDrawable() != null){
+                    new AlertDialog.Builder(NovaVistoriaActivity.this)
+                            .setTitle("SisInspe")
+                            .setCancelable(false)
+                            // Set Dialog Message
+                            .setMessage("Deseja realmente apagar foto?")
+                            .setNegativeButton("Cancelar", null) // dismisses by default
+                            // Positive button
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ivPhoto6.setImageResource(0);
+                                    ivPhoto6.setVisibility(View.GONE);
+                                    sPhotoSeis = "";
+                                    String fileNameAux = "";
+                                    if (arrayListFotos.size() > 0) {
+                                        for (int i = 0; i < arrayListFotos.size(); i++) {
+                                            fileNameAux = arrayListFotos.get(i);
+
+                                            if (String.valueOf(fileNameAux.charAt(76)).equals("6")) {
+                                                arrayListFotos.remove(i);
+                                            }
+                                        }
+                                    }
+                                }
+                            }).show();
+
+                }
+                return false;
+            }
+        });
+        ivPhoto7 = (ImageView) findViewById(R.id.ivPhoto7);
+        ivPhoto7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getBaseContext(), DetailsActivity.class);
+                Bundle extras = new Bundle();
+                String fileNameAux = "";
+                if (arrayListFotos.size() > 0) {
+                    for (int i = 0; i < arrayListFotos.size(); i++) {
+                        fileNameAux = arrayListFotos.get(i);
+
+                        if (String.valueOf(fileNameAux.charAt(76)).equals("7")) {
+                            break;
+                        }
+                    }
+                }
+                it.putExtra("imageUri", fileNameAux);
+                it.putExtras(extras);
+                startActivity(it);
+            }
+        });
+        ivPhoto7.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(ivPhoto7.getDrawable() != null){
+                    new AlertDialog.Builder(NovaVistoriaActivity.this)
+                            .setTitle("SisInspe")
+                            .setCancelable(false)
+                            // Set Dialog Message
+                            .setMessage("Deseja realmente apagar foto?")
+                            .setNegativeButton("Cancelar", null) // dismisses by default
+                            // Positive button
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ivPhoto7.setImageResource(0);
+                                    ivPhoto7.setVisibility(View.GONE);
+                                    sPhotoSete = "";
+                                    String fileNameAux = "";
+                                    if (arrayListFotos.size() > 0) {
+                                        for (int i = 0; i < arrayListFotos.size(); i++) {
+                                            fileNameAux = arrayListFotos.get(i);
+
+                                            if (String.valueOf(fileNameAux.charAt(76)).equals("7")) {
+                                                arrayListFotos.remove(i);
+                                            }
+                                        }
+                                    }
+                                }
+                            }).show();
+
+                }
+                return false;
+            }
+        });
+        ivPhoto8 = (ImageView) findViewById(R.id.ivPhoto8);
+        ivPhoto8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getBaseContext(), DetailsActivity.class);
+                Bundle extras = new Bundle();
+                String fileNameAux = "";
+                if (arrayListFotos.size() > 0) {
+                    for (int i = 0; i < arrayListFotos.size(); i++) {
+                        fileNameAux = arrayListFotos.get(i);
+
+                        if (String.valueOf(fileNameAux.charAt(76)).equals("8")) {
+                            break;
+                        }
+                    }
+                }
+                it.putExtra("imageUri", fileNameAux);
+                it.putExtras(extras);
+                startActivity(it);
+            }
+        });
+        ivPhoto8.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(ivPhoto8.getDrawable() != null){
+                    new AlertDialog.Builder(NovaVistoriaActivity.this)
+                            .setTitle("SisInspe")
+                            .setCancelable(false)
+                            // Set Dialog Message
+                            .setMessage("Deseja realmente apagar foto?")
+                            .setNegativeButton("Cancelar", null) // dismisses by default
+                            // Positive button
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ivPhoto8.setImageResource(0);
+                                    ivPhoto8.setVisibility(View.GONE);
+                                    sPhotoOito = "";
+                                    String fileNameAux = "";
+                                    if (arrayListFotos.size() > 0) {
+                                        for (int i = 0; i < arrayListFotos.size(); i++) {
+                                            fileNameAux = arrayListFotos.get(i);
+
+                                            if (String.valueOf(fileNameAux.charAt(76)).equals("8")) {
+                                                arrayListFotos.remove(i);
+                                            }
+                                        }
+                                    }
+                                }
+                            }).show();
+
+                }
+                return false;
+            }
+        });
+        ivPhoto9 = (ImageView) findViewById(R.id.ivPhoto9);
+        ivPhoto9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getBaseContext(), DetailsActivity.class);
+                Bundle extras = new Bundle();
+                String fileNameAux = "";
+                if (arrayListFotos.size() > 0) {
+                    for (int i = 0; i < arrayListFotos.size(); i++) {
+                        fileNameAux = arrayListFotos.get(i);
+
+                        if (String.valueOf(fileNameAux.charAt(76)).equals("9")) {
+                            break;
+                        }
+                    }
+                }
+                it.putExtra("imageUri", fileNameAux);
+                it.putExtras(extras);
+                startActivity(it);
+            }
+        });
+        ivPhoto9.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(ivPhoto9.getDrawable() != null){
+                    new AlertDialog.Builder(NovaVistoriaActivity.this)
+                            .setTitle("SisInspe")
+                            .setCancelable(false)
+                            // Set Dialog Message
+                            .setMessage("Deseja realmente apagar foto?")
+                            .setNegativeButton("Cancelar", null) // dismisses by default
+                            // Positive button
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ivPhoto9.setImageResource(0);
+                                    ivPhoto9.setVisibility(View.GONE);
+                                    sPhotoNove = "";
+                                    String fileNameAux = "";
+                                    if (arrayListFotos.size() > 0) {
+                                        for (int i = 0; i < arrayListFotos.size(); i++) {
+                                            fileNameAux = arrayListFotos.get(i);
+
+                                            if (String.valueOf(fileNameAux.charAt(76)).equals("9")) {
+                                                arrayListFotos.remove(i);
+                                            }
+                                        }
+                                    }
+                                }
+                            }).show();
+
+                }
+                return false;
+            }
+        });
 
         rvChecklist = (RecyclerView) findViewById(R.id.rvChecklist);
         llm = new LinearLayoutManager(this);
@@ -570,6 +894,12 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                     vistoria.setFoto1(sPhotoUm);
                                     vistoria.setFoto2(sPhotoDois);
                                     vistoria.setFoto3(sPhotoTres);
+                                    vistoria.setFoto3(sPhotoQuatro);
+                                    vistoria.setFoto3(sPhotoCinco);
+                                    vistoria.setFoto3(sPhotoSeis);
+                                    vistoria.setFoto3(sPhotoSete);
+                                    vistoria.setFoto3(sPhotoOito);
+                                    vistoria.setFoto3(sPhotoNove);
 
                                     ProblemasCheckListAdapter problemasCheckListAdapter = (ProblemasCheckListAdapter) rvChecklist.getAdapter();
                                     ArrayList<Integer> checklists = problemasCheckListAdapter.getArrayListCheck();
@@ -777,7 +1107,62 @@ private void showImage(File file, String imageName) {
             ivPhoto3.setVisibility(View.VISIBLE);
             sPhotoTres = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 50);
             fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
+        } else if (ivPhoto4.getDrawable() == null) {
+            int w = ivPhoto4.getWidth();
+            int h = ivPhoto4.getHeight();
+            //Redimensiona a imagem para o tamanho do IV
+            Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
+            ivPhoto4.setImageBitmap(bitmap);
+            ivPhoto4.setVisibility(View.VISIBLE);
+            sPhotoQuatro = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 50);
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
+        } else if (ivPhoto5.getDrawable() == null) {
+            int w = ivPhoto5.getWidth();
+            int h = ivPhoto5.getHeight();
+            //Redimensiona a imagem para o tamanho do IV
+            Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
+            ivPhoto5.setImageBitmap(bitmap);
+            ivPhoto5.setVisibility(View.VISIBLE);
+            sPhotoCinco = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 50);
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
+        } else if (ivPhoto6.getDrawable() == null) {
+            int w = ivPhoto6.getWidth();
+            int h = ivPhoto6.getHeight();
+            //Redimensiona a imagem para o tamanho do IV
+            Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
+            ivPhoto6.setImageBitmap(bitmap);
+            ivPhoto6.setVisibility(View.VISIBLE);
+            sPhotoSeis = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 50);
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
+        } else if (ivPhoto7.getDrawable() == null) {
+            int w = ivPhoto7.getWidth();
+            int h = ivPhoto7.getHeight();
+            //Redimensiona a imagem para o tamanho do IV
+            Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
+            ivPhoto7.setImageBitmap(bitmap);
+            ivPhoto7.setVisibility(View.VISIBLE);
+            sPhotoSete = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 50);
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
+        } else if (ivPhoto8.getDrawable() == null) {
+            int w = ivPhoto8.getWidth();
+            int h = ivPhoto8.getHeight();
+            //Redimensiona a imagem para o tamanho do IV
+            Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
+            ivPhoto8.setImageBitmap(bitmap);
+            ivPhoto8.setVisibility(View.VISIBLE);
+            sPhotoOito = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 50);
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
+        } else if (ivPhoto9.getDrawable() == null) {
+            int w = ivPhoto9.getWidth();
+            int h = ivPhoto9.getHeight();
+            //Redimensiona a imagem para o tamanho do IV
+            Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w ,h , false);
+            ivPhoto9.setImageBitmap(bitmap);
+            ivPhoto9.setVisibility(View.VISIBLE);
+            sPhotoNove = encodeToBase64(bitmap, Bitmap.CompressFormat.JPEG, 50);
+            fileName = String.valueOf(Uri.fromFile(new File("/storage/emulated/0/Android/data/br.com.monster.smokeproject/files/Pictures/"+imageName)));
         }
+
 
     }
 }
