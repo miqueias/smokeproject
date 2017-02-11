@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class MotorBombaActivity extends AppCompatActivity {
     private int idVistoria;
     private int idCmb;
     private int estacaoElevatoria;
+    private TextView tvTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,17 @@ public class MotorBombaActivity extends AppCompatActivity {
         etHorimetro.setTypeface(RalewayMedium);
         etAmperagem = (EditText) findViewById(R.id.etAmperagem);
         etAmperagem.setTypeface(RalewayMedium);
+
+        String descMotorBomba;
+
+        if (mode.equals("view")) {
+            descMotorBomba = auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getNumero();
+        } else {
+            descMotorBomba = auth.getRota().getEstacoesElevatoriasArrayList().get(idVistoria).getConjuntoMotorBombaArrayList().get(position).getNumero();
+        }
+
+        tvTitle = (TextView) findViewById(R.id.tvTitle);
+        tvTitle.setText(descMotorBomba);
 
         if (mode.equals("view")) {
             etHorimetro.setText(auth.getVistoriasArrayList().get(idVistoria).getEstacoesElevatorias().getConjuntoMotorBombaArrayList().get(position).getHorimetro());
