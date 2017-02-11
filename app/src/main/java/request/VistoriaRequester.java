@@ -1,5 +1,6 @@
 package request;
 
+import android.content.Context;
 import android.util.Base64;
 import android.util.Log;
 
@@ -15,6 +16,7 @@ import exception.VistoriaException;
 import pojo.Auth;
 import pojo.ConjuntoMotorBomba;
 import pojo.Vistoria;
+import util.Internet;
 
 /**
  * Created by Miqueias on 1/23/17.
@@ -23,6 +25,8 @@ import pojo.Vistoria;
 public class VistoriaRequester {
 
     Auth auth;
+    private Internet internet;
+    public Context context;
 
     public VistoriaRequester() {
 
@@ -141,6 +145,13 @@ public class VistoriaRequester {
                 jsonPut.put("cmbs"+i, jsonObjectCmb.toString());
             }
         }
+
+        /*internet = new Internet(context);
+        if (internet.verificarConexao()) {
+
+        } else {
+
+        }*/
 
         BaseRequester baseRequester = new BaseRequester();
         baseRequester.setUrl(Requester.API_URL + "/add_vistoria");

@@ -5,11 +5,16 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 
 import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
@@ -25,6 +30,7 @@ public abstract class Util
     private static Message message = null;
     private static ProgressDialog pd = null;
     public static final String PREFS_NAME = "ESTACOES_TRABALHADAS";
+    public static final String VISTORIA_FOLDER = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/VISTORIAS_APP/";
 
     public static String ChangeStringTosha1(String input) throws NoSuchAlgorithmException {
         MessageDigest mDigest = MessageDigest.getInstance("SHA1");
@@ -255,6 +261,35 @@ public abstract class Util
         //data atual end
 
         return timeString;
+    }
+
+    public static void saveFile(String text) throws IOException {
+        File diretorio = new File(VISTORIA_FOLDER);
+
+        if (diretorio.exists()) {
+            File fileExt = new File(VISTORIA_FOLDER, "VISTORIAS_OFF_LINE.txt");
+
+            if (!fileExt.exists()) {
+                fileExt.getParentFile().mkdirs();
+            }
+
+            FileOutputStream fosExt = null;
+            try {
+                text = text + "++++";
+                fosExt = new FileOutputStream(fileExt);
+                fosExt.write(text.getBytes());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                fosExt.close();
+            }
+
+        } else {
+            diretorio.mkdirs();
+            saveFile(text);
+        }
     }
 
 }

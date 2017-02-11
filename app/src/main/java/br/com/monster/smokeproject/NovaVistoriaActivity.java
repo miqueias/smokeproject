@@ -910,6 +910,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                         UserRequester userRequester = new UserRequester();
                                         userRequester.loadAuth(auth.getLogin(), auth.getSenha(), "");
 
+                                        vistoriaRequester.context = NovaVistoriaActivity.this;
                                         vistoriaRequester.registrarVistoria(vistoria, checklists, conjuntoMotorBombaArrayList);
                                         Util.AtivaDialogHandler(5, "", "");
                                         Util.AtivaDialogHandler(1, "SisInspe", "Vistoria registada com sucesso, obrigado!");
