@@ -5,12 +5,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,12 +20,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.concurrent.ExecutionException;
 
+import exception.VistoriaException;
 import pojo.Auth;
+import request.BaseRequester;
+import request.Method;
+import request.Requester;
 import request.UserRequester;
+import util.GerenciadorTxt;
+import util.Internet;
 import util.Util;
 
 public class HomeActivity extends AppCompatActivity
@@ -36,6 +46,8 @@ public class HomeActivity extends AppCompatActivity
 
     private TextView tvOla, tvNomeBV, tvData, tvEscala, tvTipoRota, tvDescRota;
     private Auth auth;
+    Handler mHandler = new Handler();
+    boolean isRunning = true;
 
 
     @Override
@@ -199,15 +211,19 @@ public class HomeActivity extends AppCompatActivity
                     @Override
                     public void run() {
 
-                        UserRequester userRequester = new UserRequester();
-                        try {
-                            userRequester.loadAuth(auth.getLogin(), auth.getSenha(), "");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        } catch (ExecutionException e) {
-                            e.printStackTrace();
+                        Internet internet;
+                        internet = new Internet(HomeActivity.this);
+                        if (internet.verificarConexao()) {
+                            UserRequester userRequester = new UserRequester();
+                            try {
+                                userRequester.loadAuth(auth.getLogin(), auth.getSenha(), "");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            }
                         }
 
                         Intent it = new Intent(getBaseContext(), VistoriaRealizadaActivity.class);
@@ -235,6 +251,72 @@ public class HomeActivity extends AppCompatActivity
         if (auth.getOperador().getValidaPlaca().equals("false")) {
             btnPlaca.setVisibility(View.INVISIBLE);
         }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                while (isRunning) {
+                    try {
+                        Thread.sleep(10000);
+                        mHandler.post(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                // TODO Auto-generated method stub
+                                // Write your code here to update the UI.
+                                Internet internet;
+                                internet = new Internet(HomeActivity.this);
+                                if (internet.verificarConexao()) {
+                                    try {
+                                        GerenciadorTxt gerenciadorTxt = new GerenciadorTxt();
+                                        String conteudoText = gerenciadorTxt.lerArquivoTxt(new File(Util.VISTORIA_FILE));
+
+                                        if (!conteudoText.equals("")) {
+                                            String[] vistorias = conteudoText.split("@@@@");
+
+                                            if (vistorias.length > 0) {
+                                                UserRequester userRequester = new UserRequester();
+                                                userRequester.loadAuth(auth.getLogin(), auth.getSenha(), "");
+
+                                                for (int i = 0; i < vistorias.length; i++) {
+                                                    BaseRequester baseRequester = new BaseRequester();
+                                                    baseRequester.setUrl(Requester.API_URL + "/add_vistoria");
+                                                    baseRequester.setMethod(Method.POST);
+
+                                                    JSONObject jsonObjectOff = new JSONObject(vistorias[i]);
+                                                    jsonObjectOff.remove("token");
+                                                    jsonObjectOff.put("token", auth.getToken());
+
+                                                    baseRequester.setJsonString(jsonObjectOff.toString());
+
+                                                    String jsonReturnOff = baseRequester.execute(baseRequester).get();
+                                                    JSONObject jsonObjectAuth = new JSONObject(jsonReturnOff);
+                                                    Log.d("API", jsonReturnOff);
+
+                                                    Toast.makeText(HomeActivity.this, jsonObjectAuth.get("mensagem").toString(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+
+                                            gerenciadorTxt.deletarArquivoTxt(new File(Util.VISTORIA_FILE));
+                                        }
+                                    }catch(InterruptedException e){
+                                        e.printStackTrace();
+                                    }catch(ExecutionException e){
+                                        e.printStackTrace();
+                                    }catch(JSONException e){
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        });
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
+                }
+            }
+        }).start();
+
     }
 
     @Override

@@ -67,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (!internet.verificarConexao()) {
                     new AlertDialog.Builder(LoginActivity.this)
                             .setCancelable(false)
+                            .setTitle(R.string.app_name)
                             .setMessage("Por favor, verifique sua conexao com a internet.")
 
                             // Positive button

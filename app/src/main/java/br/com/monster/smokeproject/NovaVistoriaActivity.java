@@ -71,6 +71,7 @@ import request.UserRequester;
 import request.VistoriaRequester;
 import util.DividerItemDecoration;
 import util.ImageResizeUtils;
+import util.Internet;
 import util.MyFileContentProvider;
 import util.RecyclerItemClickListener;
 import util.SDCardUtils;
@@ -911,8 +912,12 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                                     VistoriaRequester vistoriaRequester = new VistoriaRequester();
 
                                     try {
-                                        UserRequester userRequester = new UserRequester();
-                                        userRequester.loadAuth(auth.getLogin(), auth.getSenha(), "");
+                                        Internet internet;
+                                        internet = new Internet(NovaVistoriaActivity.this);
+                                        if (internet.verificarConexao()) {
+                                            UserRequester userRequester = new UserRequester();
+                                            userRequester.loadAuth(auth.getLogin(), auth.getSenha(), "");
+                                        }
 
                                         vistoriaRequester.context = NovaVistoriaActivity.this;
                                         vistoriaRequester.registrarVistoria(vistoria, checklists, conjuntoMotorBombaArrayList);

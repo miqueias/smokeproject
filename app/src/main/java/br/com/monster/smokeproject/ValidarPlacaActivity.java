@@ -1,6 +1,8 @@
 package br.com.monster.smokeproject;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +28,7 @@ import pojo.Auth;
 import request.BaseRequester;
 import request.Method;
 import request.Requester;
+import util.Internet;
 
 public class ValidarPlacaActivity extends AppCompatActivity {
 
@@ -54,47 +57,61 @@ public class ValidarPlacaActivity extends AppCompatActivity {
             btnValidar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(etPlaca.getWindowToken(), 0);
-                minhaPlaca = etPlaca.getText().toString();
 
-                auth = Auth.getInstance();
-                final JSONObject jsonPut = new JSONObject();
+                Internet internet;
+                internet = new Internet(ValidarPlacaActivity.this);
+                if (internet.verificarConexao()) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(etPlaca.getWindowToken(), 0);
+                    minhaPlaca = etPlaca.getText().toString();
 
-                try {
-                    jsonPut.put("placa", minhaPlaca);
-                    jsonPut.put("operador_id", auth.getOperador().getId());
-                    jsonPut.put("token", auth.getToken());
+                    auth = Auth.getInstance();
+                    final JSONObject jsonPut = new JSONObject();
 
-                    BaseRequester baseRequester = new BaseRequester();
-                    baseRequester.setUrl(Requester.API_URL + "/validar_placa");
-                    baseRequester.setMethod(Method.POST);
-                    baseRequester.setJsonString(jsonPut.toString());
+                    try {
+                        jsonPut.put("placa", minhaPlaca);
+                        jsonPut.put("operador_id", auth.getOperador().getId());
+                        jsonPut.put("token", auth.getToken());
 
-                    String jsonReturn = baseRequester.execute(baseRequester).get();
-                    Log.d("API", jsonReturn);
+                        BaseRequester baseRequester = new BaseRequester();
+                        baseRequester.setUrl(Requester.API_URL + "/validar_placa");
+                        baseRequester.setMethod(Method.POST);
+                        baseRequester.setJsonString(jsonPut.toString());
 
-                    JSONObject jsonObjectPlaca = new JSONObject(jsonReturn);
+                        String jsonReturn = baseRequester.execute(baseRequester).get();
+                        Log.d("API", jsonReturn);
 
-                    if (jsonObjectPlaca.get("status").equals("ERRO")) {
-                        snackbar = Snackbar.make(linearLayout, jsonObjectPlaca.get("mensagem").toString(), Snackbar.LENGTH_INDEFINITE);
-                    } else {
-                        snackbar = Snackbar.make(linearLayout, "CÓDIGO: " + jsonObjectPlaca.getJSONObject("dados").get("codigo").toString(), Snackbar.LENGTH_INDEFINITE);
+                        JSONObject jsonObjectPlaca = new JSONObject(jsonReturn);
+
+                        if (jsonObjectPlaca.get("status").equals("ERRO")) {
+                            snackbar = Snackbar.make(linearLayout, jsonObjectPlaca.get("mensagem").toString(), Snackbar.LENGTH_INDEFINITE);
+                        } else {
+                            snackbar = Snackbar.make(linearLayout, "CÓDIGO: " + jsonObjectPlaca.getJSONObject("dados").get("codigo").toString(), Snackbar.LENGTH_INDEFINITE);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
                     }
+                    View snackbarView = snackbar.getView();
+                    snackbarView.setBackgroundResource(R.color.black);
+                    snackbar.show();
+                } else {
+                    new AlertDialog.Builder(ValidarPlacaActivity.this)
+                            .setCancelable(false)
+                            .setTitle(R.string.app_name)
+                            .setMessage("Por favor, verifique sua conexao com a internet.")
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
+                            // Positive button
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
                 }
-
-
-                View snackbarView = snackbar.getView();
-                snackbarView.setBackgroundResource(R.color.black);
-                snackbar.show();
-
 
             }
         });

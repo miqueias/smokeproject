@@ -1,5 +1,7 @@
 package br.com.monster.smokeproject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -134,30 +136,59 @@ public class MotorBombaActivity extends AppCompatActivity {
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConjuntoMotorBomba conjuntoMotorBomba = new ConjuntoMotorBomba();
 
-                if (auth.getVistoriasArrayList().size() == 0) {
-                    conjuntoMotorBomba.setEstacaoElevatoriaId(estacaoElevatoria);
+                if (etHorimetro.getText().toString().trim().equals("")) {
+                    new AlertDialog.Builder(MotorBombaActivity.this)
+                            .setCancelable(false)
+                            .setTitle(R.string.app_name)
+                            .setMessage("Horímetro não informado!")
+
+                            // Positive button
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+
+                } else if (etAmperagem.getText().toString().trim().equals("")) {
+                    new AlertDialog.Builder(MotorBombaActivity.this)
+                            .setCancelable(false)
+                            .setTitle(R.string.app_name)
+                            .setMessage("Amperagem não informada!")
+
+                            // Positive button
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
+
                 } else {
-                    conjuntoMotorBomba.setEstacaoElevatoriaId(auth.getVistoriasArrayList().get(idVistoria).getEstacaoElevatoriaId());
+                    ConjuntoMotorBomba conjuntoMotorBomba = new ConjuntoMotorBomba();
+
+                    if (auth.getVistoriasArrayList().size() == 0) {
+                        conjuntoMotorBomba.setEstacaoElevatoriaId(estacaoElevatoria);
+                    } else {
+                        conjuntoMotorBomba.setEstacaoElevatoriaId(auth.getVistoriasArrayList().get(idVistoria).getEstacaoElevatoriaId());
+                    }
+
+                    conjuntoMotorBomba.setId(idCmb);
+                    conjuntoMotorBomba.setHorimetro(etHorimetro.getText().toString().trim());
+                    conjuntoMotorBomba.setAmperagem(etAmperagem.getText().toString().trim());
+
+                    ChecklistAdapter checkListAdapter = (ChecklistAdapter) rvChecklist.getAdapter();
+                    ArrayList<Integer> checklists = checkListAdapter.getArrayListCheck();
+                    ArrayList<Problemas> problemasArrayList = new ArrayList<Problemas>();
+
+                    for (int i = 0; i < checklists.size(); i++) {
+                        Problemas problemas = new Problemas();
+                        problemas.setId(checklists.get(i));
+                        problemasArrayList.add(problemas);
+                    }
+                    conjuntoMotorBomba.setProblemasArrayList(problemasArrayList);
+                    DataTransferObject.getInstance().setDto(conjuntoMotorBomba);
+                    finish();
                 }
-
-                conjuntoMotorBomba.setId(idCmb);
-                conjuntoMotorBomba.setHorimetro(etHorimetro.getText().toString().trim());
-                conjuntoMotorBomba.setAmperagem(etAmperagem.getText().toString().trim());
-
-                ChecklistAdapter checkListAdapter = (ChecklistAdapter) rvChecklist.getAdapter();
-                ArrayList<Integer> checklists = checkListAdapter.getArrayListCheck();
-                ArrayList<Problemas> problemasArrayList = new ArrayList<Problemas>();
-
-                for (int i = 0; i < checklists.size(); i++) {
-                    Problemas problemas = new Problemas();
-                    problemas.setId(checklists.get(i));
-                    problemasArrayList.add(problemas);
-                }
-                conjuntoMotorBomba.setProblemasArrayList(problemasArrayList);
-                DataTransferObject.getInstance().setDto(conjuntoMotorBomba);
-                finish();
             }
         });
 

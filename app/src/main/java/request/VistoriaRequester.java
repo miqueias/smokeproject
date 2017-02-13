@@ -176,7 +176,15 @@ public class VistoriaRequester {
 
             gerenciadorTxt.criarDireotorioTxt(new File(Util.VISTORIA_FOLDER));
             gerenciadorTxt.criarArquivoTxt(new File(Util.VISTORIA_FILE));
-            gerenciadorTxt.escreverArquivoTxt(jsonPut.toString() + "@@@@", new File(Util.VISTORIA_FILE));
+            String conteudoTxt = gerenciadorTxt.lerArquivoTxt(new File(Util.VISTORIA_FILE));
+
+            if (!conteudoTxt.equals("")) {
+                conteudoTxt = conteudoTxt + jsonPut.toString() + "@@@@";
+            } else {
+                conteudoTxt = jsonPut.toString() + "@@@@";
+            }
+
+            gerenciadorTxt.escreverArquivoTxt(conteudoTxt, new File(Util.VISTORIA_FILE));
 
         }
     }
