@@ -136,7 +136,14 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
                     if (personViewHolder.cbChecklist.isChecked()) {
                         arrayListCheck.add(lista.get(position).getId());
                     } else {
-                        arrayListCheck.remove(position);
+                        if (arrayListCheck.size() > 0) {
+
+                            for (int i = 0; i < arrayListCheck.size(); i++) {
+                                if (arrayListCheck.get(i) == position) {
+                                    arrayListCheck.remove(i);
+                                }
+                            }
+                        }
                     }
                 }
             });
