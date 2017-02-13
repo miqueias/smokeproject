@@ -11,11 +11,15 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.com.monster.smokeproject.R;
 import model.Lista;
+import pojo.Auth;
 import pojo.Problemas;
+import pojo.ProblemasCheckList;
 
 /**
  * Created by Marlon on 09/12/2016.
@@ -27,6 +31,9 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
     public Context context;
     private String mode;
     private ArrayList<Integer> arrayListCheck;
+    private Auth auth;
+    private int idConjuntoMotorBomba;
+    private int idEstacaoElevatoria;
 
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
@@ -85,6 +92,22 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
         this.arrayListCheck = arrayListCheck;
     }
 
+    public int getIdConjuntoMotorBomba() {
+        return idConjuntoMotorBomba;
+    }
+
+    public void setIdConjuntoMotorBomba(int idConjuntoMotorBomba) {
+        this.idConjuntoMotorBomba = idConjuntoMotorBomba;
+    }
+
+    public int getIdEstacaoElevatoria() {
+        return idEstacaoElevatoria;
+    }
+
+    public void setIdEstacaoElevatoria(int idEstacaoElevatoria) {
+        this.idEstacaoElevatoria = idEstacaoElevatoria;
+    }
+
     @Override
     public PersonViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_checklist, viewGroup, false);
@@ -102,6 +125,22 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
             }
             personViewHolder.cbChecklist.setEnabled(false);
         } else {
+
+            auth = Auth.getInstance();
+            if (auth.getRota().getEstacoesElevatoriasArrayList().get(idEstacaoElevatoria).getHashMapProblemaCMBMarcadoUltimaVistoria().size() > 0) {
+                HashMap<Integer, Integer> hashMap;
+                hashMap = auth.getRota().getEstacoesElevatoriasArrayList().get(idEstacaoElevatoria).getHashMapProblemaCMBMarcadoUltimaVistoria();
+                for ( Map.Entry<Integer, Integer> entry : hashMap.entrySet()) {
+                    Integer idCmb = entry.getKey();
+                    Integer idProblema = entry.getValue();
+
+                    if (idCmb == idConjuntoMotorBomba) {
+                        if (idProblema == lista.get(position).getId()) {
+                            personViewHolder.cbChecklist.setChecked(true);
+                        }
+                    }
+                }
+            }
             personViewHolder.cbChecklist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

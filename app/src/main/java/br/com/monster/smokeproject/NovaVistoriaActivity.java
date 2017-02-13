@@ -114,6 +114,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     String timeStamp;
     String imageName;
     int estacaoElevatoria;
+    int estacaoElevatoriaPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +129,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             position = extras.getInt("posicao");
             mode = extras.getString("modo");
             estacaoElevatoria = extras.getInt("estacao_elevatoria");
+            estacaoElevatoriaPosition = extras.getInt("estacao_elevatoria_position");
         }
 
         //Fontes.ttf
@@ -816,7 +818,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             adapterDois = new ProblemasCheckListAdapter(problemasCheckLists, mode, this);
         } else {
             adapterDois = new ProblemasCheckListAdapter(auth.getProblemasCheckListArrayList(), mode, this);
-            adapterDois.setIdEstacaoElevatoria(position);
+            adapterDois.setIdEstacaoElevatoria(estacaoElevatoriaPosition);
         }
 
         rvChecklist.setAdapter(adapterDois);
@@ -845,6 +847,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                         Intent it = new Intent(getBaseContext(), MotorBombaActivity.class);
                         it.putExtra("posicao", position_cmb);
                         it.putExtra("estacao_elevatoria", estacaoElevatoria);
+                        it.putExtra("estacao_elevatoria_position", estacaoElevatoriaPosition);
                         if (mode.equals("new")) {
                             it.putExtra("id_cmb", auth.getRota().getEstacoesElevatoriasArrayList().get(position).getConjuntoMotorBombaArrayList().get(position_cmb).getId());
                         }

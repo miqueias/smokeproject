@@ -169,10 +169,11 @@ public class UserRequester {
                 for (int d = 0; d < jsonArrayCheckListNaoMarcadoUltimaVistoria.length(); d++) {
 
                     JSONObject jsonObjectProblemasCheckList = jsonArrayCheckListNaoMarcadoUltimaVistoria.getJSONObject(d);
+                    JSONObject jsonObjectProblemasCheckListItem = jsonObjectProblemasCheckList.getJSONObject("Problema");
 
                     ProblemasCheckList problemasCheckList = new ProblemasCheckList();
-                    problemasCheckList.setId(Integer.parseInt(jsonObjectProblemasCheckList.get("id").toString()));
-                    problemasCheckList.setDescricao(jsonObjectProblemasCheckList.get("descricao").toString());
+                    problemasCheckList.setId(Integer.parseInt(jsonObjectProblemasCheckListItem.get("id").toString()));
+                    problemasCheckList.setDescricao(jsonObjectProblemasCheckListItem.get("descricao").toString());
                     problemasCheckList.setChecked(true);
                     problemasCheckListArrayListUltimaVistoria.add(problemasCheckList);
                 }

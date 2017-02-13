@@ -114,6 +114,7 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
             }
         } else {
 
+            auth = Auth.getInstance();
             if (auth.getRota().getEstacoesElevatoriasArrayList().get(idEstacaoElevatoria).getArrayListCheckListNaoMarcadoUltimaVistoria().size() > 0) {
                 ArrayList<ProblemasCheckList> problemasCheckLists;
                 problemasCheckLists = auth.getRota().getEstacoesElevatoriasArrayList().get(idEstacaoElevatoria).getArrayListCheckListNaoMarcadoUltimaVistoria();

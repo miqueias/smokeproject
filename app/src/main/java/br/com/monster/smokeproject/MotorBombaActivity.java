@@ -42,6 +42,7 @@ public class MotorBombaActivity extends AppCompatActivity {
     private int idCmb;
     private int estacaoElevatoria;
     private TextView tvTitle;
+    int estacaoElevatoriaPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class MotorBombaActivity extends AppCompatActivity {
             idVistoria = extras.getInt("vistoria_id");
             idCmb = extras.getInt("id_cmb");
             estacaoElevatoria = extras.getInt("estacao_elevatoria");
+            estacaoElevatoriaPosition = extras.getInt("estacao_elevatoria_position");
         }
 
         etHorimetro = (EditText) findViewById(R.id.etHorimetro);
@@ -121,6 +123,8 @@ public class MotorBombaActivity extends AppCompatActivity {
             adapter = new ChecklistAdapter(problemasCheckLists, mode, this);
         } else {
             adapter = new ChecklistAdapter(auth.getProblemasArrayList(), mode, this);
+            adapter.setIdEstacaoElevatoria(estacaoElevatoriaPosition);
+            adapter.setIdConjuntoMotorBomba(idCmb);
         }
 
         rvChecklist.setAdapter(adapter);
