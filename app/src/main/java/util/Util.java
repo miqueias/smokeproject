@@ -31,6 +31,7 @@ public abstract class Util
     private static ProgressDialog pd = null;
     public static final String PREFS_NAME = "ESTACOES_TRABALHADAS";
     public static final String VISTORIA_FOLDER = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/VISTORIAS_APP/";
+    public static final String VISTORIA_FILE = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/VISTORIAS_APP/VISTORIAS_APP.txt";
 
     public static String ChangeStringTosha1(String input) throws NoSuchAlgorithmException {
         MessageDigest mDigest = MessageDigest.getInstance("SHA1");

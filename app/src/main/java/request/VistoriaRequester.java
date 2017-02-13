@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -16,7 +17,9 @@ import exception.VistoriaException;
 import pojo.Auth;
 import pojo.ConjuntoMotorBomba;
 import pojo.Vistoria;
+import util.GerenciadorTxt;
 import util.Internet;
+import util.Util;
 
 /**
  * Created by Miqueias on 1/23/17.
@@ -146,31 +149,35 @@ public class VistoriaRequester {
             }
         }
 
-        /*internet = new Internet(context);
+        internet = new Internet(context);
         if (internet.verificarConexao()) {
+            BaseRequester baseRequester = new BaseRequester();
+            baseRequester.setUrl(Requester.API_URL + "/add_vistoria");
+            baseRequester.setMethod(Method.POST);
 
+            baseRequester.setJsonString(jsonPut.toString());
+
+            String jsonReturn = baseRequester.execute(baseRequester).get();
+            Log.d("API", jsonReturn);
+
+            JSONObject jsonObjectAuth = new JSONObject(jsonReturn);
+
+            auth.setStatusAPI(jsonObjectAuth.get("status").toString());
+            auth.setMensagemErroApi(jsonObjectAuth.get("mensagem").toString());
+
+            if (jsonObjectAuth.get("status").toString().equals("ERRO")) {
+                String mensagemErro = jsonObjectAuth.get("mensagem").toString();
+                Log.d("API", mensagemErro);
+                throw new VistoriaException(mensagemErro);
+            }
         } else {
 
-        }*/
+            GerenciadorTxt gerenciadorTxt = new GerenciadorTxt();
 
-        BaseRequester baseRequester = new BaseRequester();
-        baseRequester.setUrl(Requester.API_URL + "/add_vistoria");
-        baseRequester.setMethod(Method.POST);
+            gerenciadorTxt.criarDireotorioTxt(new File(Util.VISTORIA_FOLDER));
+            gerenciadorTxt.criarArquivoTxt(new File(Util.VISTORIA_FILE));
+            gerenciadorTxt.escreverArquivoTxt(jsonPut.toString() + "@@@@", new File(Util.VISTORIA_FILE));
 
-        baseRequester.setJsonString(jsonPut.toString());
-
-        String jsonReturn = baseRequester.execute(baseRequester).get();
-        Log.d("API", jsonReturn);
-
-        JSONObject jsonObjectAuth = new JSONObject(jsonReturn);
-
-        auth.setStatusAPI(jsonObjectAuth.get("status").toString());
-        auth.setMensagemErroApi(jsonObjectAuth.get("mensagem").toString());
-
-        if (jsonObjectAuth.get("status").toString().equals("ERRO")) {
-            String mensagemErro = jsonObjectAuth.get("mensagem").toString();
-            Log.d("API", mensagemErro);
-            throw new VistoriaException(mensagemErro);
         }
     }
 }
