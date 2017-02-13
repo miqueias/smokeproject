@@ -8,6 +8,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.concurrent.ExecutionException;
 
 import br.com.monster.smokeproject.HomeActivity;
@@ -161,6 +163,49 @@ public class UserRequester {
                 regional.setNome(jsonObjectRegional.get("nome").toString());
                 estacoesElevatorias.setRegional(regional);
 
+                //CheckListNaoMarcadoUltimaVistoria
+                JSONArray jsonArrayCheckListNaoMarcadoUltimaVistoria = jsonObjectEstacoesElevatorias.getJSONArray("CheckListNaoMarcadoUltimaVistoria");
+                ArrayList<ProblemasCheckList> problemasCheckListArrayListUltimaVistoria = new ArrayList<>();
+                for (int d = 0; d < jsonArrayCheckListNaoMarcadoUltimaVistoria.length(); d++) {
+
+                    JSONObject jsonObjectProblemasCheckList = jsonArrayCheckListNaoMarcadoUltimaVistoria.getJSONObject(d);
+
+                    ProblemasCheckList problemasCheckList = new ProblemasCheckList();
+                    problemasCheckList.setId(Integer.parseInt(jsonObjectProblemasCheckList.get("id").toString()));
+                    problemasCheckList.setDescricao(jsonObjectProblemasCheckList.get("descricao").toString());
+                    problemasCheckList.setChecked(true);
+                    problemasCheckListArrayListUltimaVistoria.add(problemasCheckList);
+                }
+                estacoesElevatorias.setArrayListCheckListNaoMarcadoUltimaVistoria(problemasCheckListArrayListUltimaVistoria);
+
+                //ProblemaCMBMarcadoUltimaVistoria
+                JSONObject jsonObjectProblemaCMBMarcadoUltimaVistoria = jsonObjectEstacoesElevatorias.getJSONObject("ProblemaCMBMarcadoUltimaVistoria");
+                Iterator it = jsonObjectProblemaCMBMarcadoUltimaVistoria.keys();
+                JSONArray jsonArrayProblemaCMBMarcadoUltimaVistoria = new JSONArray();
+
+                while (it.hasNext()){
+                    String key = (String) it.next();
+                    jsonArrayProblemaCMBMarcadoUltimaVistoria.put(jsonObjectProblemaCMBMarcadoUltimaVistoria.get(key));
+                }
+
+                HashMap<Integer, Integer> hashMapProblemaCMBMarcadoUltimaVistoria = new HashMap<>();
+                for (int u = 0; u < jsonArrayProblemaCMBMarcadoUltimaVistoria.length(); u++) {
+                    JSONArray jsonArrayProblemaCMBMarcadoUltimaVistoriaItem = jsonArrayProblemaCMBMarcadoUltimaVistoria.getJSONArray(u);
+
+                    for (int t = 0; t < jsonArrayProblemaCMBMarcadoUltimaVistoriaItem.length(); t++) {
+                        JSONObject jsonObjectProblemaCMBMarcadoUltimaVistoriaItem = jsonArrayProblemaCMBMarcadoUltimaVistoriaItem.getJSONObject(t);
+
+                        JSONObject jsonObjectProblemaCMBMarcadoUltimaVistoriaItemCmb = jsonObjectProblemaCMBMarcadoUltimaVistoriaItem.getJSONObject("CMB");
+                        Integer id_cmb = Integer.parseInt(jsonObjectProblemaCMBMarcadoUltimaVistoriaItemCmb.get("id").toString());
+
+                        JSONObject jsonObjectProblemaCMBMarcadoUltimaVistoriaItemProblema = jsonObjectProblemaCMBMarcadoUltimaVistoriaItem.getJSONObject("Problema");
+                        Integer id_problema = Integer.parseInt(jsonObjectProblemaCMBMarcadoUltimaVistoriaItemProblema.get("id").toString());
+
+                        hashMapProblemaCMBMarcadoUltimaVistoria.put(id_cmb, id_problema);
+                    }
+                }
+                estacoesElevatorias.setHashMapProblemaCMBMarcadoUltimaVistoria(hashMapProblemaCMBMarcadoUltimaVistoria);
+
                 //conjunto motor bomba
                 JSONArray jsonArrayConjuntoMotorBomba = jsonObjectEstacoesElevatorias.getJSONArray("cmb");
                 ArrayList<ConjuntoMotorBomba> conjuntoMotorBombaArrayList = new ArrayList<ConjuntoMotorBomba>();
@@ -174,7 +219,6 @@ public class UserRequester {
                     conjuntoMotorBomba.setNumero(jsonObjectConjuntoMotorBomba.get("numero").toString());
                     conjuntoMotorBomba.setEstacaoElevatoriaId(Integer.parseInt(jsonObjectConjuntoMotorBomba.get("estacao_elevatoria_id").toString()));
                     conjuntoMotorBombaArrayList.add(conjuntoMotorBomba);
-
                 }
                 estacoesElevatorias.setConjuntoMotorBombaArrayList(conjuntoMotorBombaArrayList);
                 estacoesElevatoriasArrayList.add(estacoesElevatorias);

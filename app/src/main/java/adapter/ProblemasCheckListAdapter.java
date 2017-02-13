@@ -13,6 +13,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.com.monster.smokeproject.R;
+import pojo.Auth;
+import pojo.Problemas;
 import pojo.ProblemasCheckList;
 
 /**
@@ -25,7 +27,8 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
     public Context context;
     private String mode;
     private ArrayList<Integer> arrayListCheck;
-
+    private Auth auth;
+    private int idEstacaoElevatoria;
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
 
@@ -76,12 +79,21 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
         this.arrayListCheck = arrayListCheck;
     }
 
+    public int getIdEstacaoElevatoria() {
+        return idEstacaoElevatoria;
+    }
+
+    public void setIdEstacaoElevatoria(int idEstacaoElevatoria) {
+        this.idEstacaoElevatoria = idEstacaoElevatoria;
+    }
+
     public ProblemasCheckListAdapter(ArrayList<ProblemasCheckList> lista, String mode, Context context) {
         this.lista = lista;
         this.mode = mode;
         this.context = context;
         arrayListCheck = new ArrayList<>();
     }
+
 
     @Override
     public PersonViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -101,6 +113,22 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
                 personViewHolder.cbChecklist.setChecked(true);
             }
         } else {
+
+            if (auth.getRota().getEstacoesElevatoriasArrayList().get(idEstacaoElevatoria).getArrayListCheckListNaoMarcadoUltimaVistoria().size() > 0) {
+                ArrayList<ProblemasCheckList> problemasCheckLists;
+                problemasCheckLists = auth.getRota().getEstacoesElevatoriasArrayList().get(idEstacaoElevatoria).getArrayListCheckListNaoMarcadoUltimaVistoria();
+                for (int i = 0; i < problemasCheckLists.size(); i++) {
+                    ProblemasCheckList problemasCheckList;
+                    problemasCheckList = problemasCheckLists.get(i);
+
+                    for (int j = 0; j < lista.size(); j++) {
+                        if (lista.get(j).getId() == problemasCheckList.getId()) {
+                            personViewHolder.cbChecklist.setChecked(true);
+                        }
+                    }
+                }
+            }
+
             personViewHolder.cbChecklist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -109,12 +137,6 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
                     } else {
                         arrayListCheck.remove(position);
                     }
-
-                    /*for (int i = 0; i < arrayListCheck.size(); i++) {
-                        if (arrayListCheck.get(i) == position) {
-
-                        }
-                    }*/
                 }
             });
         }

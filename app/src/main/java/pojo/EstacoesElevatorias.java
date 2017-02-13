@@ -1,6 +1,8 @@
 package pojo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Miqueias on 1/7/17.
@@ -20,6 +22,8 @@ public class EstacoesElevatorias {
     private Regional regional;
     private String endereco;
     private int ufId;
+    private ArrayList<ProblemasCheckList> arrayListCheckListNaoMarcadoUltimaVistoria;
+    private HashMap<Integer, Integer> hashMapProblemaCMBMarcadoUltimaVistoria;
 
 
     public EstacoesElevatorias() {
@@ -120,5 +124,21 @@ public class EstacoesElevatorias {
 
     public void setUfId(int ufId) {
         this.ufId = ufId;
+    }
+
+    public ArrayList<ProblemasCheckList> getArrayListCheckListNaoMarcadoUltimaVistoria() {
+        return arrayListCheckListNaoMarcadoUltimaVistoria;
+    }
+
+    public void setArrayListCheckListNaoMarcadoUltimaVistoria(ArrayList<ProblemasCheckList> arrayListCheckListNaoMarcadoUltimaVistoria) {
+        this.arrayListCheckListNaoMarcadoUltimaVistoria = arrayListCheckListNaoMarcadoUltimaVistoria;
+    }
+
+    public HashMap<Integer, Integer> getHashMapProblemaCMBMarcadoUltimaVistoria() {
+        return hashMapProblemaCMBMarcadoUltimaVistoria;
+    }
+
+    public void setHashMapProblemaCMBMarcadoUltimaVistoria(HashMap<Integer, Integer> hashMapProblemaCMBMarcadoUltimaVistoria) {
+        this.hashMapProblemaCMBMarcadoUltimaVistoria = hashMapProblemaCMBMarcadoUltimaVistoria;
     }
 }

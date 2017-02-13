@@ -816,6 +816,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
             adapterDois = new ProblemasCheckListAdapter(problemasCheckLists, mode, this);
         } else {
             adapterDois = new ProblemasCheckListAdapter(auth.getProblemasCheckListArrayList(), mode, this);
+            adapterDois.setIdEstacaoElevatoria(position);
         }
 
         rvChecklist.setAdapter(adapterDois);
