@@ -986,7 +986,7 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent it = new Intent(getBaseContext(), HomeActivity.class);
+                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
                 startActivity(it);
                 finish();
                 return true;
@@ -1105,6 +1105,9 @@ public class NovaVistoriaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+        startActivity(it);
+        finish();
     }
 
     @Override

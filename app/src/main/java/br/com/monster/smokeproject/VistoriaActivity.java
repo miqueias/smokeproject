@@ -109,6 +109,9 @@ public class VistoriaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent it = new Intent(getBaseContext(), HomeActivity.class);
+        startActivity(it);
+        finish();
     }
 
     @Override

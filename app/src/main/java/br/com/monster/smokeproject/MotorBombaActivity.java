@@ -220,6 +220,7 @@ public class MotorBombaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        finish();
     }
 
 }

@@ -199,6 +199,9 @@ public class ApoioActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+        startActivity(it);
+        finish();
     }
 
     @Override

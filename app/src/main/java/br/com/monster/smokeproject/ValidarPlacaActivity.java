@@ -29,6 +29,7 @@ import request.BaseRequester;
 import request.Method;
 import request.Requester;
 import util.Internet;
+import util.Mask;
 
 public class ValidarPlacaActivity extends AppCompatActivity {
 
@@ -51,6 +52,8 @@ public class ValidarPlacaActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etPlaca = (EditText) findViewById(R.id.etPlaca);
+        etPlaca.addTextChangedListener(Mask.insert("###-###", etPlaca));
+
 
         linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
         Button btnValidar = (Button) findViewById(R.id.btnValidar);
@@ -144,5 +147,8 @@ public class ValidarPlacaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent it = new Intent(getBaseContext(), HomeActivity.class);
+        startActivity(it);
+        finish();
     }
 }

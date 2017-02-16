@@ -94,6 +94,9 @@ public class EstacoesElevatoriasActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent it = new Intent(getBaseContext(), HomeActivity.class);
+        startActivity(it);
+        finish();
     }
 
 
