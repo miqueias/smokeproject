@@ -160,9 +160,14 @@ public class ApoioActivity extends AppCompatActivity {
 
                             JSONObject jsonObjectApoio = new JSONObject(jsonReturn);
 
-                            Util.AtivaDialogHandler(5, "", "");
-                            Util.AtivaDialogHandler(1, "SisInspe", jsonObjectApoio.get("mensagem").toString());
-
+                            if (jsonObjectApoio.get("status").toString().equals("ERRO")) {
+                                Util.AtivaDialogHandler(5, "", "");
+                                Util.AtivaDialogHandler(1, "SisInspe", jsonObjectApoio.get("mensagem").toString());
+                            } else {
+                                Intent it = new Intent(getBaseContext(), EstacoesElevatoriasActivity.class);
+                                startActivity(it);
+                                finish();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         } catch (InterruptedException e) {

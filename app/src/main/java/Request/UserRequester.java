@@ -180,14 +180,14 @@ public class UserRequester {
                 estacoesElevatorias.setArrayListCheckListNaoMarcadoUltimaVistoria(problemasCheckListArrayListUltimaVistoria);
 
                 //ProblemaCMBMarcadoUltimaVistoria
-                JSONObject jsonObjectProblemaCMBMarcadoUltimaVistoria = jsonObjectEstacoesElevatorias.getJSONObject("ProblemaCMBMarcadoUltimaVistoria");
-                Iterator it = jsonObjectProblemaCMBMarcadoUltimaVistoria.keys();
-                JSONArray jsonArrayProblemaCMBMarcadoUltimaVistoria = new JSONArray();
+                //JSONArray jsonObjectProblemaCMBMarcadoUltimaVistoria = jsonObjectEstacoesElevatorias.getJSONArray("ProblemaCMBMarcadoUltimaVistoria");
+                //Iterator it = jsonObjectProblemaCMBMarcadoUltimaVistoria.keys();
+                JSONArray jsonArrayProblemaCMBMarcadoUltimaVistoria = jsonObjectEstacoesElevatorias.getJSONArray("ProblemaCMBMarcadoUltimaVistoria");
 
-                while (it.hasNext()){
-                    String key = (String) it.next();
-                    jsonArrayProblemaCMBMarcadoUltimaVistoria.put(jsonObjectProblemaCMBMarcadoUltimaVistoria.get(key));
-                }
+                //while (it.hasNext()){
+                //    String key = (String) it.next();
+                //    jsonArrayProblemaCMBMarcadoUltimaVistoria.put(jsonObjectProblemaCMBMarcadoUltimaVistoria.get(key));
+                //}
 
                 HashMap<Integer, Integer> hashMapProblemaCMBMarcadoUltimaVistoria = new HashMap<>();
                 for (int u = 0; u < jsonArrayProblemaCMBMarcadoUltimaVistoria.length(); u++) {

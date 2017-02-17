@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -34,12 +35,14 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
 
         Typeface RalewayMedium = Typeface.createFromAsset(itemView.getResources().getAssets(), "Raleway-Medium.ttf");
         CheckBox cbChecklist;
+        LinearLayout linearLayoutBomba;
 
         PersonViewHolder(View itemView) {
             super(itemView);
             itemView.setClickable(true);
             cbChecklist = (CheckBox) itemView.findViewById(R.id.cbChecklist);
             cbChecklist.setTypeface(RalewayMedium);
+            linearLayoutBomba = (LinearLayout) itemView.findViewById(R.id.linearLayoutCheckLists);
         }
     }
 
@@ -118,15 +121,28 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
             if (auth.getRota().getEstacoesElevatoriasArrayList().get(idEstacaoElevatoria).getArrayListCheckListNaoMarcadoUltimaVistoria().size() > 0) {
                 ArrayList<ProblemasCheckList> problemasCheckLists;
                 problemasCheckLists = auth.getRota().getEstacoesElevatoriasArrayList().get(idEstacaoElevatoria).getArrayListCheckListNaoMarcadoUltimaVistoria();
+
+                personViewHolder.cbChecklist.setChecked(true);
+                //lista.get(position).setChecked(true);
+
+                personViewHolder.linearLayoutBomba.setBackgroundColor(context.getResources().getColor(R.color.bg_lista));
                 for (int i = 0; i < problemasCheckLists.size(); i++) {
                     ProblemasCheckList problemasCheckList;
                     problemasCheckList = problemasCheckLists.get(i);
 
-                    for (int j = 0; j < lista.size(); j++) {
-                        if (lista.get(j).getId() == problemasCheckList.getId()) {
-                            personViewHolder.cbChecklist.setChecked(true);
-                        }
+                    if (lista.get(position).getId() == problemasCheckList.getId()) {
+                        personViewHolder.cbChecklist.setChecked(false);
+                        //lista.get(position).setChecked(false);
+                        personViewHolder.linearLayoutBomba.setBackgroundColor(context.getResources().getColor(R.color.cardview_light_background));
                     }
+
+                    /*for (int j = 0; j < lista.size(); j++) {
+                        if (lista.get(j).getId() == problemasCheckList.getId()) {
+                            personViewHolder.cbChecklist.setChecked(false);
+                            //lista.get(position).setChecked(false);
+                            personViewHolder.linearLayoutBomba.setBackgroundColor(context.getResources().getColor(R.color.cardview_light_background));
+                        }
+                    }*/
                 }
             }
 

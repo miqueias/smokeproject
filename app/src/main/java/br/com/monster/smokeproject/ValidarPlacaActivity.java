@@ -52,7 +52,7 @@ public class ValidarPlacaActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etPlaca = (EditText) findViewById(R.id.etPlaca);
-        etPlaca.addTextChangedListener(Mask.insert("###-###", etPlaca));
+        etPlaca.addTextChangedListener(Mask.insert("###-####", etPlaca));
 
 
         linearLayout = (LinearLayout) findViewById(R.id.linearLayout);

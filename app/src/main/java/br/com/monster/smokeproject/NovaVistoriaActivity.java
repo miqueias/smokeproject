@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -817,9 +818,11 @@ public class NovaVistoriaActivity extends AppCompatActivity {
                 problemasCheckLists.add(problemasCheckList);
             }
             adapterDois = new ProblemasCheckListAdapter(problemasCheckLists, mode, this);
+            adapterDois.setContext(NovaVistoriaActivity.this);
         } else {
             adapterDois = new ProblemasCheckListAdapter(auth.getProblemasCheckListArrayList(), mode, this);
             adapterDois.setIdEstacaoElevatoria(estacaoElevatoriaPosition);
+            adapterDois.setContext(NovaVistoriaActivity.this);
         }
 
         rvChecklist.setAdapter(adapterDois);
@@ -921,9 +924,20 @@ public class NovaVistoriaActivity extends AppCompatActivity {
 
                                         vistoriaRequester.context = NovaVistoriaActivity.this;
                                         vistoriaRequester.registrarVistoria(vistoria, checklists, conjuntoMotorBombaArrayList);
-                                        Util.AtivaDialogHandler(5, "", "");
-                                        Util.AtivaDialogHandler(1, "SisInspe", "Vistoria registada com sucesso, obrigado!");
-                                        Intent it = new Intent(getBaseContext(), HomeActivity.class);
+                                        //Util.AtivaDialogHandler(5, "", "");
+                                        //Util.AtivaDialogHandler(1, "SisInspe", "Vistoria registada com sucesso, obrigado!");
+                                        SharedPreferences sharedPreferences;
+                                        sharedPreferences = getSharedPreferences(Util.PREFS_NAME, 0);
+
+                                        int i = sharedPreferences.getInt("estacao_elevatoria_"+estacaoElevatoriaPosition, -1);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                                        if (i == -1) {
+                                            editor.putInt("estacao_elevatoria_"+estacaoElevatoriaPosition, estacaoElevatoriaPosition);
+                                            editor.apply();
+                                        }
+
+                                        Intent it = new Intent(getBaseContext(), EstacoesElevatoriasActivity.class);
                                         startActivity(it);
                                         finish();
                                     } catch (JSONException e) {
