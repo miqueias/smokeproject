@@ -23,7 +23,7 @@ public class EstacoesElevatorias {
     private String endereco;
     private int ufId;
     private ArrayList<ProblemasCheckList> arrayListCheckListNaoMarcadoUltimaVistoria;
-    private HashMap<Integer, Integer> hashMapProblemaCMBMarcadoUltimaVistoria;
+    private ArrayList<ProblemaCMBMarcadoUltimaVistoria> arrayListProblemaCMBMarcadoUltimaVistoria;
 
 
     public EstacoesElevatorias() {
@@ -134,11 +134,12 @@ public class EstacoesElevatorias {
         this.arrayListCheckListNaoMarcadoUltimaVistoria = arrayListCheckListNaoMarcadoUltimaVistoria;
     }
 
-    public HashMap<Integer, Integer> getHashMapProblemaCMBMarcadoUltimaVistoria() {
-        return hashMapProblemaCMBMarcadoUltimaVistoria;
+    public ArrayList<ProblemaCMBMarcadoUltimaVistoria> getArrayListProblemaCMBMarcadoUltimaVistoria() {
+        return arrayListProblemaCMBMarcadoUltimaVistoria;
     }
 
-    public void setHashMapProblemaCMBMarcadoUltimaVistoria(HashMap<Integer, Integer> hashMapProblemaCMBMarcadoUltimaVistoria) {
-        this.hashMapProblemaCMBMarcadoUltimaVistoria = hashMapProblemaCMBMarcadoUltimaVistoria;
+    public void setArrayListProblemaCMBMarcadoUltimaVistoria(ArrayList<ProblemaCMBMarcadoUltimaVistoria> arrayListProblemaCMBMarcadoUltimaVistoria) {
+        this.arrayListProblemaCMBMarcadoUltimaVistoria = arrayListProblemaCMBMarcadoUltimaVistoria;
     }
+
 }

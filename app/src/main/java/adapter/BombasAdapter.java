@@ -15,7 +15,10 @@ import java.util.List;
 
 import br.com.monster.smokeproject.R;
 import model.Lista;
+import pojo.Auth;
 import pojo.ConjuntoMotorBomba;
+import pojo.EstacoesElevatorias;
+import pojo.ProblemaCMBMarcadoUltimaVistoria;
 
 /**
  * Created by Marlon on 09/12/2016.
@@ -103,6 +106,7 @@ public class BombasAdapter extends RecyclerView.Adapter<BombasAdapter.PersonView
         if (mode.equals("view")) {
             personViewHolder.linearLayoutBomba.setBackgroundColor(context.getResources().getColor(R.color.bg_lista));
         }
+
         if (arrayListSelect.size() > 0) {
             for (int i = 0; i < arrayListSelect.size(); i++) {
                 if (arrayListSelect.get(i) == lista.get(position).getId()) {
@@ -115,7 +119,22 @@ public class BombasAdapter extends RecyclerView.Adapter<BombasAdapter.PersonView
             }
         }
 
+        Auth auth = Auth.getInstance();
+        ArrayList<EstacoesElevatorias> estacoesElevatoriasArrayList = auth.getRota().getEstacoesElevatoriasArrayList();
 
+        if (estacoesElevatoriasArrayList.size() > 0) {
+            for (int i = 0; i < estacoesElevatoriasArrayList.size(); i++) {
+                ArrayList<ProblemaCMBMarcadoUltimaVistoria> problemaCMBMarcadoUltimaVistoriaArrayList = estacoesElevatoriasArrayList.get(i).getArrayListProblemaCMBMarcadoUltimaVistoria();
+                if (problemaCMBMarcadoUltimaVistoriaArrayList.size() > 0) {
+                    for (int j = 0; j < problemaCMBMarcadoUltimaVistoriaArrayList.size(); j++) {
+                        ProblemaCMBMarcadoUltimaVistoria problemaCMBMarcadoUltimaVistoria = problemaCMBMarcadoUltimaVistoriaArrayList.get(j);
+                        if (lista.get(position).getId() == problemaCMBMarcadoUltimaVistoria.getIdCmb()) {
+                            personViewHolder.linearLayoutBomba.setBackgroundColor(context.getResources().getColor(R.color.bg_lista));
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override

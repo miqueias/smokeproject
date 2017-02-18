@@ -18,6 +18,7 @@ import java.util.Map;
 import br.com.monster.smokeproject.R;
 import model.Lista;
 import pojo.Auth;
+import pojo.ProblemaCMBMarcadoUltimaVistoria;
 import pojo.Problemas;
 import pojo.ProblemasCheckList;
 
@@ -127,12 +128,13 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
         } else {
 
             auth = Auth.getInstance();
-            if (auth.getRota().getEstacoesElevatoriasArrayList().get(idEstacaoElevatoria).getHashMapProblemaCMBMarcadoUltimaVistoria().size() > 0) {
-                HashMap<Integer, Integer> hashMap;
-                hashMap = auth.getRota().getEstacoesElevatoriasArrayList().get(idEstacaoElevatoria).getHashMapProblemaCMBMarcadoUltimaVistoria();
-                for ( Map.Entry<Integer, Integer> entry : hashMap.entrySet()) {
-                    Integer idCmb = entry.getKey();
-                    Integer idProblema = entry.getValue();
+            if (auth.getRota().getEstacoesElevatoriasArrayList().get(idEstacaoElevatoria).getArrayListProblemaCMBMarcadoUltimaVistoria().size() > 0) {
+                ArrayList<ProblemaCMBMarcadoUltimaVistoria> problemaCMBMarcadoUltimaVistorias;
+                problemaCMBMarcadoUltimaVistorias = auth.getRota().getEstacoesElevatoriasArrayList().get(idEstacaoElevatoria).getArrayListProblemaCMBMarcadoUltimaVistoria();
+                for (int i=0; i < problemaCMBMarcadoUltimaVistorias.size(); i++) {
+                    ProblemaCMBMarcadoUltimaVistoria problemaCMBMarcadoUltimaVistoria = problemaCMBMarcadoUltimaVistorias.get(i);
+                    Integer idCmb = problemaCMBMarcadoUltimaVistoria.getIdCmb();
+                    Integer idProblema = problemaCMBMarcadoUltimaVistoria.getIdProblema();
 
                     if (idCmb == idConjuntoMotorBomba) {
                         if (idProblema == lista.get(position).getId()) {

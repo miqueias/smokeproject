@@ -21,6 +21,7 @@ import pojo.EstacoesElevatorias;
 import pojo.Lider;
 import pojo.Motivo;
 import pojo.Operador;
+import pojo.ProblemaCMBMarcadoUltimaVistoria;
 import pojo.Problemas;
 import pojo.ProblemasCheckList;
 import pojo.Regional;
@@ -189,7 +190,8 @@ public class UserRequester {
                 //    jsonArrayProblemaCMBMarcadoUltimaVistoria.put(jsonObjectProblemaCMBMarcadoUltimaVistoria.get(key));
                 //}
 
-                HashMap<Integer, Integer> hashMapProblemaCMBMarcadoUltimaVistoria = new HashMap<>();
+                //HashMap<Integer, Integer> hashMapProblemaCMBMarcadoUltimaVistoria = new HashMap<>();
+                ArrayList<ProblemaCMBMarcadoUltimaVistoria> problemaCMBMarcadoUltimaVistorias = new ArrayList<>();
                 for (int u = 0; u < jsonArrayProblemaCMBMarcadoUltimaVistoria.length(); u++) {
                     JSONArray jsonArrayProblemaCMBMarcadoUltimaVistoriaItem = jsonArrayProblemaCMBMarcadoUltimaVistoria.getJSONArray(u);
 
@@ -202,10 +204,14 @@ public class UserRequester {
                         JSONObject jsonObjectProblemaCMBMarcadoUltimaVistoriaItemProblema = jsonObjectProblemaCMBMarcadoUltimaVistoriaItem.getJSONObject("Problema");
                         Integer id_problema = Integer.parseInt(jsonObjectProblemaCMBMarcadoUltimaVistoriaItemProblema.get("id").toString());
 
-                        hashMapProblemaCMBMarcadoUltimaVistoria.put(id_cmb, id_problema);
+                        //hashMapProblemaCMBMarcadoUltimaVistoria.put(id_cmb, id_problema);
+                        ProblemaCMBMarcadoUltimaVistoria problemaCMBMarcadoUltimaVistoria = new ProblemaCMBMarcadoUltimaVistoria();
+                        problemaCMBMarcadoUltimaVistoria.setIdCmb(id_cmb);
+                        problemaCMBMarcadoUltimaVistoria.setIdProblema(id_problema);
+                        problemaCMBMarcadoUltimaVistorias.add(problemaCMBMarcadoUltimaVistoria);
                     }
                 }
-                estacoesElevatorias.setHashMapProblemaCMBMarcadoUltimaVistoria(hashMapProblemaCMBMarcadoUltimaVistoria);
+                estacoesElevatorias.setArrayListProblemaCMBMarcadoUltimaVistoria(problemaCMBMarcadoUltimaVistorias);
 
                 //conjunto motor bomba
                 JSONArray jsonArrayConjuntoMotorBomba = jsonObjectEstacoesElevatorias.getJSONArray("cmb");
