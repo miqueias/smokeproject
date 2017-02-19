@@ -142,7 +142,9 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
                         }
                     }
                 }
+                arrayListCheck.add(lista.get(position).getId());
             }
+
             personViewHolder.cbChecklist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

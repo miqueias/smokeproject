@@ -170,8 +170,10 @@ public class VistoriaRequester {
                 Log.d("API", mensagemErro);
                 throw new VistoriaException(mensagemErro);
             }
-        } else {
 
+            UserRequester userRequester = new UserRequester();
+            userRequester.loadAuth(auth.getLogin(), auth.getSenha(), "");
+        } else {
             GerenciadorTxt gerenciadorTxt = new GerenciadorTxt();
 
             gerenciadorTxt.criarDireotorioTxt(new File(Util.VISTORIA_FOLDER));

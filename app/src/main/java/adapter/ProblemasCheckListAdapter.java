@@ -135,15 +135,8 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
                         //lista.get(position).setChecked(false);
                         personViewHolder.linearLayoutBomba.setBackgroundColor(context.getResources().getColor(R.color.cardview_light_background));
                     }
-
-                    /*for (int j = 0; j < lista.size(); j++) {
-                        if (lista.get(j).getId() == problemasCheckList.getId()) {
-                            personViewHolder.cbChecklist.setChecked(false);
-                            //lista.get(position).setChecked(false);
-                            personViewHolder.linearLayoutBomba.setBackgroundColor(context.getResources().getColor(R.color.cardview_light_background));
-                        }
-                    }*/
                 }
+                arrayListCheck.add(lista.get(position).getId());
             }
 
             personViewHolder.cbChecklist.setOnClickListener(new View.OnClickListener() {
@@ -153,7 +146,6 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
                         arrayListCheck.add(lista.get(position).getId());
                     } else {
                         if (arrayListCheck.size() > 0) {
-
                             for (int i = 0; i < arrayListCheck.size(); i++) {
                                 if (arrayListCheck.get(i) == position) {
                                     arrayListCheck.remove(i);
