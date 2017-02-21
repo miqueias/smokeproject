@@ -216,6 +216,7 @@ public class HomeActivity extends AppCompatActivity
                         if (internet.verificarConexao()) {
                             UserRequester userRequester = new UserRequester();
                             try {
+                                userRequester.setContext(HomeActivity.this);
                                 userRequester.loadAuth(auth.getLogin(), auth.getSenha(), "");
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -283,6 +284,7 @@ public class HomeActivity extends AppCompatActivity
                                                     BaseRequester baseRequester = new BaseRequester();
                                                     baseRequester.setUrl(Requester.API_URL + "/add_vistoria");
                                                     baseRequester.setMethod(Method.POST);
+                                                    baseRequester.setContext(HomeActivity.this);
 
                                                     JSONObject jsonObjectOff = new JSONObject(vistorias[i]);
                                                     jsonObjectOff.remove("token");

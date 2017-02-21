@@ -1,5 +1,6 @@
 package request;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
@@ -36,9 +37,18 @@ import pojo.Vistoria;
 public class UserRequester {
 
     private Auth auth;
+    private Context context;
 
     public UserRequester() {
 
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     public void loadAuth(String login, String senha, String token) throws JSONException, InterruptedException, ExecutionException {
@@ -56,6 +66,7 @@ public class UserRequester {
         baseRequester.setUrl(Requester.API_URL + "/auth");
         baseRequester.setMethod(Method.POST);
         baseRequester.setJsonString(jsonPut.toString());
+        baseRequester.setContext(context);
 
         String jsonReturn = baseRequester.execute(baseRequester).get();
         Log.d("API", jsonReturn);

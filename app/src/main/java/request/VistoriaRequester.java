@@ -154,6 +154,7 @@ public class VistoriaRequester {
             BaseRequester baseRequester = new BaseRequester();
             baseRequester.setUrl(Requester.API_URL + "/add_vistoria");
             baseRequester.setMethod(Method.POST);
+            baseRequester.setContext(context);
 
             baseRequester.setJsonString(jsonPut.toString());
 
@@ -172,6 +173,7 @@ public class VistoriaRequester {
             }
 
             UserRequester userRequester = new UserRequester();
+            userRequester.setContext(context);
             userRequester.loadAuth(auth.getLogin(), auth.getSenha(), "");
         } else {
             GerenciadorTxt gerenciadorTxt = new GerenciadorTxt();

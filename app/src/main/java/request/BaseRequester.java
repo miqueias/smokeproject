@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,10 +16,20 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
 
 /**
  * Created by Miqueias on 1/7/17.
@@ -97,8 +108,7 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
     @Override
     protected String doInBackground(BaseRequester... params) {
         try {
-            return sendGson(this.url, this.method, this.jsonString, this.authorization);
-            //return sendPostRequest(this.url, this.method, this.jsonObject);
+            return sendGson(this.url, this.method, this.jsonString, this.context);
         } catch (JSONException e) {
             return null;
         } catch (IOException e) {
@@ -106,69 +116,7 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
         }
     }
 
-    private static String sendPostRequest(String apiUrl, Method method, JSONObject jsonObjSend) throws JSONException, IOException {
-
-        URL url;
-        String returnStr = "";
-
-        try {
-            url = new URL(apiUrl);
-        }
-        catch (MalformedURLException e) {
-            throw new IllegalArgumentException("invalid url: " + apiUrl);
-        }
-
-        if (method == Method.POST) {
-
-            HttpURLConnection conn = null;
-            byte[] bytes = null;
-            conn = (HttpURLConnection) url.openConnection();
-
-            String body = "";
-            if (jsonObjSend != null) {
-                body = jsonObjSend.toString();
-            }
-
-            bytes = body.getBytes();
-            conn.setRequestProperty("Content-Type", "application/json");
-
-            conn.setReadTimeout(10000);
-            conn.setConnectTimeout(15000);
-            conn.setRequestMethod(String.valueOf(method));
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
-
-            OutputStream out = conn.getOutputStream();
-                            out.write(bytes);
-            out.close();
-
-            int status = conn.getResponseCode();
-
-            InputStream is;
-            String convertStreamToString = "";
-
-            if (status == 400) {
-                //return MessageText.ERROR_SERVER.toString();
-                convertStreamToString = convertStreamToString(conn.getErrorStream(), "UTF-8");
-            }
-            else
-            {
-                if (conn != null)
-                {
-                    convertStreamToString = convertStreamToString(conn.getInputStream(), /*HTTP.UTF_8*/"UTF-8");
-                    conn.disconnect();
-                }
-            }
-
-            returnStr = convertStreamToString;
-            return convertStreamToString;
-
-        }
-        return returnStr;
-    }
-
-
-    private static String sendGson(String apiUrl, Method method, String gsonString, String authorization) throws JSONException, IOException {
+    private static String sendGson(String apiUrl, Method method, String gsonString, Context context) throws JSONException, IOException {
 
         URL url;
         String returnStr = "";
@@ -183,10 +131,14 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
             if (method == Method.POST) {
 
 
-                HttpURLConnection conn = null;
+                //HttpURLConnection conn = null;
+                HttpsURLConnection conn = null;
+                conn = (HttpsURLConnection) url.openConnection();
+                //HTTPS
+                conn.setSSLSocketFactory(generateCertificate(context).getSocketFactory());
 
                 byte[] bytes = null;
-                conn = (HttpURLConnection) url.openConnection();
+                //conn = (HttpURLConnection) url.openConnection();
 
                 String body = "";
                 if (gsonString != null) {
@@ -258,6 +210,84 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
         }
 
         return sb.toString();
+    }
+
+    private static SSLContext generateCertificate(Context context) {
+
+        // Load CAs from an InputStream
+        // (could be from a resource or ByteArrayInputStream or ...)
+        CertificateFactory cf = null;
+        try {
+            cf = CertificateFactory.getInstance("X.509");
+        } catch (CertificateException e) {
+            e.printStackTrace();
+        }
+
+        InputStream caInput = null;
+        try {
+
+            caInput = context.getAssets().open("cert.crt");
+            //caInput = new BufferedInputStream(new FileInputStream(context.getAssets().open("47b83fbefd5092a.crt")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Certificate ca = null;
+        try {
+            ca = cf.generateCertificate(caInput);
+            System.out.println("ca=" + ((X509Certificate) ca).getSubjectDN());
+        } catch (CertificateException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                caInput.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Create a KeyStore containing our trusted CAs
+        String keyStoreType = KeyStore.getDefaultType();
+        KeyStore keyStore = null;
+        try {
+            keyStore = KeyStore.getInstance(keyStoreType);
+            keyStore.load(null, null);
+            keyStore.setCertificateEntry("ca", ca);
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (CertificateException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Create a TrustManager that trusts the CAs in our KeyStore
+        String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+        TrustManagerFactory tmf = null;
+        try {
+            tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
+            tmf.init(keyStore);
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        // Create an SSLContext that uses our TrustManager
+        SSLContext SSLcontext = null;
+        try {
+            SSLcontext = SSLContext.getInstance("TLS");
+            SSLcontext.init(null, tmf.getTrustManagers(), null);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        }
+
+        return SSLcontext;
     }
 
 }

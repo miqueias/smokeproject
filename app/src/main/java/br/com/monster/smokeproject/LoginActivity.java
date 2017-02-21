@@ -88,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                             UserRequester userRequester = new UserRequester();
                             try {
                                 //userRequester.loadAuth("tiago", "4297f44b13955235245b2497399d7a93", "");
+                                userRequester.setContext(LoginActivity.this);
                                 userRequester.loadAuth(etLogin.getText().toString().toLowerCase().trim(),
                                         senha, "");
 

@@ -154,6 +154,7 @@ public class ApoioActivity extends AppCompatActivity {
                             baseRequester.setUrl(Requester.API_URL + "/add_apoio");
                             baseRequester.setMethod(Method.POST);
                             baseRequester.setJsonString(jsonPut.toString());
+                            baseRequester.setContext(ApoioActivity.this);
 
                             String jsonReturn = baseRequester.execute(baseRequester).get();
                             Log.d("API", jsonReturn);
