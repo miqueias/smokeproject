@@ -22,6 +22,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:orientation="vertical"
@@ -95,16 +98,17 @@
                     android:visibility="visible"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
                         android:id="@+id/rvChecklist" />
-
                 </LinearLayout>
-
             </LinearLayout>
+
 
         <Button
             android:text="Salvar"
@@ -114,4 +118,5 @@
             android:textColor="@color/white"
             android:id="@+id/btnSalvar" />
         </LinearLayout>
+    </ScrollView>
 </LinearLayout>
