@@ -152,7 +152,6 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
                         arrayListCheck.add(lista.get(position).getId());
                     } else {
                         if (arrayListCheck.size() > 0) {
-
                             for (int i = 0; i < arrayListCheck.size(); i++) {
                                 if (arrayListCheck.get(i) == lista.get(position).getId()) {
                                     arrayListCheck.remove(i);
