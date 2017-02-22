@@ -91,12 +91,12 @@ public class VistoriaActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent it = new Intent(getBaseContext(), HomeActivity.class);
+                Intent it = new Intent(getBaseContext(), EstacoesElevatoriasActivity.class);
                 startActivity(it);
                 finish();
                 return true;
             case R.id.action_home:
-                Intent iti = new Intent(getBaseContext(), HomeActivity.class);
+                Intent iti = new Intent(getBaseContext(), EstacoesElevatoriasActivity.class);
                 startActivity(iti);
                 finish();
 
@@ -109,7 +109,7 @@ public class VistoriaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent it = new Intent(getBaseContext(), HomeActivity.class);
+        Intent it = new Intent(getBaseContext(), EstacoesElevatoriasActivity.class);
         startActivity(it);
         finish();
     }

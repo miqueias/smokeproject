@@ -1000,10 +1000,17 @@ public class NovaVistoriaActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
-                startActivity(it);
-                finish();
-                return true;
+                if (mode.equals("view")) {
+                    Intent it = new Intent(getBaseContext(), VistoriaRealizadaActivity.class);
+                    startActivity(it);
+                    finish();
+                    return true;
+                } else {
+                    Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+                    startActivity(it);
+                    finish();
+                    return true;
+                }
             case R.id.action_home:
                 Intent iti = new Intent(getBaseContext(), HomeActivity.class);
                 startActivity(iti);
@@ -1119,9 +1126,13 @@ public class NovaVistoriaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
-        startActivity(it);
-        finish();
+        if (mode.equals("view")) {
+            super.onBackPressed();
+        } else {
+            Intent it = new Intent(getBaseContext(), VistoriaActivity.class);
+            startActivity(it);
+            finish();
+        }
     }
 
     @Override

@@ -131,14 +131,14 @@ public class BaseRequester extends AsyncTask<BaseRequester, Object, String> {
             if (method == Method.POST) {
 
 
-                //HttpURLConnection conn = null;
-                HttpsURLConnection conn = null;
-                conn = (HttpsURLConnection) url.openConnection();
+                HttpURLConnection conn = null;
+                //HttpsURLConnection conn = null;
+                //conn = (HttpsURLConnection) url.openConnection();
                 //HTTPS
-                conn.setSSLSocketFactory(generateCertificate(context).getSocketFactory());
+                //conn.setSSLSocketFactory(generateCertificate(context).getSocketFactory());
 
                 byte[] bytes = null;
-                //conn = (HttpURLConnection) url.openConnection();
+                conn = (HttpURLConnection) url.openConnection();
 
                 String body = "";
                 if (gsonString != null) {

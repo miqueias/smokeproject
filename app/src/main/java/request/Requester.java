@@ -10,7 +10,7 @@ public class Requester extends BaseRequester {
 
     }
 
-    //public static final String API_URL = "http://sisinspe.jelastic.websolute.net.br/api";
-    public static final String API_URL = "https://sisinpepe.odebrechtambiental.com";
+    public static final String API_URL = "http://sisinspe.jelastic.websolute.net.br/api";
+    //public static final String API_URL = "https://sisinpepe.odebrechtambiental.com";
 
 }
