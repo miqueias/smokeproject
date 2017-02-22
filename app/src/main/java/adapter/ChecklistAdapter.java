@@ -139,10 +139,10 @@ public class ChecklistAdapter extends RecyclerView.Adapter<ChecklistAdapter.Pers
                     if (idCmb == idConjuntoMotorBomba) {
                         if (idProblema == lista.get(position).getId()) {
                             personViewHolder.cbChecklist.setChecked(true);
+                            arrayListCheck.add(lista.get(position).getId());
                         }
                     }
                 }
-                arrayListCheck.add(lista.get(position).getId());
             }
 
             personViewHolder.cbChecklist.setOnClickListener(new View.OnClickListener() {

@@ -134,9 +134,10 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
                         personViewHolder.cbChecklist.setChecked(false);
                         //lista.get(position).setChecked(false);
                         personViewHolder.linearLayoutBomba.setBackgroundColor(context.getResources().getColor(R.color.cardview_light_background));
+                    } else {
+                        arrayListCheck.add(lista.get(position).getId());
                     }
                 }
-                arrayListCheck.add(lista.get(position).getId());
             }
 
             personViewHolder.cbChecklist.setOnClickListener(new View.OnClickListener() {
