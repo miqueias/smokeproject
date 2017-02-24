@@ -126,6 +126,11 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
                 //lista.get(position).setChecked(true);
 
                 personViewHolder.linearLayoutBomba.setBackgroundColor(context.getResources().getColor(R.color.bg_lista));
+
+                if (!arrayListCheck.contains(lista.get(position).getId())) {
+                    arrayListCheck.add(lista.get(position).getId());
+                }
+
                 for (int i = 0; i < problemasCheckLists.size(); i++) {
                     ProblemasCheckList problemasCheckList;
                     problemasCheckList = problemasCheckLists.get(i);
@@ -134,8 +139,11 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
                         personViewHolder.cbChecklist.setChecked(false);
                         //lista.get(position).setChecked(false);
                         personViewHolder.linearLayoutBomba.setBackgroundColor(context.getResources().getColor(R.color.cardview_light_background));
-                    } else {
-                        arrayListCheck.add(problemasCheckList.getId());
+                        for (int j = 0; j < arrayListCheck.size(); j++) {
+                            if (arrayListCheck.get(j) == lista.get(position).getId()) {
+                                arrayListCheck.remove(j);
+                            }
+                        }
                     }
                 }
             }
@@ -144,7 +152,9 @@ public class ProblemasCheckListAdapter extends RecyclerView.Adapter<ProblemasChe
                 @Override
                 public void onClick(View v) {
                     if (personViewHolder.cbChecklist.isChecked()) {
-                        arrayListCheck.add(lista.get(position).getId());
+                        if (!arrayListCheck.contains(lista.get(position).getId())) {
+                            arrayListCheck.add(lista.get(position).getId());
+                        }
                     } else {
                         if (arrayListCheck.size() > 0) {
                             for (int i = 0; i < arrayListCheck.size(); i++) {
